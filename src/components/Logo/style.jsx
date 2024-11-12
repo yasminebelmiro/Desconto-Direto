@@ -10,13 +10,13 @@ export const ContainerLogo = styled.div`
 `;
 
 export const Imglogo = styled.img`
-  width: 100px;
- 
+  width: 80px;
+  margin-bottom: 10px;
 `;
 
 export const Text = styled.h1`
     color: #FFFFFF;
-    font-size: 35px;
+    font-size: 30px;
     font-family: Lazy Dog;
     letter-spacing: 4px;
 `;

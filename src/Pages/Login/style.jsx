@@ -39,6 +39,11 @@ export const ButtonLeft = styled.button`
   color: #ffffff;
 
   font-family: "Maharlika";
+
+  
+  &:hover{
+  background-color: #E8C66F;
+  }
 `;
 
 export const ContainerRight = styled.div`
@@ -75,6 +80,10 @@ export const ButtonRight = styled.button`
   color: #ffffff;
 
   font-family: "Maharlika";
+
+  &:hover{
+  background-color: #205B78;
+  }
 `;
 
 export const Form = styled.form`
