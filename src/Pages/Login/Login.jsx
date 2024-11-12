@@ -16,11 +16,13 @@ import {
 import { useNavigate } from "react-router-dom";
 import Footer from "../../components/Footer/Footer";
 
+// TODO: Dar um jeito de retornar mensagens de erro
 const userSchema = yup.object().shape({
   email: yup.string().email().required(),
   password: yup.string().min(8).max(16).required(),
 });
 
+// Validação do form
 const handleSubmit = async (event) => {
   event.preventDefault();
   let formData = {
@@ -31,11 +33,13 @@ const handleSubmit = async (event) => {
   console.log(isValid);
 };
 
+
 const Login = () => {
   const navigate = useNavigate();
-
+  
+//Navegação
   const handleRegister = () => {
-    navigate("/cadastro");
+    navigate("/tipo-cadastro");
   };
 
   return (

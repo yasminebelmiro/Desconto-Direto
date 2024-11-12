@@ -3,6 +3,7 @@ import { Column, Contato, ContatoContainer, CopyrightText, FooterContainer, Logo
 import Logo from '../Logo/Logo'
 
 const Footer = () => {
+
   return (
     <FooterContainer>
         <Column>
@@ -11,6 +12,7 @@ const Footer = () => {
                 <Logo />
             </LogoContainer>
             <ContatoContainer>
+              {/* TODO: Add icones*/ }
                 <Contato>Desconto_direto</Contato>
                 <Contato>Desconto Direto</Contato>
                 <Contato>descontodireto@dd.org.br</Contato>
