@@ -40,9 +40,8 @@ export const ButtonLeft = styled.button`
 
   font-family: "Maharlika";
 
-  
-  &:hover{
-  background-color: #E8C66F;
+  &:hover {
+    background-color: #e8c66f;
   }
 `;
 
@@ -67,6 +66,29 @@ export const Titulo = styled.p`
   margin: 40px 0px;
 `;
 
+export const Input = styled.input`
+  width: 394px;
+  height: 50px;
+
+  margin: 5px;
+
+  border: none;
+  border-radius: 10px;
+
+  color: #ffb703;
+  font-size: 18px;
+  font-family: Maharlika;
+  padding: 0 20px;
+
+  &:: placeholder {
+    color: #ffb703;
+    margin-left: 30px;
+  }
+  &:focus {
+    outline: 2px solid #ffffff;
+  }
+`;
+
 export const ButtonRight = styled.button`
   width: 228px;
   height: 38px;
@@ -81,14 +103,14 @@ export const ButtonRight = styled.button`
 
   font-family: "Maharlika";
 
-  &:hover{
-  background-color: #205B78;
+  &:hover {
+    background-color: #205b78;
   }
 `;
 
 export const Form = styled.form`
- display: flex;
+  display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;`;
-
+  align-items: center;
+`;

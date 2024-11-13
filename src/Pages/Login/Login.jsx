@@ -1,6 +1,5 @@
 import React from "react";
 import Header from "../../components/Header/Header";
-import InputLogin from "../../components/Input/Input";
 import Logo from "../../components/Logo/Logo";
 import * as yup from "yup";
 
@@ -12,6 +11,7 @@ import {
   ButtonLeft,
   ButtonRight,
   Form,
+  Input,
 } from "./style";
 import { useNavigate } from "react-router-dom";
 import Footer from "../../components/Footer/Footer";
@@ -33,11 +33,10 @@ const handleSubmit = async (event) => {
   console.log(isValid);
 };
 
-
 const Login = () => {
   const navigate = useNavigate();
-  
-//Navegação
+
+  //Navegação
   const handleRegister = () => {
     navigate("/tipo-cadastro");
   };
@@ -53,8 +52,8 @@ const Login = () => {
         <ContainerRight>
           <Titulo>Login</Titulo>
           <Form onSubmit={handleSubmit}>
-            <InputLogin name="email" placeholder="Email" type="email" />
-            <InputLogin name="password" placeholder="Senha" type="password" />
+            <Input name="email" placeholder="Email" type="email" />
+            <Input name="password" placeholder="Senha" type="password" />
             <ButtonRight type="submit">Entrar</ButtonRight>
           </Form>
         </ContainerRight>
