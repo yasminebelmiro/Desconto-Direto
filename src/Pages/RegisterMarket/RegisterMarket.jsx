@@ -15,78 +15,171 @@ import {
   SmallInput,
   ButtonLeft,
   Row,
+  ErrorMessage,
 } from "./style";
 import Logo from "../../components/Logo/Logo";
 import { useNavigate } from "react-router-dom";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
 
 const registerSchema = yup.object().shape({
-  nome: yup.string().required(),
-  telefone: yup.string().required(),
-  celular: yup.string().required(),
-  endereco: yup.string().required(),
-  numero: yup.string().required(),
-  bairro: yup.string().required(),
-  cep: yup.string().required(),
-  email: yup.string().email().required(),
-  senha: yup.string().min(8).max(16).required(),
-  confirmeSenha: yup.string().min(8).max(16).required(),
-})
-// TODO: mensagens de erro e validar se as senhas são iguais
-const handleRegister = async (event) => {
-  event.preventDefault();
-  let formData = {
-    nome: event.target[0].value,
-    telefone: event.target[1].value,
-    celular: event.target[2].value,
-    endereco: event.target[3].value,
-    numero: event.target[4].value,
-    bairro: event.target[5].value,
-    cep: event.target[6].value,
-    email: event.target[7].value,
-    senha: event.target[8].value,
-    confirmeSenha: event.target[9].value,
-  }
-  const isValid = await registerSchema.isValid(formData);
-  console.log(isValid);
-}
+  name: yup.string().required("Campo obrigatório"),
+  phone: yup.string().required("Campo obrigatório"),
+  cellphone: yup.string().required("Campo obrigatório"),
+  adress: yup.string().required("Campo obrigatório"),
+  adressNumber: yup.string().required("Campo obrigatório"),
+  district: yup.string().required("Campo obrigatório"),
+  cep: yup.string().min(6, "O cep deve ter 6 caracteres").required("Campo obrigatório"),
+  email: yup.string().email().required("Campo obrigatório"),
+  password: yup
+    .string()
+    .min(8, "A senha deve ter pelo menos 8 caracteres")
+    .required("Campo obrigatório"),
+  confirmPassword: yup
+    .string()
+    .required("Campo obrigatório")
+    .oneOf(
+      [yup.ref("password"), null],
+      "As senhas não conferem, tente novamente"
+    ),
+});
 
 const RegisterMarket = () => {
   const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(registerSchema),
+  });
 
-  const handleLogin = () =>{
-    navigate("/login")
-  }
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+
+  const handleLogin = () => {
+    navigate("/login");
+  };
   return (
     <>
       <Header />
       <RegisterContainer>
         <Left>
           <Titulo>Login</Titulo>
-          <Form onSubmit={handleRegister}>
-            <LargeInput name="nome" placeholder="Nome completo" type="text" />
+          <Form onSubmit={handleSubmit(onSubmit)}>
+            <LargeInput
+              id="name"
+              name="name"
+              placeholder="Nome"
+              type="text"
+              className="name"
+              {...register("name")}
+            />
+            <ErrorMessage> {errors.name?.message} </ErrorMessage>
             <Row>
-              <SmallInput name="telefone" placeholder="Telefone fixo" type="text" />
-              <SmallInput name="celular" placeholder="Telefone celular" type="text" />
+              <SmallInput
+                id="phone"
+                name="phone"
+                placeholder="Telefone fixo"
+                type="text"
+                className="phone"
+                {...register("phone")}
+              />
+              <SmallInput
+                id="cellphone"
+                name="cellphone"
+                placeholder="Telefone celular"
+                type="text"
+                className="cellphone"
+                {...register("cellphone")}
+              />
             </Row>
             <Row>
-              <SmallInput name="endereco" placeholder="Endereço" type="text" />
-              <SmallInput name="numero" placeholder="N°" type="text" />
+              <ErrorMessage> {errors.phone?.message} </ErrorMessage>
+              <ErrorMessage> {errors.cellphone?.message} </ErrorMessage>
             </Row>
             <Row>
-              <SmallInput name="bairro" placeholder="Bairro" type="text" />
-              <SmallInput name="cep" placeholder="CEP" type="text" />
+              <SmallInput
+                id="adress"
+                name="adress"
+                placeholder="Endereço"
+                type="text"
+                className="adress"
+                {...register("adress")}
+              />
+              <SmallInput
+                id="adressNumber"
+                name="adressNumber"
+                placeholder="N°"
+                type="text"
+                className="adressNumber"
+                {...register("adressNumber")}
+              />
             </Row>
-            <LargeInput name="email" placeholder="Email *" type="email" />
             <Row>
-            <SmallInput name="senha" placeholder="Senha" type="password" />
-            <SmallInput name="confirmeSenha" placeholder="Confirme senha" type="password" />
+              <ErrorMessage> {errors.adress?.message} </ErrorMessage>
+              <ErrorMessage> {errors.adressNumber?.message} </ErrorMessage>
+            </Row>
+            <Row>
+              <SmallInput
+                id="district"
+                name="district"
+                placeholder="Bairro"
+                type="text"
+                className="district"
+                {...register("district")}
+              />
+              <SmallInput
+                id="cep"
+                name="cep"
+                placeholder="CEP"
+                type="text"
+                className="cep"
+                {...register("cep")}
+              />
+            </Row>
+            <Row>
+              <ErrorMessage> {errors.district?.message} </ErrorMessage>
+              <ErrorMessage> {errors.cep?.message} </ErrorMessage>
+            </Row>
+            <LargeInput
+              id="email"
+              name="email"
+              placeholder="Email"
+              type="email"
+              className="email"
+              {...register("email")}
+            />
+             <ErrorMessage> {errors.email?.message} </ErrorMessage>
+            <Row>
+              <SmallInput
+                id="password"
+                name="password"
+                placeholder="Senha"
+                type="password"
+                className="password"
+                {...register("password")}
+              />
+              <SmallInput
+                id="confirmPassword"
+                name="confirmPassword"
+                placeholder="Confirme senha"
+                type="password"
+                className="confirmPassword"
+                {...register("confirmPassword")}
+              />
+            </Row>
+            <Row>
+            <ErrorMessage> {errors.password?.message} </ErrorMessage>
+            <ErrorMessage> {errors.confirmPassword?.message} </ErrorMessage>
             </Row>
             <ButtonLeft type="submit">Cadastrar</ButtonLeft>
           </Form>
         </Left>
         <Right>
           <Logo />
-          <ButtonRight onClick={handleLogin} >Entrar</ButtonRight>
+          <ButtonRight onClick={handleLogin}>Entrar</ButtonRight>
         </Right>
       </RegisterContainer>
       <Footer />

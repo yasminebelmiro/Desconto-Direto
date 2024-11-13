@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const RegisterChoiseContainer = styled.div`
   background: radial-gradient(#219ebc 30%, #ffffff 100%);
-  height: 100vh;
+  height: 95vh;
   display: flex;
   justify-content: center;
   align-items: center;

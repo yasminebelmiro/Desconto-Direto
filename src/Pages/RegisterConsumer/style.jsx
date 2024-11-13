@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const RegisterContainer = styled.div`
   background: radial-gradient(#219ebc 30%, #ffffff 100%);
-  height: 100vh;
+  height: 95vh;
 
   display: flex;
   flex-direction: row;
@@ -20,7 +20,7 @@ export const Left = styled.div`
 
   display: flex;
   flex-direction: column;
-
+  justify-content: center;
   align-items: center;
 `;
 
@@ -28,7 +28,7 @@ export const Titulo = styled.p`
   font-size: 30px;
   font-family: Maharlika;
   color: #ffffff;
-  margin: 40px 0px;
+  margin: 20px 0px;
 `;
 
 export const Form = styled.form`
@@ -87,6 +87,7 @@ export const Row = styled.div`
   display: flex;
   width: 444px;
   flex-direction: row;
+  justify-content: center;
 `;
 
 export const ButtonLeft = styled.button`
@@ -140,4 +141,9 @@ export const ButtonRight = styled.button`
   &:hover {
     background-color: #e8c66f;
   }
+`;
+
+export const ErrorMessage = styled.p`
+    color: red;
+    margin-left: 10px;
 `;

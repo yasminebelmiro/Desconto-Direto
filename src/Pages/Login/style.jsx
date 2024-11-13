@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const LoginContainer = styled.div`
   background: radial-gradient(#219ebc 30%, #ffffff 100%);
-  height: 100vh;
+  height: 95vh;
 
   display: flex;
   flex-direction: row;
@@ -113,4 +113,8 @@ export const Form = styled.form`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+`;
+
+export const ErrorMessage = styled.p`
+    color: red;
 `;
