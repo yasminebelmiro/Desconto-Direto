@@ -27,7 +27,7 @@ export const LogoContainer = styled.div`
 export const ContatoContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: start;
   margin-right: 100px;
 `;
@@ -47,3 +47,15 @@ export const CopyrightText = styled.p`
   color: #ffffff;
 
   `;
+
+  export const RowContato = styled.div`
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+
+  .icon{
+  margin-right: 10px;
+  }
+`;
