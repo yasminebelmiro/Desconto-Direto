@@ -1,32 +1,85 @@
-import React from "react";
-import { Container, Form, ImgLogo, Link, Search, Right } from "./style";
+import React, { useState } from "react";
+import {
+  Container,
+  Form,
+  ImgLogo,
+  Link,
+  Search,
+  Right,
+  Button,
+  CategoryMenu,
+  Content,
+  Dropdown,
+  Item,
+  Category,
+  Options
+} from "./style";
 import imgLogo from "../../assets/logo.png";
-import { FaBell, FaHeart  } from "react-icons/fa";
+import { FaBell, FaHeart, FaChevronDown } from "react-icons/fa";
 
 const Header = ({ authenticated }) => {
-  return (
-    <Container>
-      
-        <ImgLogo src={imgLogo}></ImgLogo> 
+  const [dropdownVisible, setDropdownVisible] = useState(false);
 
+  const toggleDropdown = () => {
+    setDropdownVisible((prev) => !prev);
+  };
+
+  const handleOutsideClick = (event) => {
+    if (dropdownVisible && !event.target.closest(".dropdown-content")) {
+      setDropdownVisible(false);
+    }
+  };
+
+  React.useEffect(() => {
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, [dropdownVisible]);
+
+  return (
+    <>
       {authenticated ? (
         <>
-          <Right>
-            <Form>
-              <Search placeholder="O que está procurando?" />
-            </Form>
-            <Link>{<FaBell size={25} color="#FFB703"/>} </Link>
-            <Link>{<FaHeart size={25} color="#FFB703"/>}</Link>
-          </Right>
+          <Container>
+            <ImgLogo src={imgLogo} alt="Logo" />
+            <Right>
+              <Form>
+                <Search placeholder="O que está procurando?" />
+              </Form>
+              <Link>{<FaBell size={25} color="#FFB703" />} </Link>
+              <Link>{<FaHeart size={25} color="#FFB703" />}</Link>
+            </Right>
+          </Container>
           <CategoryMenu>
-            <DropdownCategory>
-     {/* #TODO: dropdown e links do header */}
-            </DropdownCategory>
-            <Category></Category>
+            <Dropdown>
+              <Button className="dropBtn" onClick={toggleDropdown}>
+                Todos os produtos &nbsp; <FaChevronDown />
+              </Button>
+              {dropdownVisible && (
+                <Content className="dropdown-content show">
+                  <Item>Link 1</Item>
+                  <Item>Link 2</Item>
+                  <Item>Link 3</Item>
+                </Content>
+              )}
+            </Dropdown>
+            <Options>
+              <Category>Mercearia</Category>
+              <Category>Limpeza</Category>
+              <Category>Bebidas</Category>
+              <Category>Açougue</Category>
+              <Category>Higiene</Category>
+              <Category>Drogaria</Category>
+            </Options>
           </CategoryMenu>
         </>
-      ) : null}
-    </Container>
+      ) : (
+        <Container>
+          <ImgLogo src={imgLogo} alt="Logo" />
+        </Container>
+      )}
+    </>
   );
 };
 

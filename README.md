@@ -31,7 +31,7 @@ O principal objetivo do **"Desconto Direto"** é fortalecer o comércio local e 
 
 <p>
   <a href="https://skillicons.dev">
-    <img src="https://skillicons.dev/icons?i=java,spring,idea,vscode,git,github,mysql,notion,vite,react,maven" />
+    <img src="https://skillicons.dev/icons?i=java,spring,idea,vscode,git,github,mysql,vite,react,maven" />
   </a>
 </p>
 
