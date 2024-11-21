@@ -8,12 +8,11 @@ import {
   Validity,
   Icon,
   Row,
-} from "./styles";
+} from "./style";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
 
 const CardOffer = ({ img, liked }) => {
   return (
-    <>
       <CardContainer>
         <Row>
           <Heart>
@@ -27,7 +26,6 @@ const CardOffer = ({ img, liked }) => {
         <Description>Descrição</Description>
         <Validity>12/09</Validity>
       </CardContainer>
-    </>
   );
 };
 

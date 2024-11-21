@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
-import { Divisor, Text, Row } from "./styled";
+import { Divisor, Text, Row } from "./style";
 import Carousel from "../../components/Carousel/Carousel";
 import CardOffer from "../../components/CardOffer/CardOffer";
 
@@ -45,6 +45,7 @@ const HomeConsumer = () => {
           liked={true}
           img="https://images.tcdn.com.br/img/img_prod/858764/refrigerante_coca_cola_zero_lata_350ml_c_12_365_1_20201021152513.jpg"
         />
+       
       </Row>
       <Divisor>
         <Text>Ofertas</Text>

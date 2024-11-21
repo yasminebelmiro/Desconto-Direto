@@ -20,6 +20,7 @@ const Footer = () => {
       <Column>
         <Row>
           <LogoContainer>
+            {/*TODO: Dar um jeito de diminuir o tamanho atravez do style*/}
             <Logo />
           </LogoContainer>
           <ContatoContainer>

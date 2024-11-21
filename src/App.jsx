@@ -6,6 +6,7 @@ import RegisterChoise from "./Pages/RegisterChoise/RegisterChoise";
 import RegisterConsumer from "./Pages/RegisterConsumer/RegisterConsumer";
 import RegisterMarket from "./Pages/RegisterMarket/RegisterMarket";
 import HomeConsumer from "./Pages/HomeConsumer/HomeConsumer";
+import HomeMaket from "./Pages/HomeMaket/HomeMarket";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
               <Route path="/cadastro-consumidor" element={<RegisterConsumer />} />
               <Route path="/casdastro-comercio" element={<RegisterMarket/>} />
               <Route path="/home-consumidor" element={<HomeConsumer/>} />
+              <Route path="/home-comercio" element={<HomeMaket/>} />
               
           </Routes>
       </Router>
