@@ -1,5 +1,5 @@
 import React from "react";
-import Header from "../../components/Header/Header";
+
 import Footer from "../../components/Footer/Footer";
 
 import * as yup from "yup";
@@ -21,6 +21,7 @@ import Logo from "../../components/Logo/Logo";
 import { useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
+import HeaderConsumer from "../../components/HeaderConsumer/HeaderConsumer";
 
 const registerSchema = yup.object().shape({
   name: yup.string().required("Campo obrigatório"),
@@ -63,7 +64,7 @@ const RegisterMarket = () => {
   };
   return (
     <>
-      <Header />
+      <HeaderConsumer />
       <RegisterContainer>
         <Left>
           <Titulo>Login</Titulo>

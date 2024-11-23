@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import Header from "../../components/Header/Header";
+
 import Logo from "../../components/Logo/Logo";
 import Footer from "../../components/Footer/Footer";
 
@@ -20,6 +20,7 @@ import {
   Input,
   ErrorMessage,
 } from "./style";
+import HeaderConsumer from "../../components/HeaderConsumer/HeaderConsumer";
 
 //Schema de validação
 const loginValidation = yup.object().shape({
@@ -51,7 +52,7 @@ const Login = () => {
 
   return (
     <>
-      <Header a/>
+      <HeaderConsumer />
       <LoginContainer>
         <ContainerLeft>
           <Logo />

@@ -25,19 +25,19 @@ const Footer = () => {
           </LogoContainer>
           <ContatoContainer>
             <RowContato>
-              <FaInstagram className="icon" color="#FFFFFF" size={14}/>
+              <FaInstagram className="icon" color="#FFFFFF" size={14} />
               <Contato>Desconto_direto</Contato>
             </RowContato>
             <RowContato>
-              <IoLogoLinkedin className="icon" color="#FFFFFF" size={14}/>
+              <IoLogoLinkedin className="icon" color="#FFFFFF" size={14} />
               <Contato>Desconto Direto</Contato>
             </RowContato>
             <RowContato>
-              <MdEmail className="icon" color="#FFFFFF" size={14}/>
+              <MdEmail className="icon" color="#FFFFFF" size={14} />
               <Contato>descontodireto@dd.org.br</Contato>
             </RowContato>
             <RowContato>
-              <FaPhoneAlt className="icon" color="#FFFFFF" size={14}/>
+              <FaPhoneAlt className="icon" color="#FFFFFF" size={14} />
               <Contato>0800-7777</Contato>
             </RowContato>
           </ContatoContainer>

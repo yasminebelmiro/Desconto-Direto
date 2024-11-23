@@ -17,7 +17,7 @@ import {
 import imgLogo from "../../assets/logo.png";
 import { FaBell, FaHeart, FaChevronDown } from "react-icons/fa";
 
-const Header = ({ authenticated }) => {
+const HeaderConsumer = ({ authenticated }) => {
   const [dropdownVisible, setDropdownVisible] = useState(false);
 
   const toggleDropdown = () => {
@@ -83,4 +83,4 @@ const Header = ({ authenticated }) => {
   );
 };
 
-export default Header;
+export default HeaderConsumer;

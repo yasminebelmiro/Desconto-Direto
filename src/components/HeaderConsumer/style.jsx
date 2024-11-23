@@ -46,7 +46,7 @@ export const Search = styled.input`
   }
 `;
 
-export const Link = styled.a`
+export const Link = styled.button`
   text-decoration: none;
   color: #ffff;
 `;

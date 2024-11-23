@@ -16,14 +16,6 @@ export const Text = styled.p`
   margin-left: 60px;
 `;
 
-export const Row = styled.div`
-  display: grid;
-  grid-template-columns: auto auto auto auto auto;
-  gap: 60px;
-  justify-content: center;
-  align-items: center;
-  padding: 60px 0px 30px 0px;
-`;
 
 export const Button = styled.button`
   font-family: Maharlika;
@@ -35,6 +27,7 @@ export const Button = styled.button`
   color: #ffffff;
   font-size: 20px;
   margin-right: 60px;
-
-
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 `;

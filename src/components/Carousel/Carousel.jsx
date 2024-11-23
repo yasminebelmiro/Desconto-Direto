@@ -10,7 +10,9 @@ import panfleto6 from "../../assets/images/panfleto6.png";
 import { Carrosel, Img } from "./style";
 
 const Carousel = () => {
+  {/*TODO: fazer o carrosel*/}
   return (
+    
     <Carrosel>
       <Img src={panfleto1} alt="panfleto" />
       <Img src={panfleto2} alt="panfleto" />

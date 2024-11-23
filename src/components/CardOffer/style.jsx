@@ -44,7 +44,7 @@ export const Description = styled.p`
   color: grey;
 `;
 
-export const Validity = styled.div`
+export const Price = styled.div`
   width: 200px;
   height: 50px;
   background-color: #fb8500;
@@ -70,4 +70,8 @@ export const Icon = styled.img`
   z-index: 1;
   right: -40px;
   top: -40px;
+`;
+
+export const Validity = styled.div`
+  font-size: 20px;
 `;
