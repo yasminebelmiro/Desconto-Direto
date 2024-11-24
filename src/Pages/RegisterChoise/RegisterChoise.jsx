@@ -40,7 +40,7 @@ const RegisterChoise = () => {
         </ChoiseContainer>
       </RegisterChoiseContainer>
 
-      <Footer />
+      
     </>
   );
 };

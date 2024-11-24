@@ -26,7 +26,7 @@ const HomeMaket = () => {
         </Button>
       </Divisor>
       <CardList />
-      <Footer />
+      
     </>
   );
 };

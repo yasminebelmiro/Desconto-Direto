@@ -16,9 +16,11 @@ import {
 } from "./style";
 import imgLogo from "../../assets/logo.png";
 import { FaBell, FaHeart, FaChevronDown } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const HeaderConsumer = ({ authenticated }) => {
   const [dropdownVisible, setDropdownVisible] = useState(false);
+  const navigate = useNavigate();
 
   const toggleDropdown = () => {
     setDropdownVisible((prev) => !prev);
@@ -37,6 +39,10 @@ const HeaderConsumer = ({ authenticated }) => {
     };
   }, [dropdownVisible]);
 
+  const handleFavoriteOffer = () => {
+    navigate("/ofertas-favoritas");
+   }
+
   return (
     <>
       {authenticated ? (
@@ -48,7 +54,7 @@ const HeaderConsumer = ({ authenticated }) => {
                 <Search placeholder="O que está procurando?" />
               </Form>
               <Link>{<FaBell size={25} color="#FFB703" />} </Link>
-              <Link>{<FaHeart size={25} color="#FFB703" />}</Link>
+              <Link onClick={handleFavoriteOffer}>{<FaHeart size={25} color="#FFB703" />}</Link>
             </Right>
           </Container>
           <CategoryMenu>

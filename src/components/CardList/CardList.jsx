@@ -1,4 +1,3 @@
-import { img } from "framer-motion/client";
 import React, { useState } from "react";
 import CardOfferMarket from "../CardOfferMarket/CardOfferMarket";
 import { CardsContainer } from "./style";

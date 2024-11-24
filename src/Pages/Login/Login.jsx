@@ -83,7 +83,7 @@ const Login = () => {
           </Form>
         </ContainerRight>
       </LoginContainer>
-      <Footer />
+      
     </>
   );
 };

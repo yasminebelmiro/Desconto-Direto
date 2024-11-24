@@ -182,8 +182,7 @@ const RegisterMarket = () => {
           <Logo />
           <ButtonRight onClick={handleLogin}>Entrar</ButtonRight>
         </Right>
-      </RegisterContainer>
-      <Footer />
+      </RegisterContainer>    
     </>
   );
 };

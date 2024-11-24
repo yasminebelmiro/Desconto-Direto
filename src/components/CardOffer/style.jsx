@@ -70,6 +70,7 @@ export const Icon = styled.img`
   z-index: 1;
   right: -40px;
   top: -40px;
+  cursor: pointer;
 `;
 
 export const Validity = styled.div`

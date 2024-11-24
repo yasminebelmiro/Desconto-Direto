@@ -57,6 +57,12 @@ const RegisterConsumer = () => {
   const handleLogin = () => {
     navigate("/login");
   };
+
+  const handleRegister = () => {
+    navigate("/home-consumidor");
+   }
+
+
   return (
     <>
       <HeaderConsumer />
@@ -115,7 +121,7 @@ const RegisterConsumer = () => {
             <ErrorMessage> {errors.password?.message} </ErrorMessage>
             <ErrorMessage> {errors.confirmPassword?.message} </ErrorMessage>
             </Row>
-            <ButtonLeft type="submit">Cadastrar</ButtonLeft>
+            <ButtonLeft type="submit" onClick={handleRegister}>Cadastrar</ButtonLeft>
           </Form>
         </Left>
         <Right>
@@ -123,7 +129,7 @@ const RegisterConsumer = () => {
           <ButtonRight onClick={handleLogin}>Entrar</ButtonRight>
         </Right>
       </RegisterContainer>
-      <Footer />
+
     </>
   );
 };

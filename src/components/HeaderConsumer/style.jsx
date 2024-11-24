@@ -46,16 +46,19 @@ export const Search = styled.input`
   }
 `;
 
-export const Link = styled.button`
+export const Link = styled.a`
   text-decoration: none;
   color: #ffff;
+  border: none;
+  background-color: transparent;
+  cursor:pointer;
 `;
 
 export const CategoryMenu = styled.div`
   background-color: #8ecae6;
   width: 100%;
   height: 50px;
-
+  cursor: pointer;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -106,7 +109,7 @@ export const Item = styled.a`
   padding: 12px 16px;
   text-decoration: none;
   display: block;
-
+  cursor: pointer;
   &:hover {
     background-color: #ffb703;
   }
