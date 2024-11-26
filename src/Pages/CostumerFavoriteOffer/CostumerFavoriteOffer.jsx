@@ -1,19 +1,21 @@
 import React from "react";
-import HeaderConsumer from "../../components/HeaderConsumer/HeaderConsumer";
-import CardOffer from "../../components/CardOffer/CardOffer";
+
+
 import { Back, FavoriteContainer, Row, Title, Cards } from "./style";
 import { FaArrowLeft } from "react-icons/fa";
 
 import { useNavigate } from "react-router-dom";
+import CommerceCardList from "../../components/CommerceCardList/CommerceCardList";
+import CostumerHeader from "../../components/CostumerHeader/CostumerHeader";
 
-const FavoriteOffer = () => {
+const CostumerFavoriteOffer = () => {
   const navigate = useNavigate();
   const handleBack = () => {
-    navigate("/home-consumidor");
+    navigate("/consumidor/home");
   };
   return (
     <>
-      <HeaderConsumer authenticated={true} />
+      <CostumerHeader authenticated={true} />
       <Row>
         <Back onClick={handleBack}>
           <FaArrowLeft size={25} />
@@ -23,14 +25,11 @@ const FavoriteOffer = () => {
       </Row>
       <FavoriteContainer>
         <Cards>
-          <CardOffer />
-          <CardOffer />
-          <CardOffer />
-          <CardOffer />
+          <CommerceCardList market={false} />
         </Cards>
       </FavoriteContainer>
     </>
   );
 };
 
-export default FavoriteOffer;
+export default CostumerFavoriteOffer;

@@ -1,5 +1,4 @@
 import React from "react";
-import HeaderConsumer from "../../components/HeaderConsumer/HeaderConsumer";
 import {
   ProfileContainer,
   Row,
@@ -25,15 +24,16 @@ import CardOffer from "../../components/CardOffer/CardOffer";
 import { MdAlternateEmail, MdHome } from "react-icons/md";
 import { IoIosPin } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
+import CostumerHeader from "../../components/CostumerHeader/CostumerHeader";
 
-const ProfileMarket = () => {
+const CostumerCommerceProfile = () => {
   const navigate = useNavigate();
   const handleBack = () => {
-    navigate("/home-consumidor");
+    navigate("/consumidor/home");
   };
   return (
     <>
-      <HeaderConsumer authenticated={true} />
+      <CostumerHeader authenticated={true} />
       <Back onClick={handleBack}>
         <FaArrowLeft size={25} />
       </Back>
@@ -96,4 +96,4 @@ const ProfileMarket = () => {
   );
 };
 
-export default ProfileMarket;
+export default CostumerCommerceProfile;

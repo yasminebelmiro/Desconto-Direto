@@ -14,21 +14,6 @@ export const CardContainer = styled.div`
   position: relative;
 `;
 
-export const Row = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-`;
-export const Heart = styled.div`
-  color: red;
-
-  position: absolute;
-  z-index: 1;
-  left: 5px;
-  top: 5px;
-`;
-
 export const ImgProduct = styled.img`
   width: auto;
   height: 112px;
@@ -36,7 +21,9 @@ export const ImgProduct = styled.img`
 `;
 
 export const Name = styled.h1`
-  font-size: 25px;
+  font-size: 20px;
+  text-align: center;
+  margin: 5px;
 `;
 
 export const Description = styled.p`
@@ -44,21 +31,48 @@ export const Description = styled.p`
   color: grey;
 `;
 
-export const Price = styled.div`
-  width: 200px;
-  height: 50px;
-  background-color: #fb8500;
-  border-radius: 40px;
-  font-size: 25px;
-  color: white;
-
+export const Options = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 50px;
+  color: white;
+  font-size: 20px;
 
   position: absolute;
   z-index: 1;
   bottom: -15px;
+`;
+
+export const Delete = styled.div`
+  width: 100px;
+  height: 50px;
+  background-color: #d91d04;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0px 50px 50px 0px;
+  border: 2px solid #fb8500;
+  cursor: pointer;
+  &:hover {
+    background-color: #b11905;
+    color: black;
+  }
+`;
+export const Edit = styled.div`
+  background-color: #ffb703;
+  width: 100px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px 0px 0px 50px;
+  border: 2px solid #fb8500;
+  cursor: pointer;
+  &:hover {
+    background-color: #ffe703;
+    color: black;
+  }
 `;
 
 export const Icon = styled.img`

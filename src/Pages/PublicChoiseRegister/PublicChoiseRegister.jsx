@@ -11,22 +11,22 @@ import {
 } from "./style";
 import Logo from "../../components/Logo/Logo";
 import { useNavigate } from "react-router-dom";
-import HeaderConsumer from "../../components/HeaderConsumer/HeaderConsumer";
+import CostumerHeader from "../../components/CostumerHeader/CostumerHeader";
 
-const RegisterChoise = () => {
+const PublicChoiseRegister = () => {
   const navigate = useNavigate();
 
   const handleConsumer = () => {
-    navigate("/cadastro-consumidor");
+    navigate("/consumidor/cadastro");
   };
 
   const handleMarket = () => {
-    navigate("/casdastro-comercio");
+    navigate("/comercio/casdastro-comercio");
   };
 
   return (
     <>
-      <HeaderConsumer />
+      <CostumerHeader />
       <RegisterChoiseContainer>
         <ChoiseContainer>
           <Column>
@@ -45,4 +45,4 @@ const RegisterChoise = () => {
   );
 };
 
-export default RegisterChoise;
+export default PublicChoiseRegister;

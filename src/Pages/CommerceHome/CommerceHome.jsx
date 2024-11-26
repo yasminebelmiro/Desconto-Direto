@@ -1,17 +1,18 @@
 import React from "react";
 
-import Footer from "../../components/Footer/Footer";
+
 import { Divisor, Text, Button } from "./style";
 import Carousel from "../../components/Carousel/Carousel";
 import { FaPlusCircle } from "react-icons/fa";
 
-import HeaderConsumer from "../../components/HeaderConsumer/HeaderConsumer";
-import CardList from "../../components/CardList/CardList";
 
-const HomeMaket = () => {
+import CostumerHeader from "../../components/CostumerHeader/CostumerHeader";
+import CommerceCardList from "../../components/CommerceCardList/CommerceCardList";
+
+const CommerceHome = () => {
   return (
     <>
-      <HeaderConsumer />
+      <CostumerHeader />
       <Divisor>
         <Text>Meus Panfletos</Text>
         <Button>
@@ -25,10 +26,10 @@ const HomeMaket = () => {
           Adicionar <FaPlusCircle size={15} />
         </Button>
       </Divisor>
-      <CardList />
+      <CommerceCardList market={true}/>
       
     </>
   );
 };
 
-export default HomeMaket;
+export default CommerceHome;

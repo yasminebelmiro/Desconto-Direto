@@ -11,7 +11,7 @@ import {
   Validity,
 } from "./style";
 
-const CardOfferMarket = ({ img, icon, name, description, validity, onDelete}) => {
+const CommerceCardOffer = ({ img, icon, name, description, validity, onDelete}) => {
 
   return (
     <CardContainer>
@@ -28,4 +28,4 @@ const CardOfferMarket = ({ img, icon, name, description, validity, onDelete}) =>
   );
 };
 
-export default CardOfferMarket;
+export default CommerceCardOffer;

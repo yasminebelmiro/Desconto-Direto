@@ -20,7 +20,7 @@ import {
   Input,
   ErrorMessage,
 } from "./style";
-import HeaderConsumer from "../../components/HeaderConsumer/HeaderConsumer";
+import CostumerHeader from "../../components/CostumerHeader/CostumerHeader";
 
 //Schema de validação
 const loginValidation = yup.object().shape({
@@ -31,7 +31,7 @@ const loginValidation = yup.object().shape({
     .required("Campo obrigatório"),
 });
 
-const Login = () => {
+const PublicLogin = () => {
   const navigate = useNavigate();
   const {
     register,
@@ -52,7 +52,7 @@ const Login = () => {
 
   return (
     <>
-      <HeaderConsumer />
+      <CostumerHeader />
       <LoginContainer>
         <ContainerLeft>
           <Logo />
@@ -88,4 +88,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default PublicLogin;

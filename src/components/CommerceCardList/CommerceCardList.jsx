@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import CardOfferMarket from "../CardOfferMarket/CardOfferMarket";
+import CommerceCardOffer from "../CommerceCardOffer/CommerceCardOffer";
 import { CardsContainer } from "./style";
+import { useNavigate } from "react-router-dom";
+import CostumerCardOffer from "../CostumerCardOffer/CostumerCardOffer";
 
-//TODO: adaptar o card do consumidor aqui
-const CardList = () => {
+
+const CommerceCardList = ({market}) => {
   const [cards, setCards] = useState([
     {
       id: 1,
@@ -12,6 +14,7 @@ const CardList = () => {
       name: "Refrigerante Coca-cola",
       description: "2L",
       validity: "29/12",
+      price: "R$ 7,99",
     },
     {
       id: 2,
@@ -20,6 +23,7 @@ const CardList = () => {
       name: "Suco Natural Maracujá",
       description: "1L",
       validity: "30/12",
+      price: "R$ 5,99",
     },
     {
       id: 3,
@@ -28,6 +32,7 @@ const CardList = () => {
       name: "Batata Palito Congelada",
       description: "2,5kg",
       validity: "31/12",
+      price: " R$ 24,89",
     },
     {
       id: 4,
@@ -36,6 +41,7 @@ const CardList = () => {
       name: "Filé de Peito de Frango",
       description: "1kg",
       validity: "28/12",
+      price: "R$ 25,90",
     },
     {
       id: 5,
@@ -44,6 +50,7 @@ const CardList = () => {
       name: "Biscoito Recheado Chocolate",
       description: "140g",
       validity: "15/01",
+      price: "R$ 5,89",
     },
     {
       id: 6,
@@ -52,6 +59,7 @@ const CardList = () => {
       name: "Cerveja Pilsen",
       description: "350ml",
       validity: "02/01",
+      price: "R$ 3,78",
     },
     {
       id: 7,
@@ -60,6 +68,7 @@ const CardList = () => {
       name: "Queijo Mussarela",
       description: "500g",
       validity: "27/12",
+      price: "R$ 35,00",
     },
     {
       id: 8,
@@ -67,6 +76,7 @@ const CardList = () => {
       icon: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2bCJOs9OsJXgkUDe_pEiYLjY4v8YUKbkdxA&s",
       name: "Arroz Tipo 1",
       description: "5kg",
+      price: "R$ 29,90",
     },
     {
       id: 9,
@@ -75,6 +85,7 @@ const CardList = () => {
       name: "Feijão Carioca",
       description: "1kg",
       validity: "04/01",
+      price: "R$ 15,99",
     },
     {
       id: 10,
@@ -83,6 +94,7 @@ const CardList = () => {
       name: "Detergente Líquido",
       description: "500ml",
       validity: "31/12",
+      price: "R$ 1,99",
     },
   ]);
 
@@ -91,22 +103,46 @@ const CardList = () => {
     setCards(cards.filter((card) => card.id !== id));
   };
 
+  const navigate = useNavigate();
+
+  const handleProfileMarket = () => {
+    navigate("/consumidor/perfil-comercio");
+  };
+
   return (
     <CardsContainer>
-      {cards.map((card) => (
-        <CardOfferMarket
-          key={card.id}
-          img={card.img}
-          icon={card.icon}
-          name={card.name}
-          description={card.description}
-          validity={card.validity}
-          price={card.price}
-          onDelete={() => handleDelete(card.id)}
-        />
-      ))}
+      {market ? (
+        <>
+          {cards.map((card) => (
+            <CommerceCardOffer
+              key={card.id}
+              img={card.img}
+              icon={card.icon}
+              name={card.name}
+              description={card.description}
+              validity={card.validity}
+              onDelete={() => handleDelete(card.id)}
+            />
+          ))}
+        </>
+      ) : (
+        <>
+          {cards.map((card) => (
+            <CostumerCardOffer
+              key={card.id}
+              img={card.img}
+              name={card.name}
+              price={card.price}
+              description={card.description}
+              validity={card.validity}
+              icon={card.icon}
+              onProfileMarket={() => handleProfileMarket()}
+            />
+          ))}
+        </>
+      )}
     </CardsContainer>
   );
 };
 
-export default CardList;
+export default CommerceCardList;

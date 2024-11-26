@@ -16,10 +16,8 @@ export const Text = styled.p`
 `;
 
 export const Row = styled.div`
-  display: grid;
-  grid-template-columns: auto auto auto auto auto;
-  gap: 60px;
+  display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 60px 0px 30px 0px;
 `;

@@ -18,7 +18,7 @@ import imgLogo from "../../assets/logo.png";
 import { FaBell, FaHeart, FaChevronDown } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
-const HeaderConsumer = ({ authenticated }) => {
+const CommerceHeader = ({ authenticated }) => {
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const navigate = useNavigate();
 
@@ -39,8 +39,8 @@ const HeaderConsumer = ({ authenticated }) => {
     };
   }, [dropdownVisible]);
 
-  const handleFavoriteOffer = () => {
-    navigate("/ofertas-favoritas");
+  const handleProfile = () => {
+    navigate("/comercio/meu-perfil");
    }
 
   return (
@@ -54,7 +54,7 @@ const HeaderConsumer = ({ authenticated }) => {
                 <Search placeholder="O que está procurando?" />
               </Form>
               <Link>{<FaBell size={25} color="#FFB703" />} </Link>
-              <Link onClick={handleFavoriteOffer}>{<FaHeart size={25} color="#FFB703" />}</Link>
+              <Link onClick={handleProfile}> <Perfil src="" /></Link>
             </Right>
           </Container>
           <CategoryMenu>
@@ -80,7 +80,7 @@ const HeaderConsumer = ({ authenticated }) => {
             </Options>
           </CategoryMenu>
         </>
-      ) : (
+      ): (
         <Container>
           <ImgLogo src={imgLogo} alt="Logo" />
         </Container>
@@ -89,4 +89,4 @@ const HeaderConsumer = ({ authenticated }) => {
   );
 };
 
-export default HeaderConsumer;
+export default CommerceHeader;

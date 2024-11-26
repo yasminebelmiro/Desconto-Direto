@@ -19,18 +19,14 @@ import {
 } from "./style";
 import Logo from "../../components/Logo/Logo";
 import { useNavigate } from "react-router-dom";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import HeaderConsumer from "../../components/HeaderConsumer/HeaderConsumer";
+import { yupResolver } from "@hookform/resolvers/yup";
+import CostumerHeader from "../../components/CostumerHeader/CostumerHeader";
+
 
 const registerSchema = yup.object().shape({
   name: yup.string().required("Campo obrigatório"),
-  phone: yup.string().required("Campo obrigatório"),
-  cellphone: yup.string().required("Campo obrigatório"),
-  adress: yup.string().required("Campo obrigatório"),
-  adressNumber: yup.string().required("Campo obrigatório"),
-  district: yup.string().required("Campo obrigatório"),
-  cep: yup.string().min(6, "O cep deve ter 6 caracteres").required("Campo obrigatório"),
+  cellphone: yup.string().required(),
   email: yup.string().email().required("Campo obrigatório"),
   password: yup
     .string()
@@ -45,7 +41,7 @@ const registerSchema = yup.object().shape({
     ),
 });
 
-const RegisterMarket = () => {
+const CostumerRegister = () => {
   const navigate = useNavigate();
   const {
     register,
@@ -62,9 +58,15 @@ const RegisterMarket = () => {
   const handleLogin = () => {
     navigate("/login");
   };
+
+  const handleRegister = () => {
+    navigate("/consumidor/home");
+   }
+
+
   return (
     <>
-      <HeaderConsumer />
+      <CostumerHeader />
       <RegisterContainer>
         <Left>
           <Titulo>Login</Titulo>
@@ -72,21 +74,13 @@ const RegisterMarket = () => {
             <LargeInput
               id="name"
               name="name"
-              placeholder="Nome"
+              placeholder="Nome completo"
               type="text"
               className="name"
               {...register("name")}
             />
             <ErrorMessage> {errors.name?.message} </ErrorMessage>
             <Row>
-              <SmallInput
-                id="phone"
-                name="phone"
-                placeholder="Telefone fixo"
-                type="text"
-                className="phone"
-                {...register("phone")}
-              />
               <SmallInput
                 id="cellphone"
                 name="cellphone"
@@ -96,63 +90,16 @@ const RegisterMarket = () => {
                 {...register("cellphone")}
               />
             </Row>
-            <Row>
-              <ErrorMessage> {errors.phone?.message} </ErrorMessage>
-              <ErrorMessage> {errors.cellphone?.message} </ErrorMessage>
-            </Row>
-            <Row>
-              <SmallInput
-                id="adress"
-                name="adress"
-                placeholder="Endereço"
-                type="text"
-                className="adress"
-                {...register("adress")}
-              />
-              <SmallInput
-                id="adressNumber"
-                name="adressNumber"
-                placeholder="N°"
-                type="text"
-                className="adressNumber"
-                {...register("adressNumber")}
-              />
-            </Row>
-            <Row>
-              <ErrorMessage> {errors.adress?.message} </ErrorMessage>
-              <ErrorMessage> {errors.adressNumber?.message} </ErrorMessage>
-            </Row>
-            <Row>
-              <SmallInput
-                id="district"
-                name="district"
-                placeholder="Bairro"
-                type="text"
-                className="district"
-                {...register("district")}
-              />
-              <SmallInput
-                id="cep"
-                name="cep"
-                placeholder="CEP"
-                type="text"
-                className="cep"
-                {...register("cep")}
-              />
-            </Row>
-            <Row>
-              <ErrorMessage> {errors.district?.message} </ErrorMessage>
-              <ErrorMessage> {errors.cep?.message} </ErrorMessage>
-            </Row>
+            <ErrorMessage> {errors.cellphone?.message} </ErrorMessage>
             <LargeInput
               id="email"
               name="email"
               placeholder="Email"
               type="email"
-              className="email"
+              className="form-control"
               {...register("email")}
             />
-             <ErrorMessage> {errors.email?.message} </ErrorMessage>
+            <ErrorMessage> {errors.email?.message} </ErrorMessage>
             <Row>
               <SmallInput
                 id="password"
@@ -165,7 +112,7 @@ const RegisterMarket = () => {
               <SmallInput
                 id="confirmPassword"
                 name="confirmPassword"
-                placeholder="Confirme senha"
+                placeholder="Confirme a senha"
                 type="password"
                 className="confirmPassword"
                 {...register("confirmPassword")}
@@ -175,16 +122,17 @@ const RegisterMarket = () => {
             <ErrorMessage> {errors.password?.message} </ErrorMessage>
             <ErrorMessage> {errors.confirmPassword?.message} </ErrorMessage>
             </Row>
-            <ButtonLeft type="submit">Cadastrar</ButtonLeft>
+            <ButtonLeft type="submit" onClick={handleRegister}>Cadastrar</ButtonLeft>
           </Form>
         </Left>
         <Right>
           <Logo />
           <ButtonRight onClick={handleLogin}>Entrar</ButtonRight>
         </Right>
-      </RegisterContainer>    
+      </RegisterContainer>
+
     </>
   );
 };
 
-export default RegisterMarket;
+export default CostumerRegister;
