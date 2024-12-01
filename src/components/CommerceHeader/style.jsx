@@ -15,6 +15,7 @@ export const ImgLogo = styled.img`
   justify-content: flex-start;
   margin: 0 30px;
   width: 40px;
+  cursor: pointer;
 `;
 
 export const Right = styled.div`
@@ -51,7 +52,7 @@ export const Link = styled.a`
   color: #ffff;
   border: none;
   background-color: transparent;
-  cursor:pointer;
+  cursor: pointer;
 `;
 
 export const CategoryMenu = styled.div`
@@ -124,8 +125,8 @@ export const Category = styled.a`
   display: flex;
   align-items: center;
 
-  &:hover, &:focus {
-
+  &:hover,
+  &:focus {
     background-color: #2980b9;
   }
 `;
@@ -136,4 +137,11 @@ export const Options = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+`;
+
+export const Perfil = styled.img`
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  border: 3px solid #ffb703;
 `;

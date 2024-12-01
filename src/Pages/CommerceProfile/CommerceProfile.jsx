@@ -1,5 +1,5 @@
 import React from "react";
-import CostumerHeader from "../../components/CostumerHeader/CostumerHeader";
+import CommerceHeader from "../../components/CommerceHeader/CommerceHeader"
 import {
   ProfileContainer,
   Row,
@@ -12,7 +12,7 @@ import {
   Img,
   Divisor,
   Text,
-  RowCards,
+
 } from "./style";
 import {
   FaArrowLeft,
@@ -31,11 +31,11 @@ import CommerceCardList from "../../components/CommerceCardList/CommerceCardList
 const CommerceProfile = () => {
   const navigate = useNavigate();
   const handleBack = () => {
-    navigate("/consumidor/home");
+    navigate("/comercio/home");
   };
   return (
     <>
-      <CostumerHeader authenticated={true} />
+      <CommerceHeader authenticated={true} />
       <Back onClick={handleBack}>
         <FaArrowLeft size={25} />
       </Back>
@@ -79,16 +79,15 @@ const CommerceProfile = () => {
         </Profile>
       </ProfileContainer>
       <Divisor>
-        <Text>Panfletos</Text>
+        <Text>Meus panfletos</Text>
       </Divisor>
       <Carousel />
 
       <Divisor>
-        <Text>Ofertas</Text>
+        <Text>Minhas ofertas</Text>
       </Divisor>
-      <RowCards>
        <CommerceCardList market={true} />
-      </RowCards>
+  
     </>
   );
 };

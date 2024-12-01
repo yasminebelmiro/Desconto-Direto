@@ -1,11 +1,10 @@
 import React from "react";
 
-
-import { Back, FavoriteContainer, Row, Title, Cards } from "./style";
+import { Back, FavoriteContainer, Row, Title } from "./style";
 import { FaArrowLeft } from "react-icons/fa";
 
 import { useNavigate } from "react-router-dom";
-import CommerceCardList from "../../components/CommerceCardList/CommerceCardList";
+import CostumerCardList from "../../components/CostumerCardList/CostumerCardList";
 import CostumerHeader from "../../components/CostumerHeader/CostumerHeader";
 
 const CostumerFavoriteOffer = () => {
@@ -16,17 +15,14 @@ const CostumerFavoriteOffer = () => {
   return (
     <>
       <CostumerHeader authenticated={true} />
+      <Back onClick={handleBack}>
+        <FaArrowLeft size={25} />
+      </Back>
       <Row>
-        <Back onClick={handleBack}>
-          <FaArrowLeft size={25} />
-        </Back>
-
         <Title>Oferas Favoritas</Title>
       </Row>
       <FavoriteContainer>
-        <Cards>
-          <CommerceCardList market={false} />
-        </Cards>
+        <CostumerCardList />
       </FavoriteContainer>
     </>
   );

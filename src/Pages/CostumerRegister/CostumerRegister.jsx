@@ -122,7 +122,7 @@ const CostumerRegister = () => {
             <ErrorMessage> {errors.password?.message} </ErrorMessage>
             <ErrorMessage> {errors.confirmPassword?.message} </ErrorMessage>
             </Row>
-            <ButtonLeft type="submit" onClick={handleRegister}>Cadastrar</ButtonLeft>
+            <ButtonLeft  onClick={handleRegister}>Cadastrar</ButtonLeft>
           </Form>
         </Left>
         <Right>

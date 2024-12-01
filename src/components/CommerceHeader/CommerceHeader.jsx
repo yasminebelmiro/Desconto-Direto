@@ -12,7 +12,8 @@ import {
   Dropdown,
   Item,
   Category,
-  Options
+  Options,
+  Perfil
 } from "./style";
 import imgLogo from "../../assets/logo.png";
 import { FaBell, FaHeart, FaChevronDown } from "react-icons/fa";
@@ -42,19 +43,22 @@ const CommerceHeader = ({ authenticated }) => {
   const handleProfile = () => {
     navigate("/comercio/meu-perfil");
    }
+   const handleHome = () => {
+    navigate("/comercio/home");
+   }
 
   return (
     <>
       {authenticated ? (
         <>
           <Container>
-            <ImgLogo src={imgLogo} alt="Logo" />
+            <ImgLogo src={imgLogo} alt="Logo" onClick={handleHome}/>
             <Right>
               <Form>
                 <Search placeholder="O que está procurando?" />
               </Form>
               <Link>{<FaBell size={25} color="#FFB703" />} </Link>
-              <Link onClick={handleProfile}> <Perfil src="" /></Link>
+              <Link onClick={handleProfile}><Perfil src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgZsMtVpteI3mH2yHr0p31syr08i2MPrMeQQ&s"/></Link>
             </Right>
           </Container>
           <CategoryMenu>

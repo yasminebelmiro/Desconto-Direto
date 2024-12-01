@@ -43,12 +43,15 @@ const CostumerHeader = ({ authenticated }) => {
     navigate("/consumidor/ofertas-favoritas");
    }
 
+   const handleHome = () => {
+    navigate("/consumidor/home");
+   }
   return (
     <>
       {authenticated ? (
         <>
           <Container>
-            <ImgLogo src={imgLogo} alt="Logo" />
+            <ImgLogo src={imgLogo} alt="Logo" onClick={handleHome}/>
             <Right>
               <Form>
                 <Search placeholder="O que está procurando?" />

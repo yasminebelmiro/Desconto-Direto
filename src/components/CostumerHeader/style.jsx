@@ -15,6 +15,7 @@ export const ImgLogo = styled.img`
   justify-content: flex-start;
   margin: 0 30px;
   width: 40px;
+  cursor: pointer;
 `;
 
 export const Right = styled.div`

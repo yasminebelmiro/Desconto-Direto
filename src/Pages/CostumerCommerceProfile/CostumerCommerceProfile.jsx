@@ -20,11 +20,12 @@ import {
   FaWhatsapp,
 } from "react-icons/fa";
 import Carousel from "../../components/Carousel/Carousel";
-import CardOffer from "../../components/CardOffer/CardOffer";
+
 import { MdAlternateEmail, MdHome } from "react-icons/md";
 import { IoIosPin } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import CostumerHeader from "../../components/CostumerHeader/CostumerHeader";
+import CostumerCardList from "../../components/CostumerCardList/CostumerCardList";
 
 const CostumerCommerceProfile = () => {
   const navigate = useNavigate();
@@ -84,14 +85,7 @@ const CostumerCommerceProfile = () => {
       <Divisor>
         <Text>Ofertas</Text>
       </Divisor>
-      <RowCards>
-        <CardOffer />
-        <CardOffer />
-        <CardOffer />
-        <CardOffer />
-        <CardOffer />
-        <CardOffer />
-      </RowCards>
+        <CostumerCardList />
     </>
   );
 };

@@ -56,10 +56,11 @@ export const Img = styled.img`
 `;
 
 export const Row = styled.div`
+width: 80%;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 120px;
+  margin-top: 40px;
 `;
 
 export const RowCards = styled.div`
@@ -99,3 +100,5 @@ export const Text = styled.p`
   font-weight: bold;
   margin-left: 60px;
 `;
+
+

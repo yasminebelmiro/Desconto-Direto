@@ -2,9 +2,8 @@ import React from "react";
 
 import { Divisor, Text, Row } from "./style";
 import Carousel from "../../components/Carousel/Carousel";
-import CommerceCardList from "../../components/CommerceCardList/CommerceCardList";
 import CostumerHeader from "../../components/CostumerHeader/CostumerHeader";
-
+import CostumerCardList from "../../components/CostumerCardList/CostumerCardList";
 
 const CostumerHome = () => {
   return (
@@ -17,15 +16,12 @@ const CostumerHome = () => {
       <Divisor>
         <Text>Top 10 ofertas</Text>
       </Divisor>
-      <Row>
-       
-      </Row>
+      <Row></Row>
       <Divisor>
         <Text>Ofertas</Text>
       </Divisor>
-      <Row>
-        <CommerceCardList market={false} />
-      </Row>
+
+      <CostumerCardList />
     </>
   );
 };

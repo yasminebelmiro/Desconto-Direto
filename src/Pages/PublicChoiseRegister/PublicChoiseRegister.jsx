@@ -21,7 +21,7 @@ const PublicChoiseRegister = () => {
   };
 
   const handleMarket = () => {
-    navigate("/comercio/casdastro-comercio");
+    navigate("/comercio/casdastro");
   };
 
   return (

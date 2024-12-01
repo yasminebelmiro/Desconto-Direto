@@ -62,6 +62,10 @@ const RegisterMarket = () => {
   const handleLogin = () => {
     navigate("/login");
   };
+
+  const handleRegister = () => {
+    navigate("/comercio/home");
+  }
   return (
     <>
       <CostumerHeader />
@@ -175,7 +179,7 @@ const RegisterMarket = () => {
             <ErrorMessage> {errors.password?.message} </ErrorMessage>
             <ErrorMessage> {errors.confirmPassword?.message} </ErrorMessage>
             </Row>
-            <ButtonLeft type="submit">Cadastrar</ButtonLeft>
+            <ButtonLeft type="submit" onClick={handleRegister}>Cadastrar</ButtonLeft>
           </Form>
         </Left>
         <Right>

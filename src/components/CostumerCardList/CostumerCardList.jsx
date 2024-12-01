@@ -4,7 +4,8 @@ import { CardsContainer } from "./style";
 import { useNavigate } from "react-router-dom";
 import CostumerCardOffer from "../CostumerCardOffer/CostumerCardOffer";
 
-const CommerceCardList = () => {
+
+const CostumerCardList = () => {
   const [cards, setCards] = useState([
     {
       id: 1,
@@ -97,29 +98,32 @@ const CommerceCardList = () => {
     },
   ]);
 
-  const handleDelete = (id) => {
-    console.log("Deletando card com id:", id);
-    setCards(cards.filter((card) => card.id !== id));
+
+  const navigate = useNavigate();
+
+  const handleProfileMarket = () => {
+    navigate("/consumidor/perfil-comercio");
   };
 
   return (
     <CardsContainer>
-      <>
+      
+        <>
         {cards.map((card) => (
-          <CommerceCardOffer
-            key={card.id}
-            img={card.img}
-            icon={card.icon}
-            name={card.name}
-            description={card.description}
-            validity={card.validity}
-            onDelete={() => handleDelete(card.id)}
-          />
-        ))}
-      </>
-     
+            <CostumerCardOffer
+              key={card.id}
+              img={card.img}
+              name={card.name}
+              price={card.price}
+              description={card.description}
+              validity={card.validity}
+              icon={card.icon}
+              onProfileMarket={() => handleProfileMarket()}
+            />
+          ))}
+        </>
     </CardsContainer>
   );
 };
 
-export default CommerceCardList;
+export default CostumerCardList;

@@ -1,10 +1,11 @@
 import styled from "styled-components";
 
 export const Row = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 `;
 
 export const Title = styled.h1`
@@ -16,7 +17,7 @@ export const Title = styled.h1`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: 600px;
+
   border-radius: 40px;
 `;
 
@@ -24,7 +25,7 @@ export const Back = styled.button`
   background-color: #023047;
   width: 80px;
   height: 40px;
-  margin: 60px;
+  margin: 20px;
   color: #ffffff;
   border-radius: 40px;
   display: flex;
@@ -33,23 +34,15 @@ export const Back = styled.button`
   cursor: pointer;
 `;
 
-export const Cards = styled.div`
-  width: 90%;
-  min-height: 50vh;
-  border: 4px solid #023047;
-  border-radius: 40px;
-  margin: 40px;
-  display: grid;
-  grid-template-columns: auto auto auto auto auto;
-  gap: 60px;
-  justify-content: center;
-  align-items: center;
-  padding: 60px 0px 30px 0px;
-`;
-
 export const FavoriteContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  border: 4px solid #023047;
+  margin: 40px;
+  width: 90%;
+  border-radius: 40px;
+  min-height: 50vh;
+  padding: 30px;
 `;
