@@ -12,6 +12,9 @@ import CommerceHome from "./Pages/CommerceHome/CommerceHome";
 import CostumerHome from "./Pages/CostumerHome/CostumerHome";
 import CostumerCommerceProfile from "./Pages/CostumerCommerceProfile/CostumerCommerceProfile";
 import CommerceAddFlyer from "./Pages/CommerceAddFlyer/CommerceAddFlyer";
+import CommerceAddOffer from "./Pages/CommerceAddOffer/CommerceAddOffer";
+import CommerceAddProduct from "./Pages/CommerceAddProduct/CommerceAddProduct";
+import CommerceEditProfile from "./Pages/CommerceEditProfile/CommerceEditProfile";
 
 const App = () => {
   return (
@@ -27,6 +30,10 @@ const App = () => {
         <Route path="/consumidor/perfil-comercio" element={<CostumerCommerceProfile />} />
         <Route path="/comercio/meu-perfil" element={<CommerceProfile />} />
         <Route path="/comercio/novo-panfleto" element={<CommerceAddFlyer />} />
+        <Route path="/comercio/nova-oferta"  element={<CommerceAddOffer/>} />
+        <Route path="/comercio/novo-produto"  element={<CommerceAddProduct/>} />
+        <Route path="/comercio/meu-perfil/editar"  element={<CommerceEditProfile/>} />
+        
       </Routes>
     </Router>
   );

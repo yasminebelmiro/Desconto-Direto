@@ -101,4 +101,20 @@ export const Text = styled.p`
   margin-left: 60px;
 `;
 
+export const Button = styled.button`
+  width: 150px;
+  height: 40px;
+  position: absolute;
+  top: 5%;
+  right: 3%;
+  border: none;
+  background-color: #023047;
+  border-radius: 20px;
+  color: #fff;
+  font-size: 17px;
 
+  &:hover {
+    background: #219EBC;
+    cursor: pointer;
+  }
+`;

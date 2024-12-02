@@ -6,6 +6,13 @@ export const Column = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  font-family: maharlika;
+`;
+
+export const Column2 = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const Row = styled.div`
@@ -14,7 +21,6 @@ export const Row = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  height: 50vh;
 `;
 
 export const Title = styled.h1`
@@ -54,16 +60,16 @@ export const Container = styled.div`
   border-radius: 40px;
   height: 70vh;
   position: relative;
-  font-family: maharlika;
 `;
 
 export const Left = styled.div`
   width: 100%;
-  height: 80%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
 `;
 
 export const Right = styled.div`
@@ -72,11 +78,12 @@ export const Right = styled.div`
   display: flex;
   flex-direction: column;
   margin: 60px;
+
 `;
 
 export const ContainerImg = styled.div`
   width: 461px;
-  height: 302px;
+  height: 280px;
   border: 4px solid #fb8500;
   border-radius: 20px;
   display: flex;
@@ -84,7 +91,6 @@ export const ContainerImg = styled.div`
   align-items: center;
   justify-content: center;
   cursor: pointer;
-
 `;
 
 export const Icon = styled.div`
@@ -95,7 +101,7 @@ export const Text = styled.p`
   font-size: 25px;
   position: absolute;
   top: 5%;
-  left: 5%;
+  left: 6.7%;
   font-weight: bold;
 `;
 
@@ -109,20 +115,34 @@ export const Text3 = styled.p`
 
 export const Text4 = styled.p`
   font-size: 17px;
-  margin-top: 28px;
-  margin-bottom: 10px;
 `;
 
-export const Input = styled.input`
-  width: 200px;
-  height: 30px;
+export const LongerInput = styled.input`
+  width: 400px;
+  height: 50px;
   border: 4px solid #fb8500;
   border-radius: 10px;
   padding-left: 5px;
+  margin: 10px 0;
+  font-size: 17px;
 
   &::placeholder {
     color: #fb8500;
-    
+  }
+  &:focus {
+    outline: none;
+  }
+`;
+
+export const ShortInput = styled.input`
+  width: 200px;
+  height: 40px;
+  border: 4px solid #fb8500;
+  border-radius: 10px;
+  padding-left: 5px;
+  margin: 10px 0;
+  &::placeholder {
+    color: #fb8500;
   }
 
   &:focus {

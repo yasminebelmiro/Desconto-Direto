@@ -12,6 +12,7 @@ import {
   Img,
   Divisor,
   Text,
+  Button,
 
 } from "./style";
 import {
@@ -33,6 +34,10 @@ const CommerceProfile = () => {
   const handleBack = () => {
     navigate("/comercio/home");
   };
+
+  const handleEdit = () => {
+    navigate("/comercio/meu-perfil/editar");
+  };
   return (
     <>
       <CommerceHeader authenticated={true} />
@@ -46,6 +51,7 @@ const CommerceProfile = () => {
           <Categoria>Categoria</Categoria>
           <Row>
             <Column>
+            <Button onClick={handleEdit} >Editar perfil</Button>
               <Contato>
                 <MdHome size={25} color={"#023047"} />
                 Endereço

@@ -8,19 +8,33 @@ export const Column = styled.div`
   justify-content: center;
 `;
 
+export const Column2 = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 14px;
+`;
+
 export const Row = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
+
+  align-items: center;
+`;
+
+export const Form = styled.div`
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 50vh;
-`;
+`
+
 
 export const Title = styled.h1`
   background-color: #023047;
   width: 700px;
-  height: 60px;
+  min-height: 60px;
   color: #ffffff;
   font-family: maharlika;
   display: flex;
@@ -52,58 +66,20 @@ export const Container = styled.div`
   margin: 40px;
   width: 90%;
   border-radius: 40px;
-  height: 70vh;
+  min-height: 100vh;
   position: relative;
   font-family: maharlika;
 `;
 
-export const Left = styled.div`
-  width: 100%;
-  height: 80%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`;
-
-export const Right = styled.div`
-  width: 90%;
-  height: 80%;
-  display: flex;
-  flex-direction: column;
-  margin: 60px;
-`;
-
-export const ContainerImg = styled.div`
-  width: 461px;
-  height: 302px;
+export const Img = styled.img`
+  width: 250px;
+  height: 250px;
   border: 4px solid #fb8500;
-  border-radius: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-
+  border-radius: 100%;
+  margin: 20px;
 `;
 
 export const Icon = styled.div`
-  color: #fb8500;
-`;
-
-export const Text = styled.p`
-  font-size: 25px;
-  position: absolute;
-  top: 5%;
-  left: 5%;
-  font-weight: bold;
-`;
-
-export const Text2 = styled.p`
-  color: #fb8500;
-`;
-
-export const Text3 = styled.p`
   color: #fb8500;
 `;
 
@@ -113,16 +89,32 @@ export const Text4 = styled.p`
   margin-bottom: 10px;
 `;
 
-export const Input = styled.input`
-  width: 200px;
-  height: 30px;
+export const LongerInput = styled.input`
+  width: 600px;
+  height: 50px;
+  border: 4px solid #fb8500;
+  border-radius: 10px;
+  padding-left: 5px;
+
+  font-size: 17px;
+
+  &::placeholder {
+    color: #fb8500;
+  }
+  &:focus {
+    outline: none;
+  }
+`;
+
+export const ShortInput = styled.input`
+  width: 280px;
+  height: 50px;
   border: 4px solid #fb8500;
   border-radius: 10px;
   padding-left: 5px;
 
   &::placeholder {
     color: #fb8500;
-    
   }
 
   &:focus {
@@ -133,9 +125,7 @@ export const Input = styled.input`
 export const Button = styled.button`
   width: 150px;
   height: 40px;
-  position: absolute;
-  bottom: 5%;
-  right: 5%;
+  margin: 30px 0;
   border: none;
   background-color: #fb8500;
   border-radius: 20px;
