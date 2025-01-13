@@ -18,6 +18,7 @@ import {
 import imgLogo from "../../assets/logo.png";
 import { FaBell, FaHeart, FaChevronDown } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import PublicHeader from "../PublicHeader/PublicHeader";
 
 const CommerceHeader = ({ authenticated }) => {
   const [dropdownVisible, setDropdownVisible] = useState(false);
@@ -67,6 +68,7 @@ const CommerceHeader = ({ authenticated }) => {
                 Todos os produtos &nbsp; <FaChevronDown />
               </Button>
               {dropdownVisible && (
+                // TODO: Add categorias
                 <Content className="dropdown-content show">
                   <Item>Link 1</Item>
                   <Item>Link 2</Item>
@@ -84,11 +86,7 @@ const CommerceHeader = ({ authenticated }) => {
             </Options>
           </CategoryMenu>
         </>
-      ): (
-        <Container>
-          <ImgLogo src={imgLogo} alt="Logo" />
-        </Container>
-      )}
+      ): <PublicHeader /> }
     </>
   );
 };

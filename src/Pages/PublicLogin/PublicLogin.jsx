@@ -1,14 +1,9 @@
 import React, { useState } from "react";
-
-
 import Logo from "../../components/Logo/Logo";
-import Footer from "../../components/Footer/Footer";
-
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-
 import {
   LoginContainer,
   ContainerLeft,

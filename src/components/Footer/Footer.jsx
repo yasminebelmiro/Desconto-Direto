@@ -16,7 +16,7 @@ import { MdEmail } from "react-icons/md";
 
 const Footer = () => {
   return (
-    <FooterContainer>
+    <FooterContainer id="contato">
       <Column>
         <Row>
           <LogoContainer>

@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import CommerceCardOffer from "../CommerceCardOffer/CommerceCardOffer";
 import { CardsContainer } from "./style";
-import { useNavigate } from "react-router-dom";
-import CostumerCardOffer from "../CostumerCardOffer/CostumerCardOffer";
+
 
 const CommerceCardList = () => {
   const [cards, setCards] = useState([

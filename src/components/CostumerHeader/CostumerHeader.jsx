@@ -17,6 +17,7 @@ import {
 import imgLogo from "../../assets/logo.png";
 import { FaBell, FaHeart, FaChevronDown } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import PublicHeader from "../PublicHeader/PublicHeader";
 
 const CostumerHeader = ({ authenticated }) => {
   const [dropdownVisible, setDropdownVisible] = useState(false);
@@ -83,11 +84,7 @@ const CostumerHeader = ({ authenticated }) => {
             </Options>
           </CategoryMenu>
         </>
-      ): (
-        <Container>
-          <ImgLogo src={imgLogo} alt="Logo" />
-        </Container>
-      )}
+      ): <PublicHeader />}
     </>
   );
 };

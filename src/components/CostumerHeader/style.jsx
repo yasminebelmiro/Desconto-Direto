@@ -46,7 +46,7 @@ export const Search = styled.input`
     outline: 2px solid #ffffff;
   }
 `;
-
+// TODO: Mudar tag "a" para "Link" do react-router-dom
 export const Link = styled.a`
   text-decoration: none;
   color: #ffff;
@@ -104,7 +104,7 @@ export const Content = styled.div`
     display: block;
   }
 `;
-
+// TODO: Mudar tag "a" para "Link" do react-router-dom
 export const Item = styled.a`
   color: black;
   padding: 12px 16px;
@@ -115,7 +115,7 @@ export const Item = styled.a`
     background-color: #ffb703;
   }
 `;
-
+// TODO: Mudar tag "a" para "Link" do react-router-dom
 export const Category = styled.a`
   color: #ffffff;
   padding: 0 40px;

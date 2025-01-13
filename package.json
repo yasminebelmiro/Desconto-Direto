@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
+    "axios": "^1.7.9",
     "desconto-direto": "file:",
     "framer-motion": "^11.11.17",
     "react": "^18.3.1",
