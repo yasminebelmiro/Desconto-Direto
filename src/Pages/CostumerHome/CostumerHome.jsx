@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Divisor, Text, Row } from "./style";
+import { Divisor, Text, Row , CardsContainer} from "./style";
 import Carousel from "../../components/Carousel/Carousel";
 import CostumerHeader from "../../components/CostumerHeader/CostumerHeader";
 import CostumerCardList from "../../components/CostumerCardList/CostumerCardList";
@@ -20,8 +20,9 @@ const CostumerHome = () => {
       <Divisor>
         <Text>Ofertas</Text>
       </Divisor>
-
-      <CostumerCardList />
+      <CardsContainer>
+        <CostumerCardList />
+      </CardsContainer>
     </>
   );
 };

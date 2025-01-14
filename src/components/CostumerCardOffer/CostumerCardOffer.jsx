@@ -13,8 +13,15 @@ import {
 } from "./style";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
 
-
-const CostumerCardOffer = ({ img, name, price, description, validity, icon, onProfileMarket }) => {
+const CostumerCardOffer = ({
+  img,
+  name,
+  price,
+  description,
+  validity,
+  icon,
+  onProfileMarket,
+}) => {
   const [liked, setLiked] = useState(false);
   const toggleLiked = () => {
     setLiked(!liked);
@@ -24,14 +31,14 @@ const CostumerCardOffer = ({ img, name, price, description, validity, icon, onPr
       <Row>
         <Heart onClick={toggleLiked}>
           <motion.div
-          initial={{ scale: 1}}
-          animate={{ scale: liked ? [1, 1.3, 1]: 1 }}
-          transition={{duration: 0.5}}
+            initial={{ scale: 1 }}
+            animate={{ scale: liked ? [1, 1.3, 1] : 1 }}
+            transition={{ duration: 0.5 }}
           >
-          {liked ? <FaHeart size={30} /> : <FaRegHeart size={30} />}
+            {liked ? <FaHeart size={30} /> : <FaRegHeart size={30} />}
           </motion.div>
         </Heart>
-        <Icon onClick={onProfileMarket} src={icon} ></Icon>
+        <Icon onClick={onProfileMarket} src={icon}></Icon>
       </Row>
 
       <ImgProduct src={img} alt="Imagem do produto"></ImgProduct>
