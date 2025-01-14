@@ -1,5 +1,4 @@
-import React from "react";
-
+import React, { useEffect, useState } from "react";
 
 import * as yup from "yup";
 
@@ -21,7 +20,7 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import CostumerHeader from "../../components/CostumerHeader/CostumerHeader";
-
+import { api } from "../../service/api";
 
 const registerSchema = yup.object().shape({
   name: yup.string().required("Campo obrigatório"),
@@ -41,7 +40,10 @@ const registerSchema = yup.object().shape({
 });
 
 const CostumerRegister = () => {
+
   const navigate = useNavigate();
+  const [newClientes, setNewClientes] = useState();
+
   const {
     register,
     handleSubmit,
@@ -50,18 +52,32 @@ const CostumerRegister = () => {
     resolver: yupResolver(registerSchema),
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    const newUser = {
+      nome: data.name,
+      telefone: data.cellphone,
+      email: data.email,
+      senha: data.password,
+    }
+    console.log(newUser);
+    
+    try {
+      const response = await api.post("/clientes/add", newUser);
+      setNewClientes(response.data);
+      if(newClientes){
+        alert("Cliente cadastrado com sucesso");
+        navigate("/consumidor/home")
+      }else{
+        alert("Erro ao cadastrar cliente");
+      }
+    } catch (error) {
+      console.error(error)
+    }
   };
 
   const handleLogin = () => {
     navigate("/login");
   };
-
-  const handleRegister = () => {
-    navigate("/consumidor/home");
-   }
-
 
   return (
     <>
@@ -77,16 +93,18 @@ const CostumerRegister = () => {
               type="text"
               className="name"
               {...register("name")}
+              
             />
             <ErrorMessage> {errors.name?.message} </ErrorMessage>
             <Row>
-              <SmallInput
+              <LargeInput
                 id="cellphone"
                 name="cellphone"
                 placeholder="Telefone celular"
                 type="text"
                 className="cellphone"
                 {...register("cellphone")}
+                
               />
             </Row>
             <ErrorMessage> {errors.cellphone?.message} </ErrorMessage>
@@ -97,6 +115,7 @@ const CostumerRegister = () => {
               type="email"
               className="form-control"
               {...register("email")}
+             
             />
             <ErrorMessage> {errors.email?.message} </ErrorMessage>
             <Row>
@@ -107,6 +126,7 @@ const CostumerRegister = () => {
                 type="password"
                 className="password"
                 {...register("password")}
+                
               />
               <SmallInput
                 id="confirmPassword"
@@ -115,13 +135,14 @@ const CostumerRegister = () => {
                 type="password"
                 className="confirmPassword"
                 {...register("confirmPassword")}
+                
               />
             </Row>
             <Row>
-            <ErrorMessage> {errors.password?.message} </ErrorMessage>
-            <ErrorMessage> {errors.confirmPassword?.message} </ErrorMessage>
+              <ErrorMessage> {errors.password?.message} </ErrorMessage>
+              <ErrorMessage> {errors.confirmPassword?.message} </ErrorMessage>
             </Row>
-            <ButtonLeft  onClick={handleRegister}>Cadastrar</ButtonLeft>
+            <ButtonLeft type="submit">Cadastrar</ButtonLeft>
           </Form>
         </Left>
         <Right>
@@ -129,7 +150,6 @@ const CostumerRegister = () => {
           <ButtonRight onClick={handleLogin}>Entrar</ButtonRight>
         </Right>
       </RegisterContainer>
-
     </>
   );
 };

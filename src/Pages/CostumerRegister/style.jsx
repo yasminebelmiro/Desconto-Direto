@@ -48,7 +48,7 @@ export const LargeInput = styled.input`
   border-radius: 10px;
 
   color: #ffb703;
-  font-size: 18px;
+  font-size: 15px;
   font-family: Maharlika;
   padding: 0 20px;
 
@@ -71,7 +71,7 @@ export const SmallInput = styled.input`
   border-radius: 10px;
 
   color: #ffb703;
-  font-size: 18px;
+  font-size: 15px;
   font-family: Maharlika;
   padding: 0 20px;
 
