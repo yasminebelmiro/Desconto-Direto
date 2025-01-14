@@ -12,8 +12,12 @@ import {
   Price,
 } from "./style";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
+import { useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { api } from "../../service/api";
 
 const CostumerCardOffer = ({
+  id,
   img,
   name,
   price,
@@ -23,8 +27,22 @@ const CostumerCardOffer = ({
   onProfileMarket,
 }) => {
   const [liked, setLiked] = useState(false);
-  const toggleLiked = () => {
+  const { id: userId } = useParams();
+
+
+  const toggleLiked = async () => {
     setLiked(!liked);
+
+    try {
+      const response = liked
+        ? await api.delete(`/clientes/${userId}/favoritos/${id}`) //Não tem esse endpoint na api
+        : await api.post(`/clientes/${userId}/favoritos/${id}`);
+      if (response.status === 200) {
+        console.log(liked ? "Oferta removida dos favoritos" : "Oferta favoritada");
+      }
+    } catch (error) {
+      console.log("erro ao favoritar" + error);
+    }
   };
   return (
     <CardContainer>

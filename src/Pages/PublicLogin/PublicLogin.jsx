@@ -17,6 +17,7 @@ import {
 } from "./style";
 import CostumerHeader from "../../components/CostumerHeader/CostumerHeader";
 import { api } from "../../service/api";
+import { data } from "framer-motion/client";
 
 // Esquema de validação
 const loginValidation = yup.object().shape({
@@ -51,6 +52,7 @@ const PublicLogin = () => {
         
         setClientes(clientesResponse.data);
         setComercios(comerciosResponse.data);
+        
       } catch (error) {
         console.error("Erro ao buscar clientes:", error);
       }
@@ -86,10 +88,12 @@ const PublicLogin = () => {
     if (usuarioEncontrado) {
       if (usuarioEncontrado.tipo === "cliente") {
         alert("Login de cliente realizado com sucesso!");
-        navigate("/consumidor/home");
+       navigate(`/consumidor/home/${usuarioEncontrado.dados.id}`);
+      
+        
       } else if (usuarioEncontrado.tipo === "comercio") {
         alert("Login de comércio realizado com sucesso!");
-        navigate("/comercio/home");
+        navigate(`/comercio/home/${usuarioEncontrado.dados.id}`);
       }
     } else {
       alert("Email ou senha incorretos.");

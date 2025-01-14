@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { Divisor, Text, Row , CardsContainer} from "./style";
 import Carousel from "../../components/Carousel/Carousel";
 import CostumerHeader from "../../components/CostumerHeader/CostumerHeader";
 import CostumerCardList from "../../components/CostumerCardList/CostumerCardList";
+import { useParams } from "react-router-dom";
 
 const CostumerHome = () => {
+
+  const { id } = useParams();
+
+  useEffect(() => {
+    console.log(id);
+  },[])
+  
   return (
     <>
       <CostumerHeader authenticated={true} />
@@ -21,7 +29,7 @@ const CostumerHome = () => {
         <Text>Ofertas</Text>
       </Divisor>
       <CardsContainer>
-        <CostumerCardList />
+        <CostumerCardList/>
       </CardsContainer>
     </>
   );

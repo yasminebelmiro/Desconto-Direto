@@ -22,6 +22,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import CostumerHeader from "../../components/CostumerHeader/CostumerHeader";
 import { api } from "../../service/api";
 
+
 const registerSchema = yup.object().shape({
   name: yup.string().required("Campo obrigatório"),
   cellphone: yup.string().required(),
@@ -59,21 +60,28 @@ const CostumerRegister = () => {
       email: data.email,
       senha: data.password,
     }
-    console.log(newUser);
     
     try {
       const response = await api.post("/clientes/add", newUser);
       setNewClientes(response.data);
-      if(newClientes){
-        alert("Cliente cadastrado com sucesso");
-        navigate("/consumidor/home")
-      }else{
-        alert("Erro ao cadastrar cliente");
-      }
     } catch (error) {
       console.error(error)
     }
   };
+
+  useEffect(() => {
+    try {
+      if(newClientes){
+        alert("Cliente cadastrado com sucesso");
+        navigate("/login")
+      }else{
+        
+        alert("Erro ao cadastrar cliente");
+      }
+    } catch (error) {
+      
+    }
+  }, [newClientes, navigate]);
 
   const handleLogin = () => {
     navigate("/login");
@@ -84,7 +92,7 @@ const CostumerRegister = () => {
       <CostumerHeader />
       <RegisterContainer>
         <Left>
-          <Titulo>Login</Titulo>
+          <Titulo>Cadastro</Titulo>
           <Form onSubmit={handleSubmit(onSubmit)}>
             <LargeInput
               id="name"

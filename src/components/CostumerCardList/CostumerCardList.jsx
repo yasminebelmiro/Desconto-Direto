@@ -26,6 +26,7 @@ const CostumerCardList = () => {
           card.ofertas.map((oferta) => (
             <CostumerCardOffer
               key={oferta.id}
+              id={oferta.id}
               icon={card.fotoUrl} 
               img={oferta.produto.fotoUrl} 
               name={oferta.produto.nome} 
