@@ -16,12 +16,13 @@ import {
 } from "./style";
 import imgLogo from "../../assets/logo.png";
 import { FaBell, FaHeart, FaChevronDown } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import PublicHeader from "../PublicHeader/PublicHeader";
 
 const CostumerHeader = ({ authenticated }) => {
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const navigate = useNavigate();
+  const {id: userId} = useParams();
 
   const toggleDropdown = () => {
     setDropdownVisible((prev) => !prev);
@@ -41,11 +42,11 @@ const CostumerHeader = ({ authenticated }) => {
   }, [dropdownVisible]);
 
   const handleFavoriteOffer = () => {
-    navigate("/consumidor/ofertas-favoritas");
+    navigate(`/consumidor/ofertas-favoritas/${userId}`);
    }
 
    const handleHome = () => {
-    navigate("/consumidor/home");
+    navigate(`/consumidor/home/${userId}`);
    }
   return (
     <>

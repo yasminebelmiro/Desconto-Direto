@@ -18,25 +18,25 @@ const CostumerCardList = () => {
 
   const navigate = useNavigate();
 
-  const handleProfileMarket = () => {
-    navigate("/consumidor/perfil-comercio");
+  const handleProfileMarket = (userId, name, commerceId ) => {
+    navigate(`/consumidor/${userId}/${name}/${commerceId}`);
   };
 
   return cards.flatMap((card) => (
-          card.ofertas.map((oferta) => (
-            <CostumerCardOffer
-              key={oferta.id}
-              id={oferta.id}
-              icon={card.fotoUrl} 
-              img={oferta.produto.fotoUrl} 
-              name={oferta.produto.nome} 
-              price={`R$ ${oferta.preco}`} 
-              description={oferta.produto.medida} 
-              validity={new Date(oferta.validade).toLocaleDateString("pt-BR")}
-              onProfileMarket={() => handleProfileMarket(card.id)} 
-            />
-          ))
-  ));
+    card.ofertas.map((oferta) => (
+      <CostumerCardOffer
+        key={oferta.id}
+        id={oferta.id}
+        icon={card.fotoUrl} 
+        img={oferta.produto.fotoUrl} 
+        name={oferta.produto.nome} 
+        price={`R$ ${oferta.preco}`} 
+        description={oferta.produto.medida} 
+        validity={new Date(oferta.validade).toLocaleDateString("pt-BR")}
+        onProfileMarket={() => handleProfileMarket(card.id, card.nome, card.id)}
+      />
+    ))
+));
   
 };
 

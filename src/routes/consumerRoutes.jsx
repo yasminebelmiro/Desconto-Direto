@@ -13,13 +13,14 @@ const consumerRoutes = [
     element: <CostumerHome />,
   },
   {
-    path: "/consumidor/ofertas-favoritas",
+    path: "/consumidor/ofertas-favoritas/:id",
     element: <CostumerFavoriteOffer />,
   },
   {
-    path: "/consumidor/:nome/:id",
+    path: "/consumidor/:id/:name/:id",
     element: <CostumerCommerceProfile />,
   },
+
 ];
 
 export default consumerRoutes;

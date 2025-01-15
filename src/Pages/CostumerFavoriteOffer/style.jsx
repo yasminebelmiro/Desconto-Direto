@@ -46,3 +46,12 @@ export const FavoriteContainer = styled.div`
   min-height: 50vh;
   padding: 30px;
 `;
+
+export const CardsContainer = styled.div`
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  gap: 60px;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 0px 30px 0px;
+`

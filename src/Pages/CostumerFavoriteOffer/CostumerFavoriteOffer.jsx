@@ -1,17 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 
-import { Back, FavoriteContainer, Row, Title } from "./style";
+import { Back, CardsContainer, FavoriteContainer, Row, Title } from "./style";
 import { FaArrowLeft } from "react-icons/fa";
 
-import { useNavigate } from "react-router-dom";
-import CostumerCardList from "../../components/CostumerCardList/CostumerCardList";
+import { useNavigate, useParams } from "react-router-dom";
+
 import CostumerHeader from "../../components/CostumerHeader/CostumerHeader";
+import { api } from "../../service/api";
+import CostumerFavoriteList from "../../components/CostumerFavoriteList/CostumerFavoriteList";
 
 const CostumerFavoriteOffer = () => {
   const navigate = useNavigate();
+  const { id } = useParams();
   const handleBack = () => {
-    navigate("/consumidor/home");
+    navigate(`/consumidor/home/${id}`);
   };
+
+  const fetch = async () => {
+    const response = await api.get("clientes/all")
+  }
   return (
     <>
       <CostumerHeader authenticated={true} />
@@ -19,10 +26,12 @@ const CostumerFavoriteOffer = () => {
         <FaArrowLeft size={25} />
       </Back>
       <Row>
-        <Title>Oferas Favoritas</Title>
+        <Title>Ofetas Favoritas</Title>
       </Row>
       <FavoriteContainer>
-        <CostumerCardList />
+      <CardsContainer>
+        <CostumerFavoriteList/>
+      </CardsContainer>
       </FavoriteContainer>
     </>
   );

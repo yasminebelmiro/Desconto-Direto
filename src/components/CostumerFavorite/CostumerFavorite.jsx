@@ -15,7 +15,7 @@ import { FaRegHeart, FaHeart } from "react-icons/fa";
 import { useParams } from "react-router-dom";
 import { api } from "../../service/api";
 
-const CostumerCardOffer = ({
+const CostumerFavorite = ({
   id,
   img,
   name,
@@ -25,7 +25,7 @@ const CostumerCardOffer = ({
   icon,
   onProfileMarket,
 }) => {
-  const [liked = favorite, setLiked] = useState(false);
+  const [liked = favorite, setLiked] = useState(true);
   const { id: userId } = useParams();
 
   
@@ -71,4 +71,4 @@ const CostumerCardOffer = ({
   );
 };
 
-export default CostumerCardOffer;
+export default CostumerFavorite;
