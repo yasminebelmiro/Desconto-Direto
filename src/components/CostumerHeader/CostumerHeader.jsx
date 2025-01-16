@@ -21,6 +21,8 @@ import PublicHeader from "../PublicHeader/PublicHeader";
 
 const CostumerHeader = ({ authenticated }) => {
   const [dropdownVisible, setDropdownVisible] = useState(false);
+  // BUG: A API não retorna as ofertas por categoria
+  const [search, setSearch] = useState("");
   const navigate = useNavigate();
   const {id: userId} = useParams();
 
@@ -56,7 +58,7 @@ const CostumerHeader = ({ authenticated }) => {
             <ImgLogo src={imgLogo} alt="Logo" onClick={handleHome}/>
             <Right>
               <Form>
-                <Search placeholder="O que está procurando?" />
+                <Search placeholder="O que está procurando?" onChange={(e) => setSearch(e.target.value)}/>
               </Form>
               <Link>{<FaBell size={25} color="#FFB703" />} </Link>
               <Link onClick={handleFavoriteOffer}>{<FaHeart size={25} color="#FFB703" />}</Link>

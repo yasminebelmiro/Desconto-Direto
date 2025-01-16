@@ -16,9 +16,6 @@ const CostumerFavoriteOffer = () => {
     navigate(`/consumidor/home/${id}`);
   };
 
-  const fetch = async () => {
-    const response = await api.get("clientes/all")
-  }
   return (
     <>
       <CostumerHeader authenticated={true} />

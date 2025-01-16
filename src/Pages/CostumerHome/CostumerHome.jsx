@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Divisor, Text, Row , CardsContainer} from "./style";
 import Carousel from "../../components/Carousel/Carousel";
@@ -10,13 +10,14 @@ const CostumerHome = () => {
 
   const { id } = useParams();
 
+
   useEffect(() => {
     console.log(id);
   },[])
   
   return (
     <>
-      <CostumerHeader authenticated={true} />
+      <CostumerHeader authenticated={true}/>
       <Divisor>
         <Text>Panfletos</Text>
       </Divisor>

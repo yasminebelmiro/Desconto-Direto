@@ -35,7 +35,7 @@ const CostumerFavoriteList = () => {
             key={oferta.id}
             id={oferta.id}
             // BUG: A API não retorna a foto do comércio no favoritos
-            //icon={} 
+            //icon={card.fotoUrl} 
             img={oferta.produto.fotoUrl}
             name={oferta.produto.nome}
             price={`R$ ${oferta.preco}`}

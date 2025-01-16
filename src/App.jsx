@@ -12,7 +12,8 @@ const App = () => {
         element.scrollIntoView({ behavior: "smooth" });
       }
     }
-  },[location]) 
+  },[location])
+   
   return (
     <>
       <Outlet />

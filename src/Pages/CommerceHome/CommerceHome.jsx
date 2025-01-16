@@ -6,15 +6,16 @@ import { FaPlusCircle } from "react-icons/fa";
 
 import CommerceCardList from "../../components/CommerceCardList/CommerceCardList";
 import CommerceHeader from "../../components/CommerceHeader/CommerceHeader";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const CommerceHome = () => {
   const navigate = useNavigate();
+  const { idCommerce } = useParams();
   const handleAddPanfleto = () => {
-    navigate("/comercio/novo-panfleto");
+    navigate(`/comercio/${idCommerce}/novo-panfleto'`);
   };
   const handleAddOferta = () => {
-    navigate("/comercio/nova-oferta");
+    navigate(`/comercio/${idCommerce}/nova-oferta`);
   };
 
   return (
