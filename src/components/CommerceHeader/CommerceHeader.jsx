@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Container,
   Form,
@@ -13,16 +13,19 @@ import {
   Item,
   Category,
   Options,
-  Perfil
+  Perfil,
 } from "./style";
 import imgLogo from "../../assets/logo.png";
-import { FaBell, FaHeart, FaChevronDown } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { FaBell, FaChevronDown, FaChevronUp } from "react-icons/fa";
+import { useNavigate, useParams } from "react-router-dom";
 import PublicHeader from "../PublicHeader/PublicHeader";
+import { api } from "../../service/api";
 
 const CommerceHeader = ({ authenticated }) => {
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const navigate = useNavigate();
+  const { idCommerce } = useParams();
+  const [commerce, setCommerce] = useState([]);
 
   const toggleDropdown = () => {
     setDropdownVisible((prev) => !prev);
@@ -34,7 +37,18 @@ const CommerceHeader = ({ authenticated }) => {
     }
   };
 
-  React.useEffect(() => {
+  const fetchCommerce = async () => {
+    try {
+      const response = await api.get(`/comercios/find/${idCommerce}`);
+      setCommerce(response.data);
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchCommerce();
     document.addEventListener("mousedown", handleOutsideClick);
     return () => {
       document.removeEventListener("mousedown", handleOutsideClick);
@@ -42,31 +56,40 @@ const CommerceHeader = ({ authenticated }) => {
   }, [dropdownVisible]);
 
   const handleProfile = () => {
-    navigate("/comercio/meu-perfil");
-   }
-   const handleHome = () => {
-    navigate("/comercio/home");
-   }
+    navigate(`/comercio/${idCommerce}/meu-perfil`);
+  };
+  const handleHome = () => {
+    navigate(`/comercio/home/${idCommerce}`);
+  };
 
   return (
     <>
       {authenticated ? (
         <>
           <Container>
-            <ImgLogo src={imgLogo} alt="Logo" onClick={handleHome}/>
+            <ImgLogo src={imgLogo} alt="Logo" onClick={handleHome} />
             <Right>
               <Form>
                 <Search placeholder="O que está procurando?" />
               </Form>
               <Link>{<FaBell size={25} color="#FFB703" />} </Link>
-              <Link onClick={handleProfile}><Perfil src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgZsMtVpteI3mH2yHr0p31syr08i2MPrMeQQ&s"/></Link>
+              <Link onClick={handleProfile}>
+                <Perfil key={commerce.id} src={commerce.fotoUrl} alt={commerce.nome} />
+              </Link>
             </Right>
           </Container>
           <CategoryMenu>
             <Dropdown>
-              <Button className="dropBtn" onClick={toggleDropdown}>
-                Todos os produtos &nbsp; <FaChevronDown />
-              </Button>
+              {dropdownVisible === false ? (
+                <Button className="dropBtn" onClick={toggleDropdown}>
+                  Todos os produtos &nbsp; <FaChevronDown />
+                </Button>
+              ) : (
+                <Button className="dropBtn" onClick={toggleDropdown}>
+                  Todos os produtos &nbsp; <FaChevronUp />
+                </Button>
+              )}
+
               {dropdownVisible && (
                 // TODO: Add categorias
                 <Content className="dropdown-content show">
@@ -86,7 +109,9 @@ const CommerceHeader = ({ authenticated }) => {
             </Options>
           </CategoryMenu>
         </>
-      ): <PublicHeader /> }
+      ) : (
+        <PublicHeader />
+      )}
     </>
   );
 };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CommerceHeader from "../../components/CommerceHeader/CommerceHeader";
 import {
   Back,
@@ -22,12 +22,44 @@ import {
 } from "./style";
 import { FaArrowLeft, FaCamera } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import Loading from "../Loading/Loading";
 
 
 const CommerceAddProduct = () => {
   const navigate = useNavigate();
+  const { idCommerce } = useParams();
+  const [commerce, setCommerce] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchCommerce = async () => {
+      try {
+        const response = await api.get(`/comercios/find/${idCommerce}`);
+        if (response.data) {
+          setCommerce(response.data);
+        } else {
+          navigate("/404");
+        }
+      } catch (error) {
+        console.error("Erro ao buscar comércio:", error);
+        navigate("/404");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCommerce();
+  }, [idCommerce, navigate]);
+
+  if (loading) {
+    return <Loading />;
+  }
+
+  if (!commerce) {
+    return null;
+  }
   const handleBack = () => {
-    navigate("/comercio/home");
+    navigate(`/comercio/home/${idCommerce}`);
   };
 
   return (

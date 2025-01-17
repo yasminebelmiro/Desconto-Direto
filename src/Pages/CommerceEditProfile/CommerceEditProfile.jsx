@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CommerceHeader from "../../components/CommerceHeader/CommerceHeader";
 import {
   Back,
@@ -14,10 +14,43 @@ import {
   Text4,
   Form,
 } from "./style";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
+import { api } from "../../service/api";
+import Loading from "../Loading/Loading"
 const CommerceEditProfile = () => {
   const navigate = useNavigate();
+  const { idCommerce } = useParams();
+  const [commerce, setCommerce] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchCommerce = async () => {
+      try {
+        const response = await api.get(`/comercios/find/${idCommerce}`);
+        if (response.data) {
+          setCommerce(response.data);
+        } else {
+          navigate("/404");
+        }
+      } catch (error) {
+        console.error("Erro ao buscar comércio:", error);
+        navigate("/404");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCommerce();
+  }, [idCommerce, navigate]);
+
+  if (loading) {
+    return <Loading />;
+  }
+
+  if (!commerce) {
+    return null;
+  }
   const handleBack = () => {
     navigate("/comercio/home");
   };
@@ -31,42 +64,36 @@ const CommerceEditProfile = () => {
         <Title>Adicione uma imagem do panfleto</Title>
         <Container>
           <Form>
-            <Img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2bCJOs9OsJXgkUDe_pEiYLjY4v8YUKbkdxA&s" />
+            <Img src={commerce.fotoUrl} />
             <Button>Editar foto</Button>
 
             <Row>
               <Column2>
                 <Text4>Nome do comércio</Text4>
-                <LongerInput />
+                <LongerInput value={commerce.nome}/>
               </Column2>
             </Row>
             <Row>
               <Column2>
                 <Text4>Endereço</Text4>
-                <LongerInput />
+                <LongerInput value={commerce.endereco}/>
               </Column2>
+              
               <Column2>
-                <Text4>Bairro</Text4>
-                <ShortInput />
-              </Column2>
-              <Column2>
-                <Text4>CEP</Text4>
+                <Text4>Cidade</Text4>
                 <ShortInput />
               </Column2>
             </Row>
             <Row>
               <Column2>
                 <Text4>Telefone fixo</Text4>
-                <ShortInput />
+                <ShortInput value={commerce.telefone}/>
               </Column2>
               <Column2>
-                <Text4>Telefone celular</Text4>
+                <Text4>WhatsApp</Text4>
                 <ShortInput />
               </Column2>
-              <Column2>
-                <Text4>Instagram</Text4>
-                <ShortInput />
-              </Column2>
+             
               <Column2></Column2>
             </Row>
             <Button>Salvar</Button>

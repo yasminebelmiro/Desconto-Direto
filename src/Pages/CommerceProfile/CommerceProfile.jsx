@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CommerceHeader from "../../components/CommerceHeader/CommerceHeader"
 import {
   ProfileContainer,
@@ -25,18 +25,51 @@ import Carousel from "../../components/Carousel/Carousel";
 
 import { MdAlternateEmail, MdHome } from "react-icons/md";
 import { IoIosPin } from "react-icons/io";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import CommerceCardList from "../../components/CommerceCardList/CommerceCardList";
+import { api } from "../../service/api";
+import Loading from "../Loading/Loading";
 
 
 const CommerceProfile = () => {
   const navigate = useNavigate();
+  const { idCommerce } = useParams();
+  const [commerce, setCommerce] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchCommerce = async () => {
+      try {
+        const response = await api.get(`/comercios/find/${idCommerce}`);
+        if (response.data) {
+          setCommerce(response.data);
+        } else {
+          navigate("/404");
+        }
+      } catch (error) {
+        console.error("Erro ao buscar comércio:", error);
+        navigate("/404");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCommerce();
+  }, [idCommerce, navigate]);
+
+  if (loading) {
+    return <Loading />;
+  }
+
+  if (!commerce) {
+    return null;
+  }
   const handleBack = () => {
-    navigate("/comercio/home");
+    navigate(`/comercio/home/${idCommerce}`);
   };
 
   const handleEdit = () => {
-    navigate("/comercio/meu-perfil/editar");
+    navigate(`/comercio/${idCommerce}/meu-perfil/editar`);
   };
   return (
     <>
@@ -46,15 +79,15 @@ const CommerceProfile = () => {
       </Back>
       <ProfileContainer>
         <Profile>
-          <Img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2bCJOs9OsJXgkUDe_pEiYLjY4v8YUKbkdxA&s" />
-          <Nome>Nome comércio</Nome>
-          <Categoria>Categoria</Categoria>
+          <Img src={commerce.fotoUrl}/>
+          <Nome>{commerce.nome}</Nome>
+          <Categoria>{commerce.categoria}</Categoria>
           <Row>
             <Column>
-            <Button onClick={handleEdit} >Editar perfil</Button>
+            <Button onClick={handleEdit}>Editar perfil</Button>
               <Contato>
                 <MdHome size={25} color={"#023047"} />
-                Endereço
+                {commerce.endereco}
               </Contato>
               <Contato>
                 <IoIosPin size={25} color={"#023047"} />
@@ -64,7 +97,7 @@ const CommerceProfile = () => {
             <Column>
               <Contato>
                 <FaPhoneAlt size={25} color={"#023047"} />
-                Telefone
+                {commerce.telefone}
               </Contato>
               <Contato>
                 <FaWhatsapp size={25} color={"#023047"} />
@@ -74,7 +107,7 @@ const CommerceProfile = () => {
             <Column>
               <Contato>
                 <MdAlternateEmail size={25} color={"#023047"} />
-                Email
+                {commerce.email}
               </Contato>
               <Contato>
                 <FaInstagram size={25} color={"#023047"} />

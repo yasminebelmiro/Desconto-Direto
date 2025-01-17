@@ -24,6 +24,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { CiImageOn } from "react-icons/ci";
 import { api } from "../../service/api";
 import { Result, ResultList, SearchResult } from "../CommerceEditOffer/style";
+import Loading from "../Loading/Loading";
 
 const CommerceAddOffer = () => {
   const navigate = useNavigate();
@@ -33,6 +34,8 @@ const CommerceAddOffer = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResult, setSearchResult] = useState(false);
+  const [commerce, setCommerce] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const fetchProducts = async () => {
     try {
@@ -77,10 +80,29 @@ const CommerceAddOffer = () => {
   };
 
   useEffect(() => {
+    const fetchCommerce = async () => {
+      try {
+        const response = await api.get(`/comercios/find/${idCommerce}`);
+        if (response.data) {
+          setCommerce(response.data);
+        } else {
+          navigate("/404");
+        }
+      } catch (error) {
+        console.error("Erro ao buscar comércio:", error);
+        navigate("/404");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCommerce();
+
     document.addEventListener("mousedown", handleOutsideClick);
     fetchProducts();
+
     return () => document.removeEventListener("mousedown", handleOutsideClick);
-  }, [searchResult]);
+  }, [searchResult, idCommerce, navigate]);
 
   const handleSearchChange = (event) => setSearchQuery(event.target.value);
 
@@ -91,6 +113,14 @@ const CommerceAddOffer = () => {
   const handleBack = () => navigate(`/comercio/home/${idCommerce}`);
   const handleNewProduct = () =>
     navigate(`/comercio/${idCommerce}/novo-produto`);
+
+  if (loading) {
+    return <Loading />;
+  }
+
+  if (!commerce) {
+    return null;
+  }
 
   return (
     <>

@@ -25,6 +25,10 @@ const commerceRoutes = [
     element: <CommerceProfile />,
   },
   {
+    path: "/comercio/:idCommerce/meu-perfil/editar",
+    element: <CommerceEditProfile />,
+  },
+  {
     path: "/comercio/:idCommerce/editar-oferta/:idOffer",
     element : <CommerceEditOffer/>,
   },

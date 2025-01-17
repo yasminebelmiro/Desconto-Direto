@@ -9,20 +9,18 @@ import {
   Button,
   ContainerImg,
   Icon,
-  LongerInput,
   ShortInput,
   Left,
   Right,
   Text,
-  Text2,
   Text4,
   LeftInput,
-  AddOProduto,
 } from "./style";
 import { FaArrowLeft } from "react-icons/fa";
 import { useNavigate, useParams } from "react-router-dom";
 import { CiImageOn } from "react-icons/ci";
 import { api } from "../../service/api";
+import Loading from "../Loading/Loading"
 
 const CommerceEditOffer = () => {
   const navigate = useNavigate();
@@ -30,6 +28,12 @@ const CommerceEditOffer = () => {
   const [offer, setOffer] = useState(null);
   const [validade, setValidade] = useState("");
   const [preco, setPreco] = useState("");
+  const [commerce, setCommerce] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+    
+
+ 
 
   // Fetch offer data
   const fetchOffer = async () => {
@@ -38,7 +42,7 @@ const CommerceEditOffer = () => {
       setOffer(responseOffer.data);
       setValidade(
         new Date(responseOffer.data.validade).toISOString().split("T")[0]
-      ); // Formato YYYY-MM-DD
+      ); 
       setPreco(responseOffer.data.preco);
     } catch (error) {
       console.error(error);
@@ -62,16 +66,39 @@ const CommerceEditOffer = () => {
   };
 
   useEffect(() => {
-    fetchOffer();
-  }, []);
+    fetchOffer();const fetchCommerce = async () => {
+      try {
+        const response = await api.get(`/comercios/find/${idCommerce}`);
+        if (response.data) {
+          setCommerce(response.data);
+        } else {
+          navigate("/404");
+        }
+      } catch (error) {
+        console.error("Erro ao buscar comércio:", error);
+        navigate("/404");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCommerce();
+  }, [idCommerce, navigate]);
 
   const handleBack = () => {
     navigate(`/comercio/home/${idCommerce}`);
   };
 
+  if (loading) {
+    return <Loading />;
+  }
+
+  if (!commerce) {
+    return null;
+  }
 
   if (!offer) {
-    return <div>Carregando...</div>;
+    return <Loading />;
   }
 
   return (
