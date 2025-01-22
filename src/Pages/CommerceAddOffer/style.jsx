@@ -7,7 +7,6 @@ export const Column = styled.div`
   align-items: center;
   justify-content: center;
   font-family: maharlika;
-
 `;
 
 export const Row = styled.div`
@@ -64,7 +63,7 @@ export const Left = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
+  position: relative;
 `;
 
 export const Right = styled.div`
@@ -93,7 +92,6 @@ export const Icon = styled.div`
 export const Text = styled.p`
   font-size: 25px;
 
- 
   left: 6.7%;
   font-weight: bold;
 `;
@@ -129,11 +127,9 @@ export const LeftInput = styled.input`
 export const SearchResult = styled.div`
   display: none;
   position: absolute;
-  
-  left: 6.5%;
   border: 4px solid #fb8500;
   border-radius: 10px;
-
+  top: 25%;
   width: 454px;
   background-color: white;
 
@@ -149,7 +145,6 @@ export const ResultList = styled.ul`
 export const Result = styled.li`
   padding: 10px;
   cursor: pointer;
-  
 `;
 
 export const LongerInput = styled.input`
@@ -207,7 +202,7 @@ export const AddOProduto = styled.button`
   width: 470px;
   height: 40px;
   position: absolute;
-  bottom: 5%;
+  bottom: -13%;
   border: none;
   background-color: #023047;
   border-radius: 20px;

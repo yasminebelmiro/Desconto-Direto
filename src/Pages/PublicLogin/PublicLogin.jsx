@@ -17,9 +17,8 @@ import {
 } from "./style";
 import CostumerHeader from "../../components/CostumerHeader/CostumerHeader";
 import { api } from "../../service/api";
-import { data } from "framer-motion/client";
 
-// Esquema de validação
+// Esquema de validação de email e senha
 const loginValidation = yup.object().shape({
   email: yup.string().email("Email inválido").required("Campo obrigatório"),
   password: yup
@@ -43,6 +42,7 @@ const PublicLogin = () => {
 
 
   useEffect(() => {
+    // Retorna todos os clientes e comercios
     const fetch = async () => {
       try {
         const [clientesResponse, comerciosResponse] = await Promise.all([
@@ -60,7 +60,7 @@ const PublicLogin = () => {
     fetch();
   }, []);
 
-
+// verfica se existe um cliente ou comercio com o mesmo email e senha
   const onSubmit = (data) => {
     let usuarioEncontrado = null;
 

@@ -8,12 +8,6 @@ import { useParams } from "react-router-dom";
 
 const CostumerHome = () => {
 
-  const { id } = useParams();
-
-
-  useEffect(() => {
-    console.log(id);
-  },[])
   
   return (
     <>

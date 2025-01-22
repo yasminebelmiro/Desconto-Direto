@@ -52,7 +52,7 @@ const CommerceEditProfile = () => {
     return null;
   }
   const handleBack = () => {
-    navigate("/comercio/home");
+  navigate(`/comercio/home/${idCommerce}`);
   };
   return (
     <>

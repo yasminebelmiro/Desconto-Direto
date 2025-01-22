@@ -18,12 +18,15 @@ import {
   Text4,
   LeftInput,
   AddOProduto,
+  Result,
+  ResultList,
+  SearchResult,
 } from "./style";
 import { FaArrowLeft } from "react-icons/fa";
 import { useNavigate, useParams } from "react-router-dom";
 import { CiImageOn } from "react-icons/ci";
 import { api } from "../../service/api";
-import { Result, ResultList, SearchResult } from "../CommerceEditOffer/style";
+
 import Loading from "../Loading/Loading";
 
 const CommerceAddOffer = () => {
@@ -114,14 +117,6 @@ const CommerceAddOffer = () => {
   const handleNewProduct = () =>
     navigate(`/comercio/${idCommerce}/novo-produto`);
 
-  if (loading) {
-    return <Loading />;
-  }
-
-  if (!commerce) {
-    return null;
-  }
-
   return (
     <>
       <CommerceHeader authenticated={true} />
@@ -142,7 +137,8 @@ const CommerceAddOffer = () => {
                     value={searchQuery}
                     onClick={toggleDropdown}
                   />
-                  {searchResult && (
+                </Column>
+                {searchResult && (
                     <SearchResult className="dropdown-content show">
                       {filteredProducts.length > 0 ? (
                         <ResultList>
@@ -165,7 +161,6 @@ const CommerceAddOffer = () => {
                       )}
                     </SearchResult>
                   )}
-                </Column>
                 <ContainerImg>
                   {selectedProduct?.fotoUrl ? (
                     <>

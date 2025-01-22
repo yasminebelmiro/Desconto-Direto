@@ -23,6 +23,7 @@ import CostumerHeader from "../../components/CostumerHeader/CostumerHeader";
 import { api } from "../../service/api";
 
 
+// Esquema de validação do formulario
 const registerSchema = yup.object().shape({
   name: yup.string().required("Campo obrigatório"),
   cellphone: yup.string().required(),
@@ -53,6 +54,7 @@ const CostumerRegister = () => {
     resolver: yupResolver(registerSchema),
   });
 
+  // Adiciona clientes na API
   const onSubmit = async (data) => {
     const newUser = {
       nome: data.name,

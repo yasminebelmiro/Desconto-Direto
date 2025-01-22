@@ -6,7 +6,6 @@ import { FaArrowLeft } from "react-icons/fa";
 import { useNavigate, useParams } from "react-router-dom";
 
 import CostumerHeader from "../../components/CostumerHeader/CostumerHeader";
-import { api } from "../../service/api";
 import CostumerFavoriteList from "../../components/CostumerFavoriteList/CostumerFavoriteList";
 
 const CostumerFavoriteOffer = () => {

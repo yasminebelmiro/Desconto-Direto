@@ -23,6 +23,7 @@ import {
 import { FaArrowLeft, FaCamera } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import Loading from "../Loading/Loading";
+import { api } from "../../service/api";
 
 
 const CommerceAddProduct = () => {
