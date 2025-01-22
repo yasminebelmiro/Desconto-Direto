@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   ProfileContainer,
   Row,
@@ -23,15 +23,36 @@ import Carousel from "../../components/Carousel/Carousel";
 
 import { MdAlternateEmail, MdHome } from "react-icons/md";
 import { IoIosPin } from "react-icons/io";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import CostumerHeader from "../../components/CostumerHeader/CostumerHeader";
 import CostumerCardList from "../../components/CostumerCardList/CostumerCardList";
+import { api } from "../../service/api";
+import Loading from "../Loading/Loading";
 
 const CostumerCommerceProfile = () => {
   const navigate = useNavigate();
+  const [commerce, setCommerce] = useState();
+  const { idConsumer, idCommerce } = useParams();
+
+  useEffect(() => {
+    const fetchCommerce = async () => {
+      try {
+        const response = await api.get(`/comercios/find/${idCommerce}`);
+        setCommerce(response.data);
+      } catch (error) {
+        console.error("Erro ao encontrar comercio:", error);
+      }
+    };
+    fetchCommerce();
+  }, []);
   const handleBack = () => {
-    navigate("/consumidor/home");
+    navigate(`/consumidor/home/${idConsumer}`);
   };
+
+  if (!commerce) {
+    return <Loading />;
+  }
+
   return (
     <>
       <CostumerHeader authenticated={true} />
@@ -40,38 +61,41 @@ const CostumerCommerceProfile = () => {
       </Back>
       <ProfileContainer>
         <Profile>
-          <Img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2bCJOs9OsJXgkUDe_pEiYLjY4v8YUKbkdxA&s" />
-          <Nome>Nome comércio</Nome>
-          <Categoria>Categoria</Categoria>
+          <Img
+            src={commerce.fotoUrl}
+            alt={`Logo do comercio ${commerce.nome}`}
+          />
+          <Nome>{commerce.nome}</Nome>
+          <Categoria>{commerce.Categoria}</Categoria>
           <Row>
             <Column>
               <Contato>
                 <MdHome size={25} color={"#023047"} />
-                Endereço
+                {commerce.endereco || "Endereço não informado"}
               </Contato>
               <Contato>
                 <IoIosPin size={25} color={"#023047"} />
-                Cidade
+                {commerce.cidade || "Ciade não informada"}
               </Contato>
             </Column>
             <Column>
               <Contato>
                 <FaPhoneAlt size={25} color={"#023047"} />
-                Telefone
+                {commerce.telefone || "Endereço não informado"}
               </Contato>
               <Contato>
                 <FaWhatsapp size={25} color={"#023047"} />
-                WhatsApp
+                {commerce.whatsapp || "WhatsApp não informado"}
               </Contato>
             </Column>
             <Column>
               <Contato>
                 <MdAlternateEmail size={25} color={"#023047"} />
-                Email
+                {commerce.email}
               </Contato>
               <Contato>
                 <FaInstagram size={25} color={"#023047"} />
-                Instagram
+                {commerce.instagram || "Instagram não informado"}
               </Contato>
             </Column>
           </Row>
@@ -81,11 +105,10 @@ const CostumerCommerceProfile = () => {
         <Text>Panfletos</Text>
       </Divisor>
       <Carousel />
-
       <Divisor>
         <Text>Ofertas</Text>
       </Divisor>
-        <CostumerCardList />
+      {/*TODO: criar novo tipo de card */}
     </>
   );
 };
