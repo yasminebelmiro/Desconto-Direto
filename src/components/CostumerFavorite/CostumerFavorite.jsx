@@ -28,24 +28,23 @@ const CostumerFavorite = ({
   const [liked = favorite, setLiked] = useState(true);
   const { id: userId } = useParams();
 
-  
   const toggleLiked = async () => {
     setLiked(!liked);
 
     try {
       const response = liked
-        ? await api.delete(`/clientes/${userId}/favoritos/${id}`) //Não tem esse endpoint na api
+        ? await api.delete(`/clientes/${userId}/favoritos/${id}`)
         : await api.post(`/clientes/${userId}/favoritos/${id}`);
       if (response.status === 200) {
         console.log(
           liked ? "Oferta removida dos favoritos" : "Oferta favoritada"
         );
+        window.location.reload();
       }
     } catch (error) {
       console.log("erro ao favoritar" + error);
     }
   };
- 
 
   return (
     <CardContainer>
