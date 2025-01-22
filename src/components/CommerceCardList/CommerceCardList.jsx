@@ -24,14 +24,20 @@ const CommerceCardList = () => {
 
   useEffect(() => {
     fetchCommerce();
-    handleDelete();
   }, [idCommerce]);
 
   const handleDelete = async (id) => {
     try {
-      // await api.delete(`/ofertas/delete/${id} `) //BUG: Endpoint com falha
-      console.log(`Oferta com id ${id} deletada da API`);
-      console.log(id);
+      const deletOfferConfirm = confirm("Deseja deletar esta oferta?")
+      if(deletOfferConfirm){
+        await api.delete(`/ofertas/delete/${id} `) 
+        console.log(`Oferta com id ${id} deletada da API`);
+        alert("Oferta deletada com sucesso!")
+        window.location.reload();
+      }else{
+        console.log("Operação cancelada");
+      }
+       
     } catch (error) {
       console.error(error);
     }
