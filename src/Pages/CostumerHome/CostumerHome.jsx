@@ -4,12 +4,9 @@ import { Divisor, Text, Row, CardsContainer } from "./style";
 import Carousel from "../../components/Carousel/Carousel";
 import CostumerHeader from "../../components/CostumerHeader/CostumerHeader";
 import CostumerCardList from "../../components/CostumerCardList/CostumerCardList";
-import { useNavigate, useParams } from "react-router-dom";
-import Loading from "../Loading/Loading";
+
 
 const CostumerHome = () => {
- 
-
   return (
     <>
       <CostumerHeader authenticated={true} />
