@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
 
-import { Divisor, Text, Row , CardsContainer} from "./style";
+import { Divisor, Text, Row, CardsContainer } from "./style";
 import Carousel from "../../components/Carousel/Carousel";
 import CostumerHeader from "../../components/CostumerHeader/CostumerHeader";
 import CostumerCardList from "../../components/CostumerCardList/CostumerCardList";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import Loading from "../Loading/Loading";
 
 const CostumerHome = () => {
+ 
 
-  
   return (
     <>
-      <CostumerHeader authenticated={true}/>
+      <CostumerHeader authenticated={true} />
       <Divisor>
         <Text>Panfletos</Text>
       </Divisor>
@@ -24,7 +25,7 @@ const CostumerHome = () => {
         <Text>Ofertas</Text>
       </Divisor>
       <CardsContainer>
-        <CostumerCardList/>
+        <CostumerCardList />
       </CardsContainer>
     </>
   );

@@ -9,15 +9,15 @@ const consumerRoutes = [
     element: <CostumerRegister />,
   },
   {
-    path: "/consumidor/home/:id",
+    path: "/consumidor/home/:idConsumer",
     element: <CostumerHome />,
   },
   {
-    path: "/consumidor/ofertas-favoritas/:id",
+    path: "/consumidor/ofertas-favoritas/:idConsumer",
     element: <CostumerFavoriteOffer />,
   },
   {
-    path: "/consumidor/:id/:name/:id",
+    path: "/consumidor/:idConsumer/:name/:idCommerce",
     element: <CostumerCommerceProfile />,
   },
 

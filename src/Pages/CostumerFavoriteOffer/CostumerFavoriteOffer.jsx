@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Back, CardsContainer, FavoriteContainer, Row, Title } from "./style";
 import { FaArrowLeft } from "react-icons/fa";
@@ -7,12 +7,41 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import CostumerHeader from "../../components/CostumerHeader/CostumerHeader";
 import CostumerFavoriteList from "../../components/CostumerFavoriteList/CostumerFavoriteList";
+import Loading from "../Loading/Loading";
+import { api } from "../../service/api";
 
 const CostumerFavoriteOffer = () => {
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { idConsumer } = useParams();
+  const [consummer, setConsummer] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchConsummer = async () => {
+      try {
+        const response = await api.get(`/clientes/find/${idConsumer}`);
+        if (response.data) {
+          setConsummer(response.data);
+        } else navigate("/404");
+      } catch (error) {
+        console.error("Erro ao buscar cliente:", error);
+        navigate("/404");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchConsummer();
+  }, [idConsumer, navigate]);
+
+  if (loading) {
+    return <Loading />;
+  }
+
+  if (!consummer) {
+    return null;
+  }
   const handleBack = () => {
-    navigate(`/consumidor/home/${id}`);
+    navigate(`/consumidor/home/${idConsumer}`);
   };
 
   return (

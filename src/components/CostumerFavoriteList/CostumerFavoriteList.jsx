@@ -5,12 +5,12 @@ import CostumerFavorite from "../CostumerFavorite/CostumerFavorite";
 
 const CostumerFavoriteList = () => {
   const [favorites, setFavorites] = useState([]); 
-  const { id } = useParams(); 
+  const { idConsumer } = useParams(); 
 
  
   const fetchFavorites = async () => {
     try {
-      const response = await api.get(`/clientes/find/${id}`);
+      const response = await api.get(`/clientes/find/${idConsumer}`);
       setFavorites(response.data.ofertasPreferidas || []); 
     } catch (error) {
       console.error("Erro ao buscar ofertas preferidas:", error);
