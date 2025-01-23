@@ -2,6 +2,7 @@ import CostumerRegister from "../pages/CostumerRegister/CostumerRegister";
 import CostumerHome from "../Pages/CostumerHome/CostumerHome";
 import CostumerFavoriteOffer from "../Pages/CostumerFavoriteOffer/CostumerFavoriteOffer";
 import CostumerCommerceProfile from "../Pages/CostumerCommerceProfile/CostumerCommerceProfile";
+import CostumerSearchOffer from "../Pages/CostumerSearchOffer/CostumerSearchOffer";
 
 const consumerRoutes = [
   {
@@ -20,7 +21,10 @@ const consumerRoutes = [
     path: "/consumidor/:idConsumer/:name/:idCommerce",
     element: <CostumerCommerceProfile />,
   },
-
+  {
+    path: "/search",
+    element: <CostumerSearchOffer />,
+  },
 ];
 
 export default consumerRoutes;

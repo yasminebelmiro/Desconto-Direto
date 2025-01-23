@@ -23,6 +23,7 @@ const CostumerHeader = ({ authenticated }) => {
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const navigate = useNavigate();
   const { idConsumer } = useParams();
+  const [search, setSearch] = useState("");
 
   const toggleDropdown = () => {
     setDropdownVisible((prev) => !prev);
@@ -49,8 +50,14 @@ const CostumerHeader = ({ authenticated }) => {
     navigate(`/consumidor/home/${idConsumer}`);
   };
 
-  const handleSearch = () => {
-    navigate(`/consumidor/home/buscar-ofertas`);
+  const handleInputChange = (event) => {
+    setSearch(event.target.value);
+  };
+
+  const handleSearch = (event) => {
+    if (event.key === "Enter") {
+      navigate(`/search?query=${encodeURIComponent(search)}`);
+    }
   };
   return (
     <>
@@ -59,8 +66,15 @@ const CostumerHeader = ({ authenticated }) => {
           <Container>
             <ImgLogo src={imgLogo} alt="Logo" onClick={handleHome} />
             <Right>
-              <Link onClick={handleSearch}>
-                {<FaSearch size={25} color="#FFB703" />}{" "}
+              <Link>
+                <Form>
+                  <Search
+                    placeholder="O que está procurando?"
+                    value={search}
+                    onChange={handleInputChange}
+                    onKeyDown={handleSearch}
+                  />
+                </Form>
               </Link>
               <Link>{<FaBell size={25} color="#FFB703" />} </Link>
               <Link onClick={handleFavoriteOffer}>
