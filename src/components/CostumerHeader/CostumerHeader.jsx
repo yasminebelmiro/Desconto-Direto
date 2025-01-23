@@ -56,7 +56,12 @@ const CostumerHeader = ({ authenticated }) => {
 
   const handleSearch = (event) => {
     if (event.key === "Enter") {
-      navigate(`/search?query=${encodeURIComponent(search)}`);
+      event.preventDefault();
+      if (search.trim() !== "") {
+        navigate(`/consumidor/${idConsumer}/search?query=${encodeURIComponent(search)}`);
+      } else {
+        console.log("Campo de busca está vazio.");
+      }
     }
   };
   return (

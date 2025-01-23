@@ -2,7 +2,8 @@ import CostumerRegister from "../pages/CostumerRegister/CostumerRegister";
 import CostumerHome from "../Pages/CostumerHome/CostumerHome";
 import CostumerFavoriteOffer from "../Pages/CostumerFavoriteOffer/CostumerFavoriteOffer";
 import CostumerCommerceProfile from "../Pages/CostumerCommerceProfile/CostumerCommerceProfile";
-import CostumerSearchOffer from "../Pages/CostumerSearchOffer/CostumerSearchOffer";
+import CostumerSearchOffer from "../Pages/ConstumerSearchOffer/CostumerSearchOffer";
+
 
 const consumerRoutes = [
   {
@@ -22,8 +23,8 @@ const consumerRoutes = [
     element: <CostumerCommerceProfile />,
   },
   {
-    path: "/search",
-    element: <CostumerSearchOffer />,
+    path: "consumidor/:idConsumer/search",
+    element:<CostumerSearchOffer />
   },
 ];
 

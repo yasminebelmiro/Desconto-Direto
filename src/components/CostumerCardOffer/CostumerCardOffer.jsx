@@ -24,8 +24,9 @@ const CostumerCardOffer = ({
   validity,
   icon,
   onProfileMarket,
+  favorite
 }) => {
-  const [liked = favorite, setLiked] = useState(false);
+  const [liked = favorite, setLiked] = useState(favorite);
   const { id: userId } = useParams();
 
   

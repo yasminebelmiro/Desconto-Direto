@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { api } from "../../service/api";
-import CostumerFavorite from "../CostumerFavorite/CostumerFavorite";
+import CostumerCardOffer from "../CostumerCardOffer/CostumerCardOffer"
 
 const CostumerFavoriteList = () => {
   const [favorites, setFavorites] = useState([]); 
@@ -31,11 +31,12 @@ const CostumerFavoriteList = () => {
     <>
       {favorites.length > 0 ? (
         favorites.map((oferta) => (
-          <CostumerFavorite
+          <CostumerCardOffer
             key={oferta.id}
             id={oferta.id}
             // BUG: A API não retorna a foto do comércio no favoritos
             //icon={card.fotoUrl} 
+            favorite={true}
             img={oferta.produto.fotoUrl}
             name={oferta.produto.nome}
             price={`R$ ${oferta.preco}`}
