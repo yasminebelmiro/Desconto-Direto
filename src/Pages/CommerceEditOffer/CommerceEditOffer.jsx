@@ -31,11 +31,7 @@ const CommerceEditOffer = () => {
   const [commerce, setCommerce] = useState(null);
   const [loading, setLoading] = useState(true);
 
-    
 
- 
-
-  // Fetch offer data
   const fetchOffer = async () => {
     try {
       const responseOffer = await api.get(`/ofertas/find/${idOffer}`);
@@ -52,7 +48,7 @@ const CommerceEditOffer = () => {
   const onSubmit = async (event) => {
     event.preventDefault();
     try {
-      // BUG: endpoint não existe
+
       await api.put(`/ofertas/edit/${idOffer}`, {
         validade,
         preco,

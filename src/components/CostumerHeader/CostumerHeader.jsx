@@ -75,7 +75,7 @@ const CostumerHeader = ({ authenticated }) => {
                 <Form>
                   <Search
                     placeholder="O que está procurando?"
-                    value={search}
+                    placeholder={search}
                     onChange={handleInputChange}
                     onKeyDown={handleSearch}
                   />
