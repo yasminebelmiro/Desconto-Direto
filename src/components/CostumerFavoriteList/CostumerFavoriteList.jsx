@@ -23,8 +23,8 @@ const CostumerFavoriteList = () => {
 
   const navigate = useNavigate();
 
-  const handleProfileMarket = (userId, name, commerceId ) => {
-    navigate(`/consumidor/${userId}/${name}/${commerceId}`);
+  const handleProfileMarket = (name, commerceId ) => {
+    navigate(`/consumidor/${idConsumer}/${name}/${commerceId}`);
   };
 
   return (
@@ -42,7 +42,7 @@ const CostumerFavoriteList = () => {
             price={`R$ ${oferta.preco}`}
             description={oferta.produto.medida}
             validity={new Date(oferta.validade).toLocaleDateString("pt-BR")}
-            onProfileMarket={() => handleProfileMarket(card.id, card.nome, card.id)} 
+            onProfileMarket={() => handleProfileMarket(card.nome, card.id)} 
           />
         ))
       ) : (

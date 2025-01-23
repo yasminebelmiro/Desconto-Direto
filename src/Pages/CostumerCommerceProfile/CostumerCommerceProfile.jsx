@@ -25,9 +25,10 @@ import { MdAlternateEmail, MdHome } from "react-icons/md";
 import { IoIosPin } from "react-icons/io";
 import { useNavigate, useParams } from "react-router-dom";
 import CostumerHeader from "../../components/CostumerHeader/CostumerHeader";
-import CostumerCardList from "../../components/CostumerCardList/CostumerCardList";
 import { api } from "../../service/api";
 import Loading from "../Loading/Loading";
+import { CardsContainer } from "../CostumerHome/style";
+import CostumeProfileCommerceOfferList from "../../components/CostumeProfileCommerceOfferList/CostumeProfileCommerceOfferList";
 
 const CostumerCommerceProfile = () => {
   const navigate = useNavigate();
@@ -108,7 +109,9 @@ const CostumerCommerceProfile = () => {
       <Divisor>
         <Text>Ofertas</Text>
       </Divisor>
-      {/*TODO: criar novo tipo de card */}
+      <CardsContainer>
+        <CostumeProfileCommerceOfferList />
+      </CardsContainer>
     </>
   );
 };

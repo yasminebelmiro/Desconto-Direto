@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import CostumerCardOffer from "../CostumerCardOffer/CostumerCardOffer";
 import { api } from "../../service/api";
 
 
 const CostumerCardList = () => {
+  const {idConsumer} = useParams();
   const [cards, setCards] = useState([]);
-
   const ferch = async () => {
     const response = await api.get("/comercios/all");
     setCards(response.data);
@@ -18,8 +18,8 @@ const CostumerCardList = () => {
 
   const navigate = useNavigate();
 
-  const handleProfileMarket = (userId, name, commerceId ) => {
-    navigate(`/consumidor/${userId}/${name}/${commerceId}`);
+  const handleProfileMarket = (name, commerceId ) => {
+    navigate(`/consumidor/${idConsumer}/${name}/${commerceId}`);
   };
 
   return cards.flatMap((card) => (
@@ -33,7 +33,7 @@ const CostumerCardList = () => {
         price={`R$ ${oferta.preco}`} 
         description={oferta.produto.medida} 
         validity={new Date(oferta.validade).toLocaleDateString("pt-BR")}
-        onProfileMarket={() => handleProfileMarket(card.id, card.nome, card.id)}
+        onProfileMarket={() => handleProfileMarket(card.nome, card.id)}
       />
     ))
 ));
