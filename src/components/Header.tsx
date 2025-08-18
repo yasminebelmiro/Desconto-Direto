@@ -7,15 +7,18 @@ const Header = () => {
   const [menuisOpen, setMenuIsOpen] = useState(false);
   return (
     <>
-      <div className="bg-dark-blue font-inter text-white w-full h-25 flex justify-between items-center p-4">
+      <div className="bg-dark-blue font-inter text-white w-full h-25 flex justify-between items-center p-4 lg:px-30">
         <a href="/">
           <img className="w-10" src={logo} />
         </a>
-        <button className="lg:hidden" onClick={() => setMenuIsOpen(!menuisOpen)}> 
+        <button
+          className="lg:hidden"
+          onClick={() => setMenuIsOpen(!menuisOpen)}
+        >
           <GiHamburgerMenu className="text-3xl hover:text-dark-yellow" />
         </button>
-         <nav className="hidden lg:flex">
-          <ul className="flex justify-between items-center gap-5">
+        <nav className="hidden lg:flex ">
+          <ul className="flex justify-between items-center lg:gap-10">
             <li className="">
               <a href="#about">Sobre nós</a>
             </li>
@@ -25,18 +28,20 @@ const Header = () => {
             <li className="">
               <a href="#merchantArea">Área do comerciante</a>
             </li>
-            <li
-              className=""
-              onClick={() => navigate("/login")}
-            >
-              Login
-            </li>
-            <li
-              className=""
-              onClick={() => navigate("/cadastro/consumidor")}
-            >
-              Cadastro
-            </li>
+            <div className="flex gap-5">
+              <li
+                className="bg-dark-yellow text-center p-1 w-30 text-dark-blue font-bold rounded-md hover:bg-light-yellow"
+                onClick={() => navigate("/login")}
+              >
+                Login
+              </li>
+              <li
+                className="bg-dark-yellow text-center p-1 w-30 text-dark-blue font-bold rounded-md hover:bg-light-yellow"
+                onClick={() => navigate("/cadastro/consumidor")}
+              >
+                Cadastro
+              </li>
+            </div>
           </ul>
         </nav>
       </div>
