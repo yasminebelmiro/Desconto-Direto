@@ -1,5 +1,4 @@
-import path from "path"
-import LandingPage from "../components/LandingPage.tsx"
+import LandingPage from "../pages/LandingPage.tsx"
 
 const ConstumerRotes =[
     {path: "/",
