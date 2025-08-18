@@ -1,8 +1,10 @@
 import React from 'react'
+import Header from './Header.tsx'
 
 const LandingPage = () => {
   return (
-    <div>LandingPage</div>
+    <div> <Header/>
+      LandingPage</div>
   )
 }
 
