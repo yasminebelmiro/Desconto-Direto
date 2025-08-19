@@ -18,10 +18,10 @@ const HeroCarousel = () => {
   };
   return (
     <Slider {...settings} className="bg-black" >
-      <img className="w-full h-80 lg:h-130 object-cover" src={image01} alt="" />
-      <img className="w-full h-80 lg:h-130 object-cover" src={image02} alt="" />
-      <img className="w-full h-80 lg:h-130 object-cover" src={image03} alt="" />
-      <img className="w-full h-80 lg:h-130 object-cover" src={image04} alt="" />
+      <img className="w-full h-80 lg:h-140 object-cover" src={image01} alt="" />
+      <img className="w-full h-80 lg:h-140 object-cover" src={image02} alt="" />
+      <img className="w-full h-80 lg:h-140 object-cover" src={image03} alt="" />
+      <img className="w-full h-80 lg:h-140 object-cover" src={image04} alt="" />
     </Slider>
   );
 };
