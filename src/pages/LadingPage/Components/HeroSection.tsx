@@ -1,6 +1,7 @@
 import React from "react";
-import HeroCarousel from "./HeroCarousel.tsx";
+
 import { useLocation, useNavigate } from "react-router-dom";
+import HeroCarousel from "./HeroCarousel.tsx";
 
 const HeroSection = () => {
   const location = useLocation();

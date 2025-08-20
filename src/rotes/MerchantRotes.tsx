@@ -1,4 +1,5 @@
-import LandingPage from "../pages/LandingPage.tsx"
+import LandingPage from "../pages/LadingPage/LandingPage.tsx"
+
 
 
 const MerchantRotes = [
