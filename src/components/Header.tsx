@@ -22,10 +22,10 @@ const Header = () => {
         <nav className="hidden lg:flex ">
           <ul className="flex justify-between items-center lg:gap-10">
             <li className="">
-              <a href="#about">Sobre nós</a>
+              <a href="#sobre">Sobre nós</a>
             </li>
             <li className="">
-              <a href="#howWork">Como funciona?</a>
+              <a href="#comoFunciona">Como funciona?</a>
             </li>
             <li className="">
               {isMerchantArea ? (
@@ -59,10 +59,10 @@ const Header = () => {
         <nav className="bg-dark-blue font-inter text-white w-full h-auto flex justify-between items-center p-8">
           <ul className=" w-full flex flex-col justify-between items-start gap-5">
             <li className="hover:text-dark-yellow">
-              <a href="#about">Sobre nós</a>
+              <a href="#sobre">Sobre nós</a>
             </li>
             <li className="hover:text-dark-yellow">
-              <a href="#howWork">Como funciona?</a>
+              <a href="#comoFunciona">Como funciona?</a>
             </li>
             <li className="">
               {isMerchantArea ? (

@@ -50,7 +50,7 @@ const Steps = () => {
       const location = useLocation();
       const isMerchantArea = location.pathname.includes("area-comerciantes");
   return (
-    <div className="font-inter flex flex-col md:flex-row items-center justify-center bg-light-yellow px-8 py-20 gap-5">
+    <section id="comoFunciona" className="font-inter flex flex-col md:flex-row items-center justify-center bg-light-yellow px-8 py-20 gap-5">
         {isMerchantArea
           ? stepMerchant.map((step) => (
               <div
@@ -76,7 +76,7 @@ const Steps = () => {
                 <p className="text-gray-600">{step.description}</p>
               </div>
             ))}
-      </div>
+      </section>
   )
 }
 
