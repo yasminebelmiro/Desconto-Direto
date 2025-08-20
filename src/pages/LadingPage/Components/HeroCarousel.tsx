@@ -1,11 +1,10 @@
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import image01 from "../assets/HeroImages/image01.png";
-import image02 from "../assets/HeroImages/image02.png";
-import image03 from "../assets/HeroImages/image03.png"; 
-import image04 from "../assets/HeroImages/image04.png";
-
+import image01 from "../../../assets/HeroImages/image01.png";
+import image02 from "../../../assets/HeroImages/image02.png";
+import image03 from "../../../assets/HeroImages/image03.png"; 
+import image04 from "../../../assets/HeroImages/image04.png";
 
 const HeroCarousel = () => {
   const settings = {

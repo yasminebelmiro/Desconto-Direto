@@ -1,7 +1,7 @@
 import React from 'react'
-import image01 from "../assets/AboutSection/image01.png";
-import image02 from "../assets/AboutSection/image02.png";
-import image03 from "../assets/AboutSection/image03.png";
+import image01 from "../../../assets/AboutSection/image01.png";
+import image02 from "../../../assets/AboutSection/image02.png";
+import image03 from "../../../assets/AboutSection/image03.png";
 
 import { useLocation } from "react-router-dom";
 const stepConsumer = [

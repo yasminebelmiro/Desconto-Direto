@@ -1,6 +1,6 @@
-import app from "../assets/DownloadApp/App.png";
-import apple from "../assets/DownloadApp/btn-app.png";
-import google from "../assets/DownloadApp/btn-google.png";
+import app from "../../../assets/DownloadApp/App.png";
+import apple from "../../../assets/DownloadApp/btn-app.png";
+import google from "../../../assets/DownloadApp/btn-google.png";
 
 const DownloadApp = () => {
   return (

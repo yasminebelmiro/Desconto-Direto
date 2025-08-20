@@ -1,5 +1,6 @@
-import imageAbout from "../assets/AboutSection/image-about.png";
-import imageMision from "../assets/AboutSection/about-mision.png";
+import imageAbout from "../../../assets/AboutSection/image-about.png";
+import imageMision from "../../../assets/AboutSection/about-mision.png"
+;
 
 const About = () => {
   return (
