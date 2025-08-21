@@ -4,7 +4,7 @@ import google from "../../../assets/DownloadApp/btn-google.png";
 
 const DownloadApp = () => {
   return (
-    <div className="py-10 px-10 flex flex-col md:flex-row items-center justify-center gap-10">
+    <section className="py-10 px-10 flex flex-col md:flex-row items-center justify-center gap-10">
       <div className="relative md:w-100 flex justify-center items-center gap-10">
         <img className="z-1 w-30 lg:w-50" src={app} alt="Imagem do App" />
         <div className="absolute w-60 lg:w-90  h-60 lg:h-90 rounded-full bg-dark-yellow"></div>
@@ -38,7 +38,7 @@ const DownloadApp = () => {
           ></button>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

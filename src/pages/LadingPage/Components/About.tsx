@@ -4,7 +4,7 @@ import imageMision from "../../../assets/AboutSection/about-mision.png"
 
 const About = () => {
   return (
-    <section>
+    <section id="sobre">
       <div className="p-20 lg:px-40 bg-light-organge flex flex-col-reverse md:flex-row bg-light-orange justify-center items-center gap-10">
         <div className="flex flex-col  md:items-start text-center gap-5">
           <h3 className="font-kaisei text-3xl text-dark-orange font-bold">

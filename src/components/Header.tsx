@@ -22,10 +22,10 @@ const Header = () => {
         <nav className="hidden lg:flex ">
           <ul className="flex justify-between items-center lg:gap-10">
             <li className="">
-              <a href="#about">Sobre nós</a>
+              <a href="#sobre">Sobre nós</a>
             </li>
             <li className="">
-              <a href="#howWork">Como funciona?</a>
+              <a href="#comoFunciona">Como funciona?</a>
             </li>
             <li className="">
               {isMerchantArea ? (
@@ -37,7 +37,11 @@ const Header = () => {
             <div className="flex gap-5">
               <li
                 className="bg-dark-yellow text-center p-1 w-30 text-dark-blue font-bold rounded-md hover:bg-light-yellow"
-                onClick={() => navigate("/login")}
+                onClick={() => {
+                  isMerchantArea
+                    ? navigate("/area-comerciantes/login")
+                    : navigate("/area-consumidores/login");
+                }}
               >
                 Login
               </li>
@@ -45,8 +49,8 @@ const Header = () => {
                 className="bg-dark-yellow text-center p-1 w-30 text-dark-blue font-bold rounded-md hover:bg-light-yellow"
                 onClick={() => {
                   isMerchantArea
-                    ? navigate("/cadastro/comercio")
-                    : navigate("/cadastro/consumidor");
+                    ? navigate("/area-comerciantes/cadastro")
+                    : navigate("/area-consumidores/cadastro");
                 }}
               >
                 Cadastro
@@ -59,10 +63,10 @@ const Header = () => {
         <nav className="bg-dark-blue font-inter text-white w-full h-auto flex justify-between items-center p-8">
           <ul className=" w-full flex flex-col justify-between items-start gap-5">
             <li className="hover:text-dark-yellow">
-              <a href="#about">Sobre nós</a>
+              <a href="#sobre">Sobre nós</a>
             </li>
             <li className="hover:text-dark-yellow">
-              <a href="#howWork">Como funciona?</a>
+              <a href="#comoFunciona">Como funciona?</a>
             </li>
             <li className="">
               {isMerchantArea ? (
@@ -73,17 +77,21 @@ const Header = () => {
             </li>
             <li
               className="bg-dark-yellow text-center p-3 w-40 text-dark-blue font-bold rounded-md hover:bg-light-yellow"
-              onClick={() => navigate("/login")}
+              onClick={() => {
+                  isMerchantArea
+                    ? navigate("/area-comerciantes/login")
+                    : navigate("/area-consumidores/login");
+                }}
             >
               Login
             </li>
             <li
               className="bg-dark-yellow text-center p-3 w-40 text-dark-blue font-bold rounded-md hover:bg-light-yellow"
-              onClick={() => {
-                isMerchantArea
-                  ? (navigate("/cadastro/comercio"))
-                  : navigate("/cadastro/consumidor");
-              }}
+               onClick={() => {
+                  isMerchantArea
+                    ? navigate("/area-comerciantes/cadastro")
+                    : navigate("/area-consumidores/cadastro");
+                }}
             >
               Cadastro
             </li>

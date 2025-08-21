@@ -3,12 +3,13 @@ import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import HeroCarousel from "./HeroCarousel.tsx";
 
-const HeroSection = () => {
+
+function HeroSection() {
   const location = useLocation();
   const navigate = useNavigate();
   const isMerchantArea = location.pathname.includes("area-comerciantes");
   return (
-    <div className="relative">
+    <section className="relative">
       <div className="z-1 absolute w-full h-80 bg-gradient-to-r from-dark-blue to-transparent lg:h-140">
         {isMerchantArea ? (
           <div className="flex flex-col text-white items-start justify-center h-full gap-5 pl-8 lg:w-1/2 lg:pl-30">
@@ -31,8 +32,8 @@ const HeroSection = () => {
         )}
       </div>
       <HeroCarousel />
-    </div>
+    </section>
   );
-};
+}
 
 export default HeroSection;
