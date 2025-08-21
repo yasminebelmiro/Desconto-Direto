@@ -1,20 +1,24 @@
 import Header from "../../components/Header.tsx";
 import logo from "../../assets/logo.png";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UserLoginSchema, type LoginData } from "../../schemas/LoginSchema.ts";
-import { toast } from "react-toastify";
+import Input from "./components/Input.tsx";
+
 const Login = () => {
-  const navigate = useNavigate();
+  const location = useLocation();
+   const navigate = useNavigate();
+   const isMerchantArea = location.pathname.includes("area-comerciantes");
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<LoginData>({ resolver: zodResolver(UserLoginSchema) });
+
   const onSubmit = (data: LoginData) => {
     console.log(data);
-    toast.success("Login realizado com sucesso!");
+
   };
   return (
     <div>
@@ -26,7 +30,7 @@ const Login = () => {
             Desconto <span className="text-dark-yellow">Direto</span>
           </h1>
           <button
-            onClick={() => navigate("/area-comerciantes/cadastro")}
+            onClick={() => {isMerchantArea ? navigate("/area-comerciantes/cadastro") : navigate("/area-consumidores/cadastro")}}
             className="font-kaisei bg-dark-yellow hover:bg-dark-orange cursor-pointer mt-10 w-1/2 px-10 py-2 rounded-2xl text-white"
           >
             Cadastrar
@@ -38,20 +42,14 @@ const Login = () => {
             onSubmit={handleSubmit(onSubmit)}
             className="flex flex-col items-center justify-center w-full gap-4"
           >
-            <input
-              className="bg-white text-dark-yellow placeholder:text-dark-yellow w-full h-15 px-10 rounded-lg lg:w-[70%]"
-              type="text"
-              placeholder="Email"
-              {...register("email")}
-            />
-            <p className="text-red-600">{errors.email?.message}</p>
-            <input
-              className="bg-white text-dark-yellow placeholder:text-dark-yellow w-full h-15 px-10 rounded-lg lg:w-[70%]"
-              type="text"
-              placeholder="Senha"
-              {...register("senha")}
-            />
-            <p className="text-red-600">{errors.senha?.message}</p>
+            <Input type="text" placeholder="Email" {...register("email")} />
+            {errors.email && (
+              <p className="text-red-600">{errors.email?.message}</p>
+            )}
+            <Input type="text" placeholder="Senha" {...register("senha")} />
+            {errors.senha && (
+              <p className="text-red-600">{errors.senha?.message}</p>
+            )}
             <button
               type="submit"
               className="font-kaisei bg-dark-blue w-1/2 px-10 py-2 rounded-2xl hover:bg-dark-orange cursor-pointer"
@@ -59,7 +57,7 @@ const Login = () => {
               Entrar
             </button>
             <button
-              onClick={() => navigate("/area-comerciantes/cadastro")}
+              onClick={() => {isMerchantArea ? navigate("/area-comerciantes/cadastro") : navigate("/area-consumidores/cadastro")}}
               className="font-kaisei md:hidden bg-dark-blue w-1/2 px-10 py-2 rounded-2xl hover:bg-dark-orange cursor-pointer"
             >
               Cadastrar
