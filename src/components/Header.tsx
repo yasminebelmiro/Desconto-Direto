@@ -37,7 +37,11 @@ const Header = () => {
             <div className="flex gap-5">
               <li
                 className="bg-dark-yellow text-center p-1 w-30 text-dark-blue font-bold rounded-md hover:bg-light-yellow"
-                onClick={() => navigate("/login")}
+                onClick={() => {
+                  isMerchantArea
+                    ? navigate("/area-comerciantes/login")
+                    : navigate("/area-consumidores/login");
+                }}
               >
                 Login
               </li>
@@ -45,8 +49,8 @@ const Header = () => {
                 className="bg-dark-yellow text-center p-1 w-30 text-dark-blue font-bold rounded-md hover:bg-light-yellow"
                 onClick={() => {
                   isMerchantArea
-                    ? navigate("/cadastro/comercio")
-                    : navigate("/cadastro/consumidor");
+                    ? navigate("/area-comerciantes/cadastro")
+                    : navigate("/area-consumidores/cadastro");
                 }}
               >
                 Cadastro
@@ -73,17 +77,21 @@ const Header = () => {
             </li>
             <li
               className="bg-dark-yellow text-center p-3 w-40 text-dark-blue font-bold rounded-md hover:bg-light-yellow"
-              onClick={() => navigate("/login")}
+              onClick={() => {
+                  isMerchantArea
+                    ? navigate("/area-comerciantes/login")
+                    : navigate("/area-consumidores/login");
+                }}
             >
               Login
             </li>
             <li
               className="bg-dark-yellow text-center p-3 w-40 text-dark-blue font-bold rounded-md hover:bg-light-yellow"
-              onClick={() => {
-                isMerchantArea
-                  ? (navigate("/cadastro/comercio"))
-                  : navigate("/cadastro/consumidor");
-              }}
+               onClick={() => {
+                  isMerchantArea
+                    ? navigate("/area-comerciantes/cadastro")
+                    : navigate("/area-consumidores/cadastro");
+                }}
             >
               Cadastro
             </li>
