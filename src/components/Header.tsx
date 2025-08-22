@@ -9,23 +9,23 @@ const Header = () => {
   const [menuisOpen, setMenuIsOpen] = useState(false);
   return (
     <>
-      <div className="bg-dark-blue font-inter text-white w-full h-25 flex justify-between items-center p-4 lg:px-30">
-        <a href="/">
-          <img className="w-10" src={logo} />
-        </a>
+      <div className="bg-dark-blue flex items-center text-white justify-between px-10 py-5">
+        <Link to="/">
+          <img className="w-8" src={logo} />
+        </Link>
         <button
           className="lg:hidden"
           onClick={() => setMenuIsOpen(!menuisOpen)}
         >
-          <GiHamburgerMenu className="text-3xl hover:text-dark-yellow" />
+          <GiHamburgerMenu className="text-2xl hover:text-dark-yellow" />
         </button>
         <nav className="hidden lg:flex ">
           <ul className="flex justify-between items-center lg:gap-10">
             <li className="">
-              <a href="#sobre">Sobre nós</a>
+              <Link to="#sobre">Sobre nós</Link>
             </li>
             <li className="">
-              <a href="#comoFunciona">Como funciona?</a>
+              <Link to="#comoFunciona">Como funciona?</Link>
             </li>
             <li className="">
               {isMerchantArea ? (
@@ -63,10 +63,10 @@ const Header = () => {
         <nav className="bg-dark-blue font-inter text-white w-full h-auto flex justify-between items-center p-8">
           <ul className=" w-full flex flex-col justify-between items-start gap-5">
             <li className="hover:text-dark-yellow">
-              <a href="#sobre">Sobre nós</a>
+              <Link to="#sobre">Sobre nós</Link>
             </li>
             <li className="hover:text-dark-yellow">
-              <a href="#comoFunciona">Como funciona?</a>
+              <Link to="#comoFunciona">Como funciona?</Link>
             </li>
             <li className="">
               {isMerchantArea ? (
