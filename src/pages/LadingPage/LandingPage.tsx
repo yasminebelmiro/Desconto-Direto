@@ -1,9 +1,9 @@
-import About from "./components/About.tsx";
-import DownloadApp from "./components/DownloadApp.tsx";
 import Header from "../../components/Header.tsx";
+import About from "./Components/About.tsx";
+import DownloadApp from "./Components/DownloadApp.tsx";
+import HeroSection from "./Components/HeroSection.tsx";
+import Steps from "./Components/Steps.tsx";
 
-import Steps from "./components/Steps.tsx";
-import HeroSection from "./components/HeroSection.tsx";
 
 const LandingPage = () => {
   return (
