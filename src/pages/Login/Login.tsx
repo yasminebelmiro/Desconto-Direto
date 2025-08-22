@@ -20,6 +20,11 @@ const Login = () => {
   const onSubmit = (data: LoginData) => {
     console.log(data);
     toast.success("Login realizado com sucesso!");
+    if(isMerchantArea){
+      navigate("/area-comerciantes/home");
+    } else {
+      navigate("/area-consumidores/home");
+    }
   };
 
   const onError = (errors: any) => {

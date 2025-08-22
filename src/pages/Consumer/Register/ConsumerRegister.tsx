@@ -24,6 +24,7 @@ const ConsumerRegister = () => {
 
   const onSubmit = (data: ConsumerRegisterData) => {
     console.log(data);
+    navigate("/area-consumidores/home");
   };
 
   const onError = (errors: any) => {
