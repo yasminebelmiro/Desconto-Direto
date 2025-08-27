@@ -48,7 +48,7 @@ const stepMerchant = [
 
 const Steps = () => {
       const location = useLocation();
-      const isMerchantArea = location.pathname.includes("area-comerciantes");
+      const isMerchantArea = location.pathname.includes("comerciantes");
   return (
     <section id="comoFunciona" className="font-inter flex flex-col md:flex-row items-center justify-center bg-light-yellow px-8 py-20 gap-5">
         {isMerchantArea

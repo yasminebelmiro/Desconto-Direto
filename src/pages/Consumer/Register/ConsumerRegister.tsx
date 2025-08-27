@@ -24,7 +24,7 @@ const ConsumerRegister = () => {
 
   const onSubmit = (data: ConsumerRegisterData) => {
     console.log(data);
-    navigate("/area-consumidores/home");
+    navigate("/consumidores/home");
   };
 
   const onError = (errors: any) => {
@@ -98,7 +98,7 @@ const ConsumerRegister = () => {
             Não tenho uma conta.{" "}
             <span
               className="underline hover:font-bold"
-              onClick={() => navigate("/area-consumidores/login")}
+              onClick={() => navigate("/consumidores/login")}
             >
               Cadastrar
             </span>
@@ -111,7 +111,7 @@ const ConsumerRegister = () => {
             Desconto <span className="text-dark-yellow">Direto</span>
           </h1>
           <button
-            onClick={() => navigate("/area-consumidores/login")}
+            onClick={() => navigate("/consumidores/login")}
             className="font-kaisei bg-dark-yellow hover:bg-dark-orange cursor-pointer mt-10 w-1/2 px-10 py-2 rounded-2xl text-white"
           >
             Cadastrar

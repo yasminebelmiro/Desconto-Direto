@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App.tsx";
-import MerchantRotes from "./MerchantRotes.tsx";
-import ConstumerRotes from "./ConstumerRotes.tsx";
+import MerchantRotes from "./MerchantRoutes.tsx";
+import ConstumerRotes from "./ConsumerRoutes.tsx";
 
 const Router = createBrowserRouter([
   { path: "/", 

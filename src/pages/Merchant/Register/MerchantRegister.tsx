@@ -25,7 +25,7 @@ const MerchantRegister = () => {
 
   const onSubmit = (data: MerchantRegisterData) => {
     console.log(data);
-    navigate("/area-comerciantes/home");
+    navigate("/comerciantes/home");
   };
 
   const onError = (errors: any) => {
@@ -142,7 +142,7 @@ const MerchantRegister = () => {
             Não tenho uma conta.{" "}
             <span
               className="underline hover:font-bold"
-              onClick={() => navigate("/area-comerciantes/login")}
+              onClick={() => navigate("/comerciantes/login")}
             >
               Cadastrar
             </span>
@@ -157,7 +157,7 @@ const MerchantRegister = () => {
             Desconto <span className="text-dark-yellow">Direto</span>
           </h1>
           <button
-            onClick={() => navigate("/area-comerciantes/login")}
+            onClick={() => navigate("/comerciantes/login")}
             className="font-kaisei bg-dark-yellow hover:bg-dark-orange cursor-pointer mt-10 w-1/2 px-10 py-2 rounded-2xl text-white"
           >
             Cadastrar

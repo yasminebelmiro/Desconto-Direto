@@ -5,7 +5,7 @@ import { useState } from "react";
 const Header = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const isMerchantArea = location.pathname.includes("area-comerciantes");
+  const isMerchantArea = location.pathname.includes("comerciantes");
   const [menuisOpen, setMenuIsOpen] = useState(false);
   return (
     <>
@@ -31,7 +31,7 @@ const Header = () => {
               {isMerchantArea ? (
                 <Link to="/" onClick={()=> setMenuIsOpen(false)}>Área do consumidor</Link>
               ) : (
-                <Link to="/area-comerciantes" onClick={()=> setMenuIsOpen(false)}>Área do comerciante</Link>
+                <Link to="/comerciantes" onClick={()=> setMenuIsOpen(false)}>Área do comerciante</Link>
               )}
             </li>
             <div className="flex gap-5">
@@ -39,8 +39,8 @@ const Header = () => {
                 className="bg-dark-yellow text-center p-1 w-30 text-dark-blue font-bold rounded-md hover:bg-light-yellow"
                 onClick={() => {
                   isMerchantArea
-                    ? navigate("/area-comerciantes/login")
-                    : navigate("/area-consumidores/login");
+                    ? navigate("/comerciantes/login")
+                    : navigate("/consumidores/login");
                 }}
               >
                 Login
@@ -49,8 +49,8 @@ const Header = () => {
                 className="bg-dark-yellow text-center p-1 w-30 text-dark-blue font-bold rounded-md hover:bg-light-yellow"
                 onClick={() => {
                   isMerchantArea
-                    ? navigate("/area-comerciantes/cadastro")
-                    : navigate("/area-consumidores/cadastro");
+                    ? navigate("/comerciantes/cadastrar")
+                    : navigate("/consumidores/cadastrar");
                 }}
               >
                 Cadastro
@@ -72,15 +72,15 @@ const Header = () => {
               {isMerchantArea ? (
                 <Link to="/" onClick={()=> setMenuIsOpen(false)}>Área do consumidor</Link>
               ) : (
-                <Link to="/area-comerciantes" onClick={()=> setMenuIsOpen(false)}>Área do comerciante</Link>
+                <Link to="/comerciantes" onClick={()=> setMenuIsOpen(false)}>Área do comerciante</Link>
               )}
             </li>
             <li
               className="bg-dark-yellow text-center p-3 w-40 text-dark-blue font-bold rounded-md hover:bg-light-yellow"
               onClick={() => {
                   isMerchantArea
-                    ? navigate("/area-comerciantes/login")
-                    : navigate("/area-consumidores/login");
+                    ? navigate("/comerciantes/login")
+                    : navigate("/consumidores/login");
                 }}
             >
               Login
@@ -89,8 +89,8 @@ const Header = () => {
               className="bg-dark-yellow text-center p-3 w-40 text-dark-blue font-bold rounded-md hover:bg-light-yellow"
                onClick={() => {
                   isMerchantArea
-                    ? navigate("/area-comerciantes/cadastro")
-                    : navigate("/area-consumidores/cadastro");
+                    ? navigate("/comerciantes/cadastrar")
+                    : navigate("/consumidores/cadastrar");
                 }}
             >
               Cadastro

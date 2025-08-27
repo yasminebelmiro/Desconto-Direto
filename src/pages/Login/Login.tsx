@@ -10,7 +10,7 @@ import { toast, ToastContainer } from "react-toastify";
 const Login = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const isMerchantArea = location.pathname.includes("area-comerciantes");
+  const isMerchantArea = location.pathname.includes("comerciantes");
   const {
     register,
     handleSubmit,
@@ -21,9 +21,9 @@ const Login = () => {
     console.log(data);
     toast.success("Login realizado com sucesso!");
     if(isMerchantArea){
-      navigate("/area-comerciantes/home");
+      navigate("/comerciantes/home");
     } else {
-      navigate("/area-consumidores/home");
+      navigate("/consumidores/home");
     }
   };
 
@@ -46,8 +46,8 @@ const Login = () => {
           <button
             onClick={() => {
               isMerchantArea
-                ? navigate("/area-comerciantes/cadastro")
-                : navigate("/area-consumidores/cadastro");
+                ? navigate("/comerciantes/cadastrar")
+                : navigate("/consumidores/cadastrar");
             }}
             className="font-kaisei bg-dark-yellow hover:bg-dark-orange cursor-pointer mt-10 w-1/2 px-10 py-2 rounded-2xl text-white"
           >
@@ -89,8 +89,8 @@ const Login = () => {
               className="underline hover:font-bold"
               onClick={() => {
                 isMerchantArea
-                  ? navigate("/area-comerciantes/cadastro")
-                  : navigate("/area-consumidores/cadastro");
+                  ? navigate("/comerciantes/cadastrar")
+                  : navigate("/consumidores/cadastrar");
               }}
             >
               Cadastrar
