@@ -5,7 +5,7 @@ import Login from "../pages/Login/Login.tsx";
 
 const ConsumerRoutes = [
   {
-    path: "/consumidores",
+    path: "/",
     element: <LandingPage />,
   },
   {

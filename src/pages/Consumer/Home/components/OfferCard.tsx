@@ -22,36 +22,36 @@ const OfferCard = ({
   };
 
   return (
-    <div className="font-inter p-10 w-60 h-90 flex justify-center items-center">
+    <div className="font-inter flex justify-center items-center">
       <div
-        className=" relative outline-4 outline-dark-orange w-40 h-70 rounded-2xl
-    p-4"
+        className=" relative outline-4 outline-dark-orange w-35 h-50 md:w-50 md:h-70 rounded-2xl
+    "
       >
-        <div className="flex gap-2 items-center justify-start">
+        <div className="flex gap-2 items-center justify-start pt-4 pl-4">
             {isLiked ? <FaRegHeart
             onClick={toggleHeart}
-            className="text-red-500 text-2xl cursor-pointer"
+            className="text-red-500 text-lg md:text-2xl cursor-pointer"
           /> : <FaHeart
             onClick={toggleHeart}
-            className="text-red-500 text-2xl cursor-pointer"
+            className="text-red-500 text-lg md:text-2xl cursor-pointer"
           />}
           
           <p className="text-xs text-red-500">{likes}</p>
         </div>
         <img
-          className="absolute top-[-8%] right-[-15%] w-17 h-17 object-cover rounded-full  outline-4
+          className="absolute top-[-5%] right-[-10%] w-12 h-12  md:w-17 md:h-17 object-cover rounded-full  outline-4
            outline-dark-orange"
           src={imgMerchant}
           alt={name}
         />
-        <div className="flex flex-col items-center justify-center text-center">
-          <img src={imgProduct} alt={imgProduct} />
-          <h1 className="font-bold text-md">{name}</h1>
-          <h2 className="text-red-600 text-sm">{expiration}</h2>
+        <div className="flex flex-col items-center justify-center text-center w-full">
+          <img className="w-20 md:w-30" src={imgProduct} alt={imgProduct} />
+          <h1 className="font-bold text-sm md:text-md px-2">{name}</h1>
+          <h2 className="text-red-600 text-xs md:text-sm">{expiration}</h2>
 
           <h3
-            className="font-kaisei absolute w-42 h-12 bottom-[-5%] bg-dark-orange
-           text-white font-bold text-lg flex items-center justify-center rounded-3xl"
+            className="font-kaisei absolute w-35 h-8 md:w-52 md:h-12 bottom-[-3%] bg-dark-orange
+           text-white font-bold text-md md:text-lg flex items-center justify-center rounded-3xl"
           >
             R$ {price}
           </h3>

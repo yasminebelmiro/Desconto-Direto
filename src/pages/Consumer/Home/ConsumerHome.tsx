@@ -10,8 +10,14 @@ const ConsumerHome = () => {
         <Separator section="Panfletos" />
         {/* <CarouselOffers /> */}
         <Separator section="Top ofertas" />
-        <ListOffers />
+        <div className="flex items-center justify-center">
+          <ListOffers />
+        </div>
+
         <Separator section="Últimas ofertas" />
+        <div className="flex items-center justify-center">
+          <ListOffers />
+        </div>
       </div>
     </>
   );
