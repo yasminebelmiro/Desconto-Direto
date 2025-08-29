@@ -4,7 +4,7 @@ interface SeparatorProps {
 }
 const Separator = ({section}:SeparatorProps) => {
   return (
-    <div className='bg-dark-yellow h-10 flex items-center justify-start font-kaisei text-white font-bold pl-10'>
+    <div className='bg-dark-yellow h-15 md:text-xl flex items-center justify-start font-kaisei text-white font-bold pl-10'>
         <p >{section} </p>
     </div>
   )
