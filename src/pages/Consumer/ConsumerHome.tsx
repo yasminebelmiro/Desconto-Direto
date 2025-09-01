@@ -1,7 +1,8 @@
-import Header from "./components/Header.tsx";
-import Separator from "../../../components/Separator.tsx";
-import ListOffers from "./components/ListOffers.tsx";
+import Separator from "../../components/Separator.tsx";
 import FlyersCarousel from "./components/FlyersCarousel.tsx";
+import Header from "./components/Header.tsx";
+import ListOffers from "./components/ListOffers.tsx";
+
 
 const ConsumerHome = () => {
   return (

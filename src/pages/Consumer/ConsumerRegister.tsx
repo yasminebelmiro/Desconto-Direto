@@ -1,13 +1,13 @@
-import logo from "../../../assets/logo.png";
+import logo from "../../assets/logo.png";
 import { useNavigate } from "react-router-dom";
 
-import Header from "../../../components/Header.tsx";
-import Input from "../../Login/components/Input.tsx";
+import Header from "../../components/Header.tsx";
+import Input from "../Login/components/Input.tsx";
 import { useForm } from "react-hook-form";
 import {
   type ConsumerRegisterData,
   ConsumerRegisterSchema,
-} from "../../../schemas/ConsumerRegisterSchema.ts";
+} from "../../schemas/ConsumerRegisterSchema.ts";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "react-toastify";
 

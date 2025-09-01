@@ -1,5 +1,7 @@
-import ConsumerHome from "../pages/Consumer/Home/ConsumerHome.tsx";
-import ConsumerRegister from "../pages/Consumer/Register/ConsumerRegister.tsx";
+
+import ConsumerHome from "../pages/Consumer/ConsumerHome.tsx";
+import ConsumerRegister from "../pages/Consumer/ConsumerRegister.tsx";
+import SearchConsumer from "../pages/Consumer/SearchConsumer.tsx";
 import LandingPage from "../pages/LadingPage/LandingPage.tsx";
 import Login from "../pages/Login/Login.tsx";
 
@@ -19,7 +21,10 @@ const ConsumerRoutes = [
   {
     path: "/consumidores/home",
     element: <ConsumerHome />,
-  },
+  },{
+    path: "/consumidores/buscar",
+    element: <SearchConsumer />,
+  }
 ];
 
 
