@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "image": "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/sale-promo-flyer-design-template-bdc981e993d4b9163f142c85a13e104c_screen.jpg?ts=1696311754",
+    "datePublication": "2023-10-01",
+    "dateExpiration": "2023-10-31",
+    "store": "Store A"
+  },
+  {
+    "id": 2,
+    "image": "https://i0.wp.com/artemg.com.br/wp-content/uploads/2020/04/1-01.jpg?fit=851%2C596&ssl=1",
+    "datePublication": "2023-10-05",
+    "dateExpiration": "2023-11-05",
+    "store": "Store B"
+  },
+  {
+    "id": 3,
+    "image": "https://img.cdndsgni.com/preview/10442240.jpg",
+    "datePublication": "2023-10-10",
+    "dateExpiration": "2023-11-10",
+    "store": "Store C"
+  },
+  {
+    "id": 4,
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsb2seA1yo5LwH5E5hqmlPlakw7gxgDCrrvg&s",
+    "datePublication": "2023-10-15",
+    "dateExpiration": "2023-11-15",
+    "store": "Store D"
+  },
+  {
+    "id": 5,
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrFdfff5zniOvA0pN8StzO_bVV-M7dHd0b1Q&s",
+    "datePublication": "2023-10-20",
+    "dateExpiration": "2023-11-20",
+    "store": "Store E"
+  },
+  {
+    "id": 6,
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSK4VJ69Yh6QPmuiXe-Cgv3wGTE3aah6tAKtg&s",
+    "datePublication": "2023-10-25",
+    "dateExpiration": "2023-11-25",
+    "store": "Store F"
+  }
+]

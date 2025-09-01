@@ -4,6 +4,8 @@
     // File Layout
     // "rootDir": "./src",
     // "outDir": "./dist",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
     "allowImportingTsExtensions": true,
     "noEmit": true,
     // Environment Settings
