@@ -1,9 +1,19 @@
 import React from "react";
 import { id } from "zod/v4/locales";
 import OfferCard from "./OfferCard.tsx";
+interface ListOffersProps {
+  offers: {
+    id: number;
+    imgMerchant: string;
+    imgProduct: string;
+    name: string;
+    expiration: string;
+    price: number;
+    likes: number;
+  }[];
+}
 
-import offers from "../../../mocks/offers.json" with { type: "json" };
-function ListOffers() {
+function ListOffers({offers}: ListOffersProps) {
   const formatedPrice = (price: number) => {
     return price.toFixed(2).replace(".", ",");
   };
