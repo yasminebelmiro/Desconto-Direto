@@ -1,10 +1,23 @@
 import React from "react";
 import { FaFilter } from "react-icons/fa";
+interface FiltersProps {
+  totalQtyProducts?: number;
+  qtyProductsShow?: number;
+  currentPage?: number;
+  offersPerPage?: number;
+}
+const Filters = ({
+  totalQtyProducts,
+  qtyProductsShow,
+  currentPage,
+  offersPerPage,
+}: FiltersProps) => {
 
-const Filters = () => {
+  const startItem = (currentPage! - 1) * offersPerPage! + 1;
+  const endItem = Math.min(currentPage! * offersPerPage!, totalQtyProducts!);
   return (
-    <div className="font-inter text-dark-yellow bg-dark-blue w-full h-15 flex items-center justify-between p-5 text-sm md:text-md">
-      <p className="">1-8 de 9 resultados</p>
+    <div className="font-inter text-dark-yellow bg-dark-blue w-full h-15  lg:px-30 flex items-center justify-between p-5 text-sm md:text-md">
+      <p className="">{startItem}-{endItem} de {totalQtyProducts} resultados</p>
 
       <div className="w-auto flex items-center justify-end gap-5">
         <p>Ordenar por </p>

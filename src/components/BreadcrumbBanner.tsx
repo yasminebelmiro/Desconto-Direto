@@ -4,7 +4,7 @@ import backgroundImage from "../assets/HeroImages/image02.png";
 import { BiChevronRight } from "react-icons/bi";
 interface BreadcrumbBannerProps {
   currentPage: string;
-  typeUser: string;
+  typeUser?: "consumidores" | "comerciantes";
 }
 const BreadcrumbBanner = ({ currentPage, typeUser }: BreadcrumbBannerProps) => {
   return (

@@ -16,5 +16,113 @@
     "expiration": "31/12/2023",
     "price": 20.5,
     "likes": 120
+  },
+  {
+    "id": 3,
+    "imgMerchant": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvFxfMRtqQtxIJGoYNdLFRoR1j8PaG9nALnw&s",
+    "imgProduct": "https://destro.fbitsstatic.net/img/p/biscoito-oreo-original-recheado-36g-71509/258045-1.jpg?w=500&h=500&v=202503100902&qs=ignore",
+    "name": "Biscoito Recheado Oreo 133g",
+    "expiration": "30/11/2023",
+    "price": 7.49,
+    "likes": 95
+  },
+  {
+    "id": 4,
+    "imgMerchant": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvFxfMRtqQtxIJGoYNdLFRoR1j8PaG9nALnw&s",
+    "imgProduct": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxw_coO0aS5yxeA_V3wnc8hwLNjezSa67M6g&s",
+    "name": "Achocolatado Nescau 400g",
+    "expiration": "31/12/2023",
+    "price": 12.99,
+    "likes": 200
+  },
+  {
+    "id": 5,
+    "imgMerchant": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvFxfMRtqQtxIJGoYNdLFRoR1j8PaG9nALnw&s",
+    "imgProduct": "https://espaconatelie.com.br/wp-content/uploads/2024/09/suco-de-laranja-natural.jpg",
+    "name": "Suco de Laranja 1L",
+    "expiration": "15/12/2023",
+    "price": 6.75,
+    "likes": 75
+  },
+  {
+    "id": 6,
+    "imgMerchant": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvFxfMRtqQtxIJGoYNdLFRoR1j8PaG9nALnw&s",
+    "imgProduct": "https://www.camil.com.br/wp-content/uploads/sites/12/2020/06/arroz-branco-camil-t1-1kg-768x768.jpg",
+    "name": "Arroz Tio João 5kg",
+    "expiration": "31/08/2024",
+    "price": 25.9,
+    "likes": 150
+  },
+  {
+    "id": 7,
+    "imgMerchant": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvFxfMRtqQtxIJGoYNdLFRoR1j8PaG9nALnw&s",
+    "imgProduct": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTI5HZDW6sb_rgZeqhVz3zVvBRIxDKTjOMa2A&s",
+    "name": "Feijão Carioca Tio João 1kg",
+    "expiration": "31/07/2024",
+    "price": 9.99,
+    "likes": 110
+  },
+  {
+    "id": 8,
+    "imgMerchant": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvFxfMRtqQtxIJGoYNdLFRoR1j8PaG9nALnw&s",
+    "imgProduct": "https://pt.petitchef.com/imgupl/recipe/spaghetti-alla-napoletana--lg-32540p40242.webp",
+    "name": "Massa Spaghetti 500g",
+    "expiration": "31/12/2023",
+    "price": 4.5,
+    "likes": 80
+  },
+  {
+    "id": 9,
+    "imgMerchant": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvFxfMRtqQtxIJGoYNdLFRoR1j8PaG9nALnw&s",
+    "imgProduct": "https://m.media-amazon.com/images/I/71f5f3VEPqL._UF894,1000_QL80_.jpg",
+    "name": "Leite Condensado Moça 395g",
+    "expiration": "31/12/2023",
+    "price": 8.5,
+    "likes": 140
+  },
+  {
+    "id": 10,
+    "imgMerchant": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvFxfMRtqQtxIJGoYNdLFRoR1j8PaG9nALnw&s",
+    "imgProduct": "https://zaffari.vtexassets.com/arquivos/ids/262925/1000567-00.jpg?v=638670326617530000",
+    "name": "Margarina Qualy 250g",
+    "expiration": "30/11/2023",
+    "price": 5.25,
+    "likes": 90
+  },
+  {
+    "id": 11,
+    "imgMerchant": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvFxfMRtqQtxIJGoYNdLFRoR1j8PaG9nALnw&s",
+    "imgProduct": "https://carrefourbrfood.vtexassets.com/arquivos/ids/211616/141836_1.jpg?v=637272514200130000",
+    "name": "Óleo de Soja 900ml",
+    "expiration": "31/12/2023",
+    "price": 7.99,
+    "likes": 130
+  },
+  {
+    "id": 12,
+    "imgMerchant": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvFxfMRtqQtxIJGoYNdLFRoR1j8PaG9nALnw&s",
+    "imgProduct": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWAhtRzDPmshVcBAgnOQ5DQm6qv-Q7rYE3zw&s",
+    "name": "Pão de Forma 500g",
+    "expiration": "25/12/2023",
+    "price": 6.25,
+    "likes": 85
+  },
+  {
+    "id": 13,
+    "imgMerchant": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvFxfMRtqQtxIJGoYNdLFRoR1j8PaG9nALnw&s",
+    "imgProduct": "https://boa.vtexassets.com/arquivos/ids/591829/4725.jpg.jpg?v=638744610374630000",
+    "name": "Queijo Mussarela 200g",
+    "expiration": "30/11/2023",
+    "price": 12.5,
+    "likes": 160
+  },
+  {
+    "id": 14,
+    "imgMerchant": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvFxfMRtqQtxIJGoYNdLFRoR1j8PaG9nALnw&s",
+    "imgProduct": "https://redemix.vteximg.com.br/arquivos/ids/206523-1000-1000/6541.jpg?v=638350590990600000",
+    "name": "Presunto Fatiado 150g",
+    "expiration": "31/12/2023",
+    "price": 10.0,
+    "likes": 125
   }
 ]

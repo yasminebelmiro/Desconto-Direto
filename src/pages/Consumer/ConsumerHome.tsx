@@ -11,13 +11,13 @@ const ConsumerHome = () => {
       <div>
         <Separator section="Panfletos" />
         <FlyersCarousel />
-        <Separator section="Top ofertas" />
+        <Separator section="Top ofertas" typeUser="consumidores"/>
         <div className="flex items-center justify-center">
-             <ListOffers offers={offers} />
+             <ListOffers offers={offers} cardCount={8}/>
         </div>
-        <Separator section="Últimas ofertas" />
+        <Separator section="Últimas ofertas" typeUser="consumidores"/>
         <div className="flex items-center justify-center">
-        <ListOffers offers={offers} />
+        <ListOffers offers={offers} cardCount={8}/>
         </div>
       </div>
     </>
