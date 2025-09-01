@@ -62,6 +62,8 @@ const FlyersCarousel = () => {
     autoplay: true,
     speed: 2000,
     autoplaySpeed: 3000,
+
+    
   };
 
   const [flyerSelected, setFlyerSelected] = useState<null | (typeof flyers)[0]>(
@@ -70,13 +72,13 @@ const FlyersCarousel = () => {
 
   return (
     <div className=" font-inter w-full h-full max-w-5xl mx-auto">
-      <Slider {...settings}>
+      <Slider {...settings} className="h-full">
         {flyers.map((flyer) => (
           <img
             key={flyer.id}
             src={flyer.image}
             alt={`Panfleto de ${flyer.store}`}
-            className="cursor-pointer h-full"
+            className="cursor-pointer h-full object-cover"
             onClick={() => setFlyerSelected(flyer)}
           />
         ))}
