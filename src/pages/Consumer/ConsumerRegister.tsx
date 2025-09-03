@@ -62,15 +62,15 @@ const ConsumerRegister = () => {
             <Input
               type="text"
               placeholder="Nome completo"
-              error={errors.name?.message}
-              {...register("name")}
+              error={errors.nome?.message}
+              {...register("nome")}
             />
 
             <Input
               type="text"
               placeholder="Telefone celular"
-              error={errors.cellphone?.message}
-              {...register("cellphone")}
+              error={errors.telefone?.message}
+              {...register("telefone")}
             />
             <Input
               type="email"
@@ -83,14 +83,14 @@ const ConsumerRegister = () => {
               <Input
                 type="password"
                 placeholder="Senha"
-                error={errors.password?.message}
-                {...register("password")}
+                error={errors.senha?.message}
+                {...register("senha")}
               />
                <Input
                 type="password"
                 placeholder="Confirmar senha"
-                error={errors.confirmPassword?.message}
-                {...register("confirmPassword")}
+                error={errors.confirmarSenha?.message}
+                {...register("confirmarSenha")}
               />
             </div>
 
