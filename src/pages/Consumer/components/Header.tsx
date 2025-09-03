@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FaRegBell, FaRegHeart, FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import logo from "../../../../assets/logo.png";
+import logo from "../../../assets/logo.png";
 
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoSearch } from "react-icons/io5";
@@ -21,7 +21,7 @@ const Header = () => {
         </button>
         <menu className="text-dark-yellow text-2xl hidden md:flex items-center
          justify-center gap-5">
-          <Link to={""}>
+          <Link to="/consumidores/buscar">
             <IoSearch size={22} />
           </Link>
           <Link to={""}>
@@ -36,7 +36,7 @@ const Header = () => {
         <menu className="bg-dark-blue font-inter text-white w-full h-auto 
         flex flex-col justify-between items-start p-8 gap-5">
           <Link className="font-inter flex gap-5 items-center w-full
-           hover:text-dark-yellow" to={""}>
+           hover:text-dark-yellow" to="/consumidores/buscar">
             <FaSearch  /> Pesquisar
           </Link>
           <Link className="font-inter flex gap-5 items-center w-full
