@@ -10,6 +10,8 @@ import {
 } from "../../schemas/ConsumerRegisterSchema.ts";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "react-toastify";
+import { resgiterConsumer } from "../../service/api/authService.ts";
+
 
 const ConsumerRegister = () => {
   const navigate = useNavigate();
@@ -22,9 +24,16 @@ const ConsumerRegister = () => {
     resolver: zodResolver(ConsumerRegisterSchema),
   });
 
-  const onSubmit = (data: ConsumerRegisterData) => {
+  const onSubmit = async (data: ConsumerRegisterData) => {
+    try {
+      await resgiterConsumer(data)
+      console.log(data);
+      navigate("/consumidores/home")
+    } catch (error) {
     console.log(data);
-    navigate("/consumidores/home");
+     console.log(error);
+    }
+    
   };
 
   const onError = (errors: any) => {

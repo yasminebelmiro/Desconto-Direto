@@ -10,7 +10,7 @@ const SearchConsumer = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [order, setOrder] = useState("exp-asc");
   
-  const offersPerPage = 8;
+  const offersPerPage = 16;
 
   const filteredOffers = offers.filter((offer) =>
     offer.name.toLowerCase().startsWith(search.toLowerCase())
