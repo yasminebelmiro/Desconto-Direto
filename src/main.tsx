@@ -9,6 +9,8 @@ Modal.setAppElement("#root");
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <RouterProvider router={Router} />
+    <RouterProvider  future={{
+    v7_startTransition: true,
+  }} router={Router} />
   </React.StrictMode>
 )

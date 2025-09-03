@@ -1,0 +1,53 @@
+[
+  {
+    "id": 1,
+    "name": "Padaria Pão Quente",
+    "category": "Alimentação",
+    "phone": "(11) 2345-6789",
+    "cellPhone": "(11) 91234-5678",
+    "address": "Rua das Flores, 123",
+    "district": "Centro",
+    "zipCode": "01001-000",
+    "email": "contato@paoque.com",
+    "password": "paoquente",
+    "delivery": true,
+    "openingHour": "06:00",
+    "closingHour": "20:00",
+    "instagram": "@paoque",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgNDaAYOmghNKrXZTT9YKiKG5eXL2zGGWSNg&s"
+  },
+  {
+    "id": 2,
+    "name": "Loja Tech",
+    "category": "Eletrônicos",
+    "phone": "(21) 3456-7890",
+    "cellPhone": "(21) 99876-5432",
+    "address": "Av. Central, 456",
+    "district": "Bairro Novo",
+    "zipCode": "20010-000",
+    "email": "vendas@lojatech.com",
+    "password": "lojatech",
+    "delivery": false,
+    "openingHour": "09:00",
+    "closingHour": "18:00",
+    "instagram": "@lojatech",
+    "image": "https://genialmaker.com.br/wp-content/uploads/2024/06/logo-supermercado.png"
+  },
+  {
+    "id": 3,
+    "name": "Flor do Jardim",
+    "category": "Flores e Plantas",
+    "phone": "(31) 4567-8901",
+    "cellPhone": "(31) 98765-4321",
+    "address": "Praça das Rosas, 789",
+    "district": "Jardim das Flores",
+    "zipCode": "30120-000",
+    "email": "contato@flordojardim.com",
+    "password": "florjardim",
+    "delivery": true,
+    "openingHour": "08:00",
+    "closingHour": "19:00",
+    "instagram": "@flordojardim",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_-6_kdbcZdB7FsHoKaHbBQzn5i7yIIY8AqA&s"
+  }
+]
