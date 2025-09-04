@@ -26,7 +26,7 @@ const Login = () => {
       if (response.role === "merchant") {
         navigate("/comerciantes/home");
       } else {
-        navigate(`/consumidores/${response.userId}/home`);
+        navigate("/consumidores/home");
       }
     } catch (error) {
       console.error(error);
