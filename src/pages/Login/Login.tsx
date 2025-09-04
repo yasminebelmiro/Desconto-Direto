@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { UserLoginSchema, type LoginData } from "../../schemas/LoginSchema.ts";
 import Input from "./components/Input.tsx";
 import { toast, ToastContainer } from "react-toastify";
+import { login } from "../../service/api/authService.ts";
 
 const Login = () => {
   const location = useLocation();
@@ -17,23 +18,33 @@ const Login = () => {
     formState: { errors },
   } = useForm<LoginData>({ resolver: zodResolver(UserLoginSchema) });
 
-  const onSubmit = (data: LoginData) => {
-    console.log(data);
-    toast.success("Login realizado com sucesso!");
-    if(isMerchantArea){
-      navigate("/comerciantes/home");
-    } else {
-      navigate("/consumidores/home");
+  const endpoint = isMerchantArea ? "/comercios/all" : "/clientes/all";
+
+  const onSubmit = async (data: LoginData) => {
+    try {
+      const response = await login(data.email, data.senha, endpoint);
+      if (response.role === "merchant") {
+        navigate("/comerciantes/home");
+      } else {
+        navigate(`/consumidores/${response.userId}/home`);
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error(
+        "Cadastro não encontrado. Certifique de estar na área correta!"
+      );
     }
   };
 
   const onError = (errors: any) => {
     Object.values(errors).forEach((err: any) => {
       if (err?.message) {
-        toast.error(err.message);
+        console.error(err);
+        toast.error("Email ou senha inválidos");
       }
     });
   };
+
   return (
     <div>
       <Header />
@@ -54,8 +65,10 @@ const Login = () => {
             Cadastrar
           </button>
         </div>
-        <div className="relative md:ml-[-35px] flex flex-col items-center justify-center bg-dark-yellow text-white w-full md:w-100 
-        lg:w-120 h-100 lg:h-120 gap-5 px-4 py-10 md:rounded-3xl ">
+        <div
+          className="relative md:ml-[-35px] flex flex-col items-center justify-center bg-dark-yellow text-white w-full md:w-100 
+        lg:w-120 h-100 lg:h-120 gap-5 px-4 py-10 md:rounded-3xl "
+        >
           <h1 className="font-kaisei text-3xl">Login</h1>
           <form
             onSubmit={handleSubmit(onSubmit, onError)}
@@ -71,8 +84,8 @@ const Login = () => {
             <Input
               type="password"
               placeholder="Senha"
-              error={errors.password?.message}
-              {...register("password")}
+              error={errors.senha?.message}
+              {...register("senha")}
             />
 
             <p className="underline hover:font-bold">Esqueci minha senha</p>

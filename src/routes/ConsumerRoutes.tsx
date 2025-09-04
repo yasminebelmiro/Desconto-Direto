@@ -19,7 +19,7 @@ const ConsumerRoutes = [
     element: <ConsumerRegister />,
   },
   {
-    path: "/consumidores/home",
+    path: "/consumidores/:id/home",
     element: <ConsumerHome />,
   },{
     path: "/consumidores/buscar",

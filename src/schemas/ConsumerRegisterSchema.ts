@@ -1,6 +1,7 @@
 import z from "zod";
 
 export const ConsumerRegisterSchema = z.object({
+  id: z.number().optional(),
   nome: z.string().min(1, "Campo obrigatório!"),
   telefone: z.string().min(9, "Campo obrigatório!"),
   email: z.string().email("Email inválido").min(1, "Email inválido"),

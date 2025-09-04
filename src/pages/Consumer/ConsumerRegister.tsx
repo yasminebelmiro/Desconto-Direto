@@ -27,10 +27,10 @@ const ConsumerRegister = () => {
   const onSubmit = async (data: ConsumerRegisterData) => {
     try {
       await resgiterConsumer(data)
-      console.log(data);
-      navigate("/consumidores/home")
+      toast.success("Cadastro realizado com sucesso!")
+      navigate(`/consumidores/login`)
     } catch (error) {
-    console.log(data);
+ 
      console.log(error);
     }
     
