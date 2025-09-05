@@ -2,11 +2,9 @@ import Separator from "../../components/Separator.tsx";
 import FlyersCarousel from "./components/FlyersCarousel.tsx";
 import Header from "./components/Header.tsx";
 import ListOffers from "./components/ListOffers.tsx";
-import offers from "../../mocks/offers.json" with { type: "json" };
 import { useEffect, useState } from "react";
 import api from "../../service/api/axios.ts";
 import type { OfferTypes } from "../../types/OfferTypes.ts";
-import type { MerchantRegisterData } from "../../schemas/MerchantRegisterSchema.ts";
 
 const ConsumerHome = () => {
     const [offers, setOffers] = useState<OfferTypes[]>([]);
@@ -21,7 +19,7 @@ const ConsumerHome = () => {
       } catch (error) {
         console.error(error);
       }
-      // TODO: passar o id do comercio apos arrumar a api
+      
     }, [offers]);
   return (
     <>

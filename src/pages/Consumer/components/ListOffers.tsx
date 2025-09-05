@@ -25,9 +25,9 @@ const ListOffers = ({ cardCount, order, offers }: ListOffersProps) => {
   const formatedPrice = (price: number) => {
     return price.toFixed(2).replace(".", ",");
   };
-  // TODO: organizar os filtros = apos arrumar a api
-  // const sortOffers = (offers: OfferTypes[], order: string) => {
-  //   switch (order) {
+  // TODO: organizar os filtros apos arrumar a api
+ const sortOffers = (offers: OfferTypes[], order: string) => {
+     switch (order) {
   //     case "exp-asc":
   //       return [...offers].sort(
   //         (a, b) =>
@@ -39,22 +39,22 @@ const ListOffers = ({ cardCount, order, offers }: ListOffersProps) => {
   //           new Date(b.expiration).getTime() - new Date(a.expiration).getTime()
   //       );
 
-  //     case "price-asc":
-  //       return offers.sort((a, b) => a.preco - b.price);
-  //     case "price-desc":
-  //       return offers.sort((a, b) => b.price - a.price);
-  //     case "relevance":
-  //       return offers.sort((a, b) => b.likes - a.likes);
-  //     default:
-  //       return offers;
-  //   }
-  // };
+      case "price-asc":
+        return offers.sort((a, b) => a.preco - b.preco);
+      case "price-desc":
+        return offers.sort((a, b) => b.preco - a.preco);
+      // case "relevance":
+      //   return offers.sort((a, b) => b.likes - a.likes);
+      default:
+        return offers;
+    }
+  };
 
-  // const sortedOffers = sortOffers(offersToShow, order);
-
+  const sortedOffers = sortOffers(offersToShow, order);
+ // TODO: passar o id do comercio apos arrumar a api
   return (
     <div className="w-full flex items-center justify-center gap-10 py-10 md:px-10 flex-wrap lg:grid grid-cols-4 lg:w-250 ">
-      {offers.map((offer) => {
+      {sortedOffers.map((offer) => {
         return (
           <OfferCard
             key={offer.id}
