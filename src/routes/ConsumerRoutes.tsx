@@ -5,6 +5,7 @@ import SearchConsumer from "../pages/Consumer/SearchConsumer.tsx";
 import LandingPage from "../pages/LadingPage/LandingPage.tsx";
 import Login from "../pages/Login/Login.tsx";
 import ProtectedRoutes from "./ProtectedRoute.tsx";
+import FavoritesOffers from "../pages/Consumer/FavoritesOffers.tsx";
 
 const ConsumerRoutes = [
   {
@@ -29,6 +30,10 @@ const ConsumerRoutes = [
       {
         path: "/consumidores/buscar",
         element: <SearchConsumer />,
+      },
+        {
+        path: "/consumidores/favoritos",
+        element: <FavoritesOffers />,
       },
     ],
   },

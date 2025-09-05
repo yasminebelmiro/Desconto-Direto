@@ -24,9 +24,7 @@ const Header = () => {
           <Link to="/consumidores/buscar">
             <IoSearch size={22} />
           </Link>
-          <Link to={""}>
-            <FaRegBell size={20} />
-          </Link>
+          
           <Link to={""}>
             <FaRegHeart size={20} />
           </Link>
@@ -40,11 +38,7 @@ const Header = () => {
             <FaSearch  /> Pesquisar
           </Link>
           <Link className="font-inter flex gap-5 items-center w-full
-           hover:text-dark-yellow" to={""}>
-            <FaRegBell  /> Notificações
-          </Link>
-          <Link className="font-inter flex gap-5 items-center w-full
-           hover:text-dark-yellow" to={""}>
+           hover:text-dark-yellow" to={"/consumidores/favoritos"}>
             <FaRegHeart  /> Favoritos
           </Link>
         </menu>

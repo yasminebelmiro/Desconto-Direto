@@ -57,13 +57,7 @@ const ListOffers = ({ cardCount, order, offers }: ListOffersProps) => {
       {sortedOffers.map((offer) => {
         return (
           <OfferCard
-            key={offer.id}
-            imgMerchant={"default.png"}
-            imgProduct={offer.produto.fotoUrl}
-            name={`${offer.produto.nome} ${offer.produto.medida}`}
-            expiration={formatedData(offer.validade).toString()}
-            price={formatedPrice(offer.preco)}
-            likes={10}
+           {...offer}
           />
         );
       })}

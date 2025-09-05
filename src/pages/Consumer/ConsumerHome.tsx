@@ -13,7 +13,7 @@ const ConsumerHome = () => {
         const fetchOffers = async () => {
           const response = await api.get("/ofertas/all");
           setOffers(response.data);
-          console.log(response.data);
+       
         };
         fetchOffers();
       } catch (error) {

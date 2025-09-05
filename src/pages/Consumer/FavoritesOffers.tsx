@@ -6,18 +6,20 @@ import ListOffers from "./components/ListOffers.tsx";
 import Filters from "./components/Filters.tsx";
 import type { OfferTypes } from "../../types/OfferTypes.ts";
 import api from "../../service/api/axios.ts";
-const SearchConsumer = () => {
+const FavoritesOffers = () => {
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [order, setOrder] = useState("exp-asc");
   const [offers, setOffers] = useState<OfferTypes[]>([]);
+  const userId = localStorage.getItem("userId")
 
    useEffect(() => {
       try {
         const fetchOffers = async () => {
-          const response = await api.get("/ofertas/all");
-          setOffers(response.data);
-  
+          const response = await api.get(`/clientes/find/${userId}`);
+          const {ofertasPreferidas} = response.data
+          setOffers(ofertasPreferidas)
+         
         };
         fetchOffers();
       } catch (error) {
@@ -57,7 +59,7 @@ const SearchConsumer = () => {
   return (
     <div>
       <Header />
-      <BreadcrumbBanner currentPage="Ofertas" typeUser="consumidores" />
+      <BreadcrumbBanner currentPage="Favoritos" typeUser="consumidores" />
       <form className="flex items-center justify-between px-5 w-full h-15 lg:px-30 font-bold">
         <input
           className="w-[80%] text-dark-yellow placeholder:text-dark-yellow outline-none"
@@ -122,4 +124,4 @@ const SearchConsumer = () => {
   );
 };
 
-export default SearchConsumer;
+export default FavoritesOffers;
