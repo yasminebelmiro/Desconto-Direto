@@ -1,67 +1,74 @@
+import { useEffect, useState } from "react";
 import OfferCard from "./OfferCard.tsx";
+import type { OfferTypes } from "../../../types/OfferTypes.ts";
+import api from "../../../service/api/axios.ts";
+import { type MerchantRegisterData } from "../../../schemas/MerchantRegisterSchema.ts";
 
 interface ListOffersProps {
-  offers: {
-    id: number;
-    imgMerchant: string;
-    imgProduct: string;
-    name: string;
-    expiration: string;
-    price: number;
-    likes: number;
-  }[];
   cardCount: number;
   order: string;
+  offers: OfferTypes[];
 }
 
-function ListOffers({ offers, cardCount, order }: ListOffersProps) {
-  const offersToShow = offers.slice(0, cardCount);
+const ListOffers = ({ cardCount, order, offers }: ListOffersProps) => {
+  const offersToShow: OfferTypes[] = offers.slice(0, cardCount);
+
+  const formatedData = (date: string) => {
+    const data = new Date(date);
+    return data.toLocaleDateString("pt-BR", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    });
+  };
+
   const formatedPrice = (price: number) => {
     return price.toFixed(2).replace(".", ",");
   };
+  // TODO: organizar os filtros = apos arrumar a api
+  // const sortOffers = (offers: OfferTypes[], order: string) => {
+  //   switch (order) {
+  //     case "exp-asc":
+  //       return [...offers].sort(
+  //         (a, b) =>
+  //           new Date(a.expiration).getTime() - new Date(b.expiration).getTime()
+  //       );
+  //     case "exp-desc":
+  //       return [...offers].sort(
+  //         (a, b) =>
+  //           new Date(b.expiration).getTime() - new Date(a.expiration).getTime()
+  //       );
 
-  const sortOffers = (offers: ListOffersProps["offers"], order: string) => {
-    switch (order) {
-      case "exp-asc":
-        return [...offers].sort(
-          (a, b) =>
-            new Date(a.expiration).getTime() - new Date(b.expiration).getTime()
-        );
-      case "exp-desc":
-        return [...offers].sort(
-          (a, b) =>
-            new Date(b.expiration).getTime() - new Date(a.expiration).getTime()
-        );
+  //     case "price-asc":
+  //       return offers.sort((a, b) => a.preco - b.price);
+  //     case "price-desc":
+  //       return offers.sort((a, b) => b.price - a.price);
+  //     case "relevance":
+  //       return offers.sort((a, b) => b.likes - a.likes);
+  //     default:
+  //       return offers;
+  //   }
+  // };
 
-      case "price-asc":
-        return offers.sort((a, b) => a.price - b.price);
-      case "price-desc":
-        return offers.sort((a, b) => b.price - a.price);
-      case "relevance":
-        return offers.sort((a, b) => b.likes - a.likes);
-      default:
-        return offers;
-    }
-  };
-
-  const sortedOffers = sortOffers(offersToShow, order);
-  console.log(sortedOffers);
+  // const sortedOffers = sortOffers(offersToShow, order);
 
   return (
-    <div className="flex items-center justify-center gap-10 py-10 md:px-10 flex-wrap lg:grid grid-cols-4 lg:w-250 ">
-      {sortedOffers.map((offer) => (
-        <OfferCard
-          key={offer.id}
-          imgMerchant={offer.imgMerchant}
-          imgProduct={offer.imgProduct}
-          name={offer.name}
-          expiration={offer.expiration}
-          price={formatedPrice(offer.price)}
-          likes={offer.likes}
-        />
-      ))}
+    <div className="w-full flex items-center justify-center gap-10 py-10 md:px-10 flex-wrap lg:grid grid-cols-4 lg:w-250 ">
+      {offers.map((offer) => {
+        return (
+          <OfferCard
+            key={offer.id}
+            imgMerchant={"default.png"}
+            imgProduct={offer.produto.fotoUrl}
+            name={`${offer.produto.nome} ${offer.produto.medida}`}
+            expiration={formatedData(offer.validade).toString()}
+            price={formatedPrice(offer.preco)}
+            likes={10}
+          />
+        );
+      })}
     </div>
   );
-}
+};
 
 export default ListOffers;

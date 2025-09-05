@@ -3,8 +3,26 @@ import FlyersCarousel from "./components/FlyersCarousel.tsx";
 import Header from "./components/Header.tsx";
 import ListOffers from "./components/ListOffers.tsx";
 import offers from "../../mocks/offers.json" with { type: "json" };
+import { useEffect, useState } from "react";
+import api from "../../service/api/axios.ts";
+import type { OfferTypes } from "../../types/OfferTypes.ts";
+import type { MerchantRegisterData } from "../../schemas/MerchantRegisterSchema.ts";
 
 const ConsumerHome = () => {
+    const [offers, setOffers] = useState<OfferTypes[]>([]);
+    useEffect(() => {
+      try {
+        const fetchOffers = async () => {
+          const response = await api.get("/ofertas/all");
+          setOffers(response.data);
+          console.log(response.data);
+        };
+        fetchOffers();
+      } catch (error) {
+        console.error(error);
+      }
+      // TODO: passar o id do comercio apos arrumar a api
+    }, [offers]);
   return (
     <>
       <Header />
@@ -12,12 +30,12 @@ const ConsumerHome = () => {
         <Separator section="Panfletos" />
         <FlyersCarousel />
         <Separator section="Top ofertas" typeUser="consumidores"/>
-        <div className="flex items-center justify-center">
-             <ListOffers offers={offers} cardCount={8}/>
+        <div className="flex items-center justify-center ">
+             <ListOffers offers={offers} cardCount={8} order="relevance"/>
         </div>
         <Separator section="Últimas ofertas" typeUser="consumidores"/>
         <div className="flex items-center justify-center">
-        <ListOffers offers={offers} cardCount={8}/>
+        <ListOffers offers={offers} cardCount={8} order="exp-asc"/>
         </div>
       </div>
     </>

@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ReactModal from "react-modal";
-import flyers from "../../../mocks/flyers.json" with { type: "json" };
+import api from "../../../service/api/axios.ts";
+import type { FlyerTypes } from "../../../types/FlyerTypes.ts";
 
 const FlyersCarousel = () => {
   const settings = {
@@ -15,46 +16,65 @@ const FlyersCarousel = () => {
     autoplaySpeed: 3000,
   };
 
-  const [flyerSelected, setFlyerSelected] = useState<null | (typeof flyers)[0]>(
+  const [flyer, setFlyer] = useState<FlyerTypes[]>([]);
+  const [flyerSelected, setFlyerSelected] = useState<null | (FlyerTypes[])[0]>(
     null
   );
+
+  useEffect(() => {
+    const fetchFlyers = async () => {
+      const response = await api.get("/panfletos/all");
+      setFlyer(response.data);
+    };
+    fetchFlyers();
+  }, [flyer]);
+
+  const formatedData = (date: string) => {
+    const data = new Date(date);
+    return data.toLocaleDateString("pt-BR", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    });
+  };
 
   return (
     <div className="font-inter w-full h-full max-w-5xl mx-auto">
       <Slider {...settings}>
-        {flyers.map((flyer) => (
+        {flyer.map((item) => (
           <img
-            key={flyer.id}
-            src={flyer.image}
-            alt={`Panfleto de ${flyer.store}`}
+            key={item.id}
+            src={item.fotoUrl}
+            alt={`Panfleto de `}
             className="cursor-pointer h-full"
-            onClick={() => setFlyerSelected(flyer)}
+            onClick={() => setFlyerSelected(item)}
           />
         ))}
       </Slider>
       <ReactModal
-        className="flex flex-col lg:flex-row items-center justify-center h-full bg-white p-8 "
+        className="flex flex-col md:flex-row items-center  overflow-y-auto h-full bg-white p-8"
         isOpen={!!flyerSelected}
         onRequestClose={() => setFlyerSelected(null)}
         contentLabel="Panfleto Detalhes"
+        
       >
-        <div className="w-full lg:w-1/2 flex items-center justify-center">
+        <div className="w-full lg:w-1/2 h-screen flex items-center justify-center">
           <img
-            className="w-[80%] lg:w-[60%] rounded-lg"
-            src={flyerSelected?.image}
-            alt={`Panfleto de ${flyerSelected?.store}`}
+            className="w-auto h-[80%] lg:w-[60%] lg:h-auto rounded-lg"
+            src={flyerSelected?.fotoUrl}
+            alt={`Panfleto de ?`}
           />
         </div>
-        <div className="pt-4 w-full lg:w-1/2 flex flex-col items-center gap-4">
-          <h1 className="text-2xl font-bold">{flyerSelected?.store}</h1>
+        <div className="pt-4 w-full lg:w-1/2  flex flex-col items-center gap-4">
+          <h1 className="text-2xl font-bold">Comercio</h1>
           <p>
             Publicado em{" "}
-            <span className="font-bold">{flyerSelected?.datePublication}</span>
+            <span className="font-bold">Data publicação</span>
           </p>
           <p>
             Válido até{" "}
             <span className="font-bold text-red-500">
-              {flyerSelected?.dateExpiration}
+              {formatedData(flyerSelected?.dataExpiracao ?? "").toString()}
             </span>
           </p>
           <button

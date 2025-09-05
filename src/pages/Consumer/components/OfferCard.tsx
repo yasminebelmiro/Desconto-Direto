@@ -20,7 +20,6 @@ const OfferCard = ({
   const toggleHeart = () => {
     setIsLiked(!isLiked);
   };
-
   return (
     <div className="font-inter flex justify-center items-center m-2">
       <div
@@ -49,9 +48,15 @@ const OfferCard = ({
           alt={name}
         />
         <div className=" flex flex-col items-center justify-evenly   text-center w-full">
-          <img className="w-20 h-20 object-cover md:w-30 md:h-30 " src={imgProduct} alt={imgProduct} />
+          <img
+            className="w-20 h-20 object-cover md:w-30 md:h-30 "
+            src={imgProduct}
+            alt={imgProduct}
+          />
           <div className="flex flex-col items-center justify-center gap-1 p-2">
-            <h1 className="font-bold text-xs md:text-md lg:text-[14px] md:px-2">{name}</h1>
+            <h1 className="font-bold text-xs md:text-md lg:text-[14px] md:px-2">
+              {name}
+            </h1>
             <h2 className="text-red-600 text-xs md:text-sm">{expiration}</h2>
           </div>
           <h3
