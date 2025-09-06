@@ -12,19 +12,17 @@ const SearchConsumer = () => {
   const [order, setOrder] = useState("exp-asc");
   const [offers, setOffers] = useState<OfferTypes[]>([]);
 
-   useEffect(() => {
-      try {
-        const fetchOffers = async () => {
-          const response = await api.get("/ofertas/all");
-          setOffers(response.data);
-  
-        };
-        fetchOffers();
-      } catch (error) {
-        console.error(error);
-      }
-     
-    }, [offers]);
+  useEffect(() => {
+    try {
+      const fetchOffers = async () => {
+        const response = await api.get("/ofertas/all");
+        setOffers(response.data);
+      };
+      fetchOffers();
+    } catch (error) {
+      console.error(error);
+    }
+  }, [offers]);
 
   const offersPerPage = 16;
 
@@ -76,48 +74,48 @@ const SearchConsumer = () => {
         order={order}
         setOrder={setOrder}
       />
-      <div className="flex flex-col items-center justify-center">
-        {filteredOffers.length > 0 ? (
+      {filteredOffers.length > 0 ? (
+        <div className="flex flex-col items-center justify-center">
           <ListOffers
             offers={currentOffers}
             cardCount={offersPerPage}
             order={order}
           />
-        ) : (
-          <p className="text-center m-10 font-inter">
-            Nenhum resultado encontrado
-          </p>
-        )}
-        <div className="flex gap-5 mb-10">
-          <button
-            className=" p-2 h-10 min-w-10 w-auto "
-            onClick={backPage}
-            disabled={currentPage === 1}
-          >
-            <BiChevronLeft className="text-2xl " />
-          </button>
-          {Array.from({ length: totalPages }, (_, index) => (
+          <div className="flex gap-5 mb-10">
             <button
-              key={index}
-              className={` p-2 h-10 min-w-10 w-auto ${
-                currentPage === index + 1
-                  ? "bg-dark-orange font-bol rounded-3xl text-white"
-                  : ""
-              }`}
-              onClick={() => setCurrentPage(index + 1)}
+              className=" p-2 h-10 min-w-10 w-auto "
+              onClick={backPage}
+              disabled={currentPage === 1}
             >
-              {index + 1}
+              <BiChevronLeft className="text-2xl " />
             </button>
-          ))}
-          <button
-            className=" p-2 h-10 min-w-10 w-auto "
-            onClick={nextPage}
-            disabled={currentPage === totalPages}
-          >
-            <BiChevronRight className="text-2xl " />
-          </button>
+            {Array.from({ length: totalPages }, (_, index) => (
+              <button
+                key={index}
+                className={` p-2 h-10 min-w-10 w-auto ${
+                  currentPage === index + 1
+                    ? "bg-dark-orange font-bol rounded-3xl text-white"
+                    : ""
+                }`}
+                onClick={() => setCurrentPage(index + 1)}
+              >
+                {index + 1}
+              </button>
+            ))}
+            <button
+              className=" p-2 h-10 min-w-10 w-auto "
+              onClick={nextPage}
+              disabled={currentPage === totalPages}
+            >
+              <BiChevronRight className="text-2xl " />
+            </button>
+          </div>
         </div>
-      </div>
+      ) : (
+        <p className="text-center m-10 font-inter">
+          Nenhum resultado encontrado
+        </p>
+      )}
     </div>
   );
 };

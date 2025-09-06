@@ -25,7 +25,7 @@ const Header = () => {
             <IoSearch size={22} />
           </Link>
           
-          <Link to={""}>
+          <Link to={"/consumidores/favoritos"}>
             <FaRegHeart size={20} />
           </Link>
         </menu>

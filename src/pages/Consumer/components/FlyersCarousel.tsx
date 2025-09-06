@@ -17,7 +17,7 @@ const FlyersCarousel = () => {
   };
 
   const [flyer, setFlyer] = useState<FlyerTypes[]>([]);
-  const [flyerSelected, setFlyerSelected] = useState<null | (FlyerTypes[])[0]>(
+  const [flyerSelected, setFlyerSelected] = useState<null | FlyerTypes[][0]>(
     null
   );
 
@@ -39,53 +39,59 @@ const FlyersCarousel = () => {
   };
 
   return (
-    <div className="font-inter w-full h-full max-w-5xl mx-auto">
-      <Slider {...settings}>
-        {flyer.map((item) => (
-          <img
-            key={item.id}
-            src={item.fotoUrl}
-            alt={`Panfleto de `}
-            className="cursor-pointer h-full"
-            onClick={() => setFlyerSelected(item)}
-          />
-        ))}
-      </Slider>
-      <ReactModal
-        className="flex flex-col md:flex-row items-center  overflow-y-auto h-full bg-white p-8"
-        isOpen={!!flyerSelected}
-        onRequestClose={() => setFlyerSelected(null)}
-        contentLabel="Panfleto Detalhes"
-        
-      >
-        <div className="w-full lg:w-1/2 h-screen flex items-center justify-center">
-          <img
-            className="w-auto h-[80%] lg:w-[60%] lg:h-auto rounded-lg"
-            src={flyerSelected?.fotoUrl}
-            alt={`Panfleto de ?`}
-          />
-        </div>
-        <div className="pt-4 w-full lg:w-1/2  flex flex-col items-center gap-4">
-          <h1 className="text-2xl font-bold">Comercio</h1>
-          <p>
-            Publicado em{" "}
-            <span className="font-bold">Data publicação</span>
-          </p>
-          <p>
-            Válido até{" "}
-            <span className="font-bold text-red-500">
-              {formatedData(flyerSelected?.dataExpiracao ?? "").toString()}
-            </span>
-          </p>
-          <button
-            className="p-4 w-1/2 bg-dark-blue rounded-2xl text-dark-yellow font-bold cursor-pointer"
-            onClick={() => setFlyerSelected(null)}
+    <>
+      {flyer.length > 0 ? (
+        <div className="font-inter w-full h-full max-w-5xl mx-auto">
+          <Slider {...settings}>
+            {flyer.map((item) => (
+              <img
+                key={item.id}
+                src={item.fotoUrl}
+                alt={`Panfleto de `}
+                className="cursor-pointer h-full"
+                onClick={() => setFlyerSelected(item)}
+              />
+            ))}
+          </Slider>
+          <ReactModal
+            className="flex flex-col md:flex-row items-center  overflow-y-auto h-full bg-white p-8"
+            isOpen={!!flyerSelected}
+            onRequestClose={() => setFlyerSelected(null)}
+            contentLabel="Panfleto Detalhes"
           >
-            Fechar
-          </button>
+            <div className="w-full lg:w-1/2 h-screen flex items-center justify-center">
+              <img
+                className="w-auto h-[80%] lg:w-[60%] lg:h-auto rounded-lg"
+                src={flyerSelected?.fotoUrl}
+                alt={`Panfleto de ?`}
+              />
+            </div>
+            <div className="pt-4 w-full lg:w-1/2  flex flex-col items-center gap-4">
+              <h1 className="text-2xl font-bold">Comercio</h1>
+              <p>
+                Publicado em <span className="font-bold">Data publicação</span>
+              </p>
+              <p>
+                Válido até{" "}
+                <span className="font-bold text-red-500">
+                  {formatedData(flyerSelected?.dataExpiracao ?? "").toString()}
+                </span>
+              </p>
+              <button
+                className="p-4 w-1/2 bg-dark-blue rounded-2xl text-dark-yellow font-bold cursor-pointer"
+                onClick={() => setFlyerSelected(null)}
+              >
+                Fechar
+              </button>
+            </div>
+          </ReactModal>
         </div>
-      </ReactModal>
-    </div>
+      ) : (
+        <p className=" text-center m-10 font-inter">
+          Nenhum resultado encontrado
+        </p>
+      )}
+    </>
   );
 };
 

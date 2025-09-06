@@ -11,22 +11,20 @@ const FavoritesOffers = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [order, setOrder] = useState("exp-asc");
   const [offers, setOffers] = useState<OfferTypes[]>([]);
-  const userId = localStorage.getItem("userId")
+  const userId = localStorage.getItem("userId");
 
-   useEffect(() => {
-      try {
-        const fetchOffers = async () => {
-          const response = await api.get(`/clientes/find/${userId}`);
-          const {ofertasPreferidas} = response.data
-          setOffers(ofertasPreferidas)
-         
-        };
-        fetchOffers();
-      } catch (error) {
-        console.error(error);
-      }
-     
-    }, [offers]);
+  useEffect(() => {
+    try {
+      const fetchOffers = async () => {
+        const response = await api.get(`/clientes/find/${userId}`);
+        const { ofertasPreferidas } = response.data;
+        setOffers(ofertasPreferidas);
+      };
+      fetchOffers();
+    } catch (error) {
+      console.error(error);
+    }
+  }, [offers]);
 
   const offersPerPage = 16;
 
@@ -80,45 +78,47 @@ const FavoritesOffers = () => {
       />
       <div className="flex flex-col items-center justify-center">
         {filteredOffers.length > 0 ? (
-          <ListOffers
-            offers={currentOffers}
-            cardCount={offersPerPage}
-            order={order}
-          />
+          <>
+            <ListOffers
+              offers={currentOffers}
+              cardCount={offersPerPage}
+              order={order}
+            />
+            <div className="flex gap-5 mb-10">
+              <button
+                className=" p-2 h-10 min-w-10 w-auto "
+                onClick={backPage}
+                disabled={currentPage === 1}
+              >
+                <BiChevronLeft className="text-2xl " />
+              </button>
+              {Array.from({ length: totalPages }, (_, index) => (
+                <button
+                  key={index}
+                  className={` p-2 h-10 min-w-10 w-auto ${
+                    currentPage === index + 1
+                      ? "bg-dark-orange font-bol rounded-3xl text-white"
+                      : ""
+                  }`}
+                  onClick={() => setCurrentPage(index + 1)}
+                >
+                  {index + 1}
+                </button>
+              ))}
+              <button
+                className=" p-2 h-10 min-w-10 w-auto "
+                onClick={nextPage}
+                disabled={currentPage === totalPages}
+              >
+                <BiChevronRight className="text-2xl " />
+              </button>
+            </div>
+          </>
         ) : (
           <p className="text-center m-10 font-inter">
             Nenhum resultado encontrado
           </p>
         )}
-        <div className="flex gap-5 mb-10">
-          <button
-            className=" p-2 h-10 min-w-10 w-auto "
-            onClick={backPage}
-            disabled={currentPage === 1}
-          >
-            <BiChevronLeft className="text-2xl " />
-          </button>
-          {Array.from({ length: totalPages }, (_, index) => (
-            <button
-              key={index}
-              className={` p-2 h-10 min-w-10 w-auto ${
-                currentPage === index + 1
-                  ? "bg-dark-orange font-bol rounded-3xl text-white"
-                  : ""
-              }`}
-              onClick={() => setCurrentPage(index + 1)}
-            >
-              {index + 1}
-            </button>
-          ))}
-          <button
-            className=" p-2 h-10 min-w-10 w-auto "
-            onClick={nextPage}
-            disabled={currentPage === totalPages}
-          >
-            <BiChevronRight className="text-2xl " />
-          </button>
-        </div>
       </div>
     </div>
   );
