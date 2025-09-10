@@ -1,15 +1,30 @@
 import z from "zod";
 
-export const MerchantRegisterSchema = z.object({
-  name: z.string().min(1, "Campo obrigatório!"),
-  phone: z.string().min(8, "Campo obrigatório!").optional(),
-  cellphone: z.string().min(9, "Campo obrigatório!"),
-  adress: z.string().min(1, "Campo obrigatório!"),
-  district: z.string().min(1, "Campo obrigatório!"),
-  zipCode: z.string().min(1, "Campo obrigatório!"),
-  email: z.string().email("Email inválido").min(1, "Email inválido"),
-  password: z.string().min(6, "Senha precisa ter pelo menos 6 caracteres"),
-  confirmPassword: z.string().min(1, "As senhas devem ser identicas"),
+export const basicSchema = z.object({
+  nome: z.string().min(1, "Nome obrigatório"),
+  categoria: z.string().min(1, "Categoria obrigatório"),
+  fotoUrl: z.string().optional(),
+});
+export const detailsSchema = z.object({
+  telefone: z.string().min(1, "Telefone obrigatório"),
+  whatsapp: z.string().optional(),
+  instagram: z.string().optional(),
+  endereco: z.string().min(1, "Endereço obrigatório"),
+  bairro: z.string().min(1, "Bairro obrigatório"),
+  cep: z.string().min(1, "Cep obrigatório"),
+  entrega: z.string().min(1, "Entrega obrigatória"),
+  horarioAbertura: z.string().min(1, "Horário de abertura obrigatório"),
+  horarioFechamento: z.string().min(1, "Horário de fechamento obrigatório"),
 });
 
-export type MerchantRegisterData = z.infer<typeof MerchantRegisterSchema>
+export const accountSchema = z
+  .object({
+    email: z.string().min(1, "Email obrigatório"),
+    senha: z.string().min(1, "Senha obrigatória"),
+    confirmarSenha: z.string().min(1, "Confirmar a senha é obrigatório"),
+    termosUso: z.string().min(1, "Aceite os termos."),
+  })
+  .refine((data) => data.senha === data.confirmarSenha, {
+    message: "As senhas não coincidem",
+    path: ["confirmarSenha"],
+  });

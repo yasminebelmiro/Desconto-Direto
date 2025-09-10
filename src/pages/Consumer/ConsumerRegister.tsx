@@ -52,7 +52,7 @@ const ConsumerRegister = () => {
         <div
           className="relative md:mr-[-35px] flex flex-col items-center justify-center
            bg-dark-yellow text-white w-full md:w-100 
-        lg:w-120 h-auto md:h-140 gap-5 px-4 py-10 md:rounded-3xl "
+        lg:w-120 h-auto md:h-120 gap-5 px-4 py-10 md:rounded-3xl "
         >
           <h1 className="font-kaisei text-3xl">Cadastro</h1>
           <form
@@ -114,7 +114,7 @@ const ConsumerRegister = () => {
           </p>
         </div>
         <div className="hidden md:flex flex-col items-center justify-center
-         bg-dark-blue md:w-100 lg:w-120 h-140 rounded-3xl">
+         bg-dark-blue md:w-100 lg:w-120 h-120 rounded-3xl">
           <img className="w-10" src={logo} alt="Logo DD" />
           <h1 className="font-kaisei flex flex-col text-center md:text-xl text-white">
             Desconto <span className="text-dark-yellow">Direto</span>
