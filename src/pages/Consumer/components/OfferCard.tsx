@@ -3,30 +3,39 @@ import { FaHeart, FaRegHeart } from "react-icons/fa";
 import api from "../../../service/api/axios.ts";
 import type { OfferTypes } from "../../../types/OfferTypes.ts";
 import { toast } from "react-toastify";
-interface OfferCardProps {
-  
-}
+interface OfferCardProps {}
 const OfferCard = ({ ...props }: OfferTypes) => {
   const [isLiked, setIsLiked] = useState(false);
   const userId = localStorage.getItem("userId");
 
   useEffect(() => {
-    try {
-      const toggleHeart = async () => {
+    const toggleHeart = async () => {
+      try {
         if (isLiked) {
-          const response = await api.post(
-            `/clientes/${userId}/favoritos/${props.id}`,
-            props
-          );
-          toast.success("Oferta adicionanda aos favoritos!");
+          await api.post(`/clientes/${userId}/favoritos/${props.id}`, props);
+          toast.success("Oferta adicionada aos favoritos!");
         }
-      };
-      toggleHeart();
-    } catch (error) {
-      toast.error("não foi possivel adicionar essa oferta aos favoritos");
-      console.error(error);
-    }
+      } catch (error) {
+        toast.error("Não foi possível adicionar essa oferta aos favoritos");
+        console.error(error);
+      }
+    };
+
+    toggleHeart();
   }, [isLiked, userId, props.id]);
+
+    const formatedData = (date: string) => {
+    const data = new Date(date);
+    return data.toLocaleDateString("pt-BR", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    });
+  };
+
+  const formatedPrice = (price: number) => {
+    return price.toFixed(2).replace(".", ",");
+  };
 
   return (
     <div className="font-inter flex justify-center items-center m-2">
@@ -66,14 +75,14 @@ const OfferCard = ({ ...props }: OfferTypes) => {
               {props.produto.nome}
             </h1>
             <h2 className="text-red-600 text-xs md:text-sm">
-              {props.validade}
+              {formatedData(props.validade)}
             </h2>
           </div>
           <h3
             className="font-kaisei absolute w-full h-8 md:h-12 bottom-[-3%] bg-dark-orange
            text-white font-bold text-md md:text-lg flex items-center justify-center rounded-3xl"
           >
-            R$ {props.preco}
+            R$ {formatedPrice(props.preco)}
           </h3>
         </div>
       </div>

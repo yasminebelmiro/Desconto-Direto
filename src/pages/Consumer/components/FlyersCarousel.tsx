@@ -27,7 +27,7 @@ const FlyersCarousel = () => {
       setFlyer(response.data);
     };
     fetchFlyers();
-  }, [flyer]);
+  }, []);
 
   const formatedData = (date: string) => {
     const data = new Date(date);

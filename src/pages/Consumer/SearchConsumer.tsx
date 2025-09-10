@@ -22,7 +22,7 @@ const SearchConsumer = () => {
     } catch (error) {
       console.error(error);
     }
-  }, [offers]);
+  }, []);
 
   const offersPerPage = 16;
 

@@ -20,7 +20,7 @@ const ConsumerHome = () => {
         console.error(error);
       }
       
-    }, [offers]);
+    }, []);
   return (
     <>
       <Header />

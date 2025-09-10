@@ -13,18 +13,7 @@ interface ListOffersProps {
 const ListOffers = ({ cardCount, order, offers }: ListOffersProps) => {
   const offersToShow: OfferTypes[] = offers.slice(0, cardCount);
 
-  const formatedData = (date: string) => {
-    const data = new Date(date);
-    return data.toLocaleDateString("pt-BR", {
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric",
-    });
-  };
 
-  const formatedPrice = (price: number) => {
-    return price.toFixed(2).replace(".", ",");
-  };
   // TODO: organizar os filtros apos arrumar a api
   const sortOffers = (offers: OfferTypes[], order: string) => {
     switch (order) {
@@ -53,21 +42,17 @@ const ListOffers = ({ cardCount, order, offers }: ListOffersProps) => {
   const sortedOffers = sortOffers(offersToShow, order);
   // TODO: passar o id do comercio apos arrumar a api
   return (
-    <>
+    <div className="w-full flex items-center justify-center gap-10 py-10 md:px-10 flex-wrap lg:grid grid-cols-4 lg:w-250 ">
       {sortedOffers.length > 0 ? (
         sortedOffers.map((offer) => {
-          return (
-            <div className="w-full flex items-center justify-center gap-10 py-10 md:px-10 flex-wrap lg:grid grid-cols-4 lg:w-250 ">
-              <OfferCard {...offer} />
-            </div>
-          );
+          return <OfferCard key={offer.id} {...offer}  />;
         })
       ) : (
         <p className="text-center m-10 font-inter">
           Nenhum resultado encontrado
         </p>
       )}
-    </>
+    </div>
   );
 };
 

@@ -24,7 +24,7 @@ const FavoritesOffers = () => {
     } catch (error) {
       console.error(error);
     }
-  }, [offers]);
+  }, []);
 
   const offersPerPage = 16;
 
