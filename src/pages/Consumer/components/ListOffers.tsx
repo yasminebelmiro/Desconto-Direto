@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import OfferCard from "./OfferCard.tsx";
 import type { OfferTypes } from "../../../types/OfferTypes.ts";
 import api from "../../../service/api/axios.ts";
-import { type MerchantRegisterData } from "../../../schemas/MerchantRegisterSchema.ts";
+
 
 interface ListOffersProps {
   cardCount: number;

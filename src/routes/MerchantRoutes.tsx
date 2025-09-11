@@ -1,7 +1,8 @@
 import LandingPage from "../pages/LadingPage/LandingPage.tsx";
 import Login from "../pages/Login/Login.tsx";
-import MerchantHome from "../pages/Merchant/Home/MerchantHome.tsx";
-import MerchantRegister from "../pages/Merchant/Register/MerchantRegister.tsx";
+import MerchantHome from "../pages/Merchant/MerchantHome.tsx";
+
+import MerchantRegister from "../pages/Merchant/MerchantRegister.tsx";
 
 const MerchantRoutes = [
   {

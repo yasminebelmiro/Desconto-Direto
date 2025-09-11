@@ -1,9 +1,7 @@
-import React from 'react'
-import Header from './components/Header.tsx'
-import Separator from '../../../components/Separator.tsx'
-import OfferCard from './components/OfferCard.tsx'
-import ListOffers from './components/ListOffers.tsx'
-import FlyersCarousel from './components/FlyersCarousel.tsx'
+import Separator from "../../components/Separator.tsx"
+import FlyersCarousel from "./components/FlyersCarousel.tsx"
+import Header from "./components/Header.tsx"
+import ListOffers from "./components/ListOffers.tsx"
 
 const MerchantHome = () => {
   return (

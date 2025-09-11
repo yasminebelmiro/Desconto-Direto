@@ -1,26 +1,25 @@
-import logo from "../../../assets/logo.png";
+import logo from "../../assets/logo.png";
 import { useNavigate } from "react-router-dom";
-
-import Header from "../../../components/Header.tsx";
-import Input from "../../Login/components/Input.tsx";
-import { useForm } from "react-hook-form";
-
-import { zodResolver } from "@hookform/resolvers/zod";
-
+import Header from "../../components/Header.tsx";
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import type { RootState } from "../../redux/store.ts";
 import { toast } from "react-toastify";
-
-import { basicSchema } from "../../../schemas/MerchantRegisterSchema.ts";
-import { useDispatch } from "react-redux";
+import BasicStep from "./components/BasicStep.tsx";
+import DetailsStep from "./components/DetailsStep.tsx";
 
 const MerchantRegister = () => {
   const navigate = useNavigate();
+  const [step, setStep] = useState(1);
+  const formData = useSelector((state: RootState) => state.merchant);
 
+  const handleSubmit = () => {
+    toast.success("Cadastro concluído!");
+    console.log(JSON.stringify(formData))
+    setStep(1);
+  };
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({ resolver: zodResolver(basicSchema) });
+  
 
   return (
     <div>
@@ -35,16 +34,9 @@ const MerchantRegister = () => {
         lg:w-120 h-auto md:h-140 gap-5 px-4 py-10 md:rounded-3xl "
         >
           <h1 className="font-kaisei text-3xl">Cadastro</h1>
-         
-          <p>
-            Não tenho uma conta.{" "}
-            <span
-              className="underline hover:font-bold"
-              onClick={() => navigate("/comerciantes/login")}
-            >
-              Cadastrar
-            </span>
-          </p>
+          {step === 1 && <BasicStep onNext={() => setStep(2)} />}
+            {step === 2 && <DetailsStep onNext={() => setStep(3)} />}
+              {step === 3 && <DetailsStep onNext={() => setStep(1)} onSubmit={handleSubmit} />}
         </div>
         <div
           className="hidden md:flex flex-col items-center justify-center
