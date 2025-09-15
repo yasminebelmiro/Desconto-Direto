@@ -1,26 +1,47 @@
 import logo from "../../assets/logo.png";
 import { useNavigate } from "react-router-dom";
 import Header from "../../components/Header.tsx";
-import { useState } from "react";
-import { useSelector } from "react-redux";
-import type { RootState } from "../../redux/store.ts";
+import { MerchantCategorys } from "../../enum/MerchantCategorys.ts";
+import { useForm } from "react-hook-form";
+import {
+  type MerchantData,
+  MerchantSchema,
+} from "../../schemas/MerchantRegisterSchema.ts";
+
+import Input from "../Login/components/Input.tsx";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "react-toastify";
-import BasicStep from "./components/BasicStep.tsx";
-import DetailsStep from "./components/DetailsStep.tsx";
+import { registerMerchant } from "../../service/api/authService.ts";
 
 const MerchantRegister = () => {
   const navigate = useNavigate();
-  const [step, setStep] = useState(1);
-  const formData = useSelector((state: RootState) => state.merchant);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<MerchantData>({
+    resolver: zodResolver(MerchantSchema),
+  });
 
-  const handleSubmit = () => {
-    toast.success("Cadastro concluído!");
-    console.log(JSON.stringify(formData))
-    setStep(1);
-  };
-
+   const onSubmit = async (data: MerchantData) => {
+      try {
+        await registerMerchant(data)
+        toast.success("Cadastro realizado com sucesso!")
+        navigate(`/comerciantes/login`)
+      } catch (error) {
+   
+       console.log(error);
+      }
+      
+    };
   
-
+    const onError = (errors: any) => {
+      Object.values(errors).forEach((err: any) => {
+        if (err?.message) {
+          toast.error(err.message);
+        }
+      });
+    };
   return (
     <div>
       <Header />
@@ -31,16 +52,69 @@ const MerchantRegister = () => {
         <div
           className="relative md:mr-[-35px] flex flex-col items-center justify-center
            bg-dark-yellow text-white w-full md:w-100 
-        lg:w-120 h-auto md:h-140 gap-5 px-4 py-10 md:rounded-3xl "
+        lg:w-120 h-auto md:h-120 gap-5 px-4 py-10 md:rounded-3xl "
         >
           <h1 className="font-kaisei text-3xl">Cadastro</h1>
-          {step === 1 && <BasicStep onNext={() => setStep(2)} />}
-            {step === 2 && <DetailsStep onNext={() => setStep(3)} />}
-              {step === 3 && <DetailsStep onNext={() => setStep(1)} onSubmit={handleSubmit} />}
+          <form onSubmit={handleSubmit(onSubmit, onError)} className="flex flex-col items-center justify-center w-full gap-4">
+            <Input
+              type="text"
+              placeholder="Nome da empresa"
+              error={errors.nome?.message}
+              {...register("nome")}
+            />
+            <select
+              className={` bg-white text-dark-yellow placeholder:text-dark-yellow 
+          w-full h-10 px-10 md:px-5 rounded-lg outline-none ${
+            errors.categoria ? "border-2 border-red-500 text-red-500" : ""
+          }`}
+              {...register("categoria")}
+            >
+              {Object.values(MerchantCategorys).map((category: string) => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
+              ))}
+            </select>
+            <Input
+            type="string"
+            placeholder="Telefone"
+            error={errors.telefone?.message}
+            />
+            <Input
+              type="email"
+              placeholder="Email"
+              error={errors.email?.message}
+              {...register("email")}
+            />
+            <div
+              className="flex flex-col md:flex-row items-center justify-center 
+            w-full gap-4"
+            >
+              <Input
+                type="password"
+                placeholder="Senha"
+                error={errors.senha?.message}
+                {...register("senha")}
+              />
+              <Input
+                type="password"
+                placeholder="Confirmar senha"
+                error={errors.confirmarSenha?.message}
+                {...register("confirmarSenha")}
+              />
+            </div>
+            <button
+              type="submit"
+              className="font-kaisei bg-dark-blue w-1/2 px-10 py-2 rounded-2xl
+               hover:bg-dark-orange cursor-pointer"
+            >
+              Entrar
+            </button>
+          </form>
         </div>
         <div
           className="hidden md:flex flex-col items-center justify-center
-         bg-dark-blue md:w-100 lg:w-120 h-140 rounded-3xl"
+         bg-dark-blue md:w-100 lg:w-120 h-120 rounded-3xl"
         >
           <img className="w-10" src={logo} alt="Logo DD" />
           <h1 className="font-kaisei flex flex-col text-center md:text-xl text-white">

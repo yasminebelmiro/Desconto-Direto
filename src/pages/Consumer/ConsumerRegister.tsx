@@ -12,7 +12,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "react-toastify";
 import { resgiterConsumer } from "../../service/api/authService.ts";
 
-
 const ConsumerRegister = () => {
   const navigate = useNavigate();
 
@@ -26,14 +25,12 @@ const ConsumerRegister = () => {
 
   const onSubmit = async (data: ConsumerRegisterData) => {
     try {
-      await resgiterConsumer(data)
-      toast.success("Cadastro realizado com sucesso!")
-      navigate(`/consumidores/login`)
+      await resgiterConsumer(data);
+      toast.success("Cadastro realizado com sucesso!");
+      navigate(`/consumidores/login`);
     } catch (error) {
- 
-     console.log(error);
+      console.log(error);
     }
-    
   };
 
   const onError = (errors: any) => {
@@ -47,8 +44,10 @@ const ConsumerRegister = () => {
   return (
     <div>
       <Header />
-      <div className="flex flex-col w-full md:flex-row items-center justify-center 
-      md:px-10 md:py-25 ">
+      <div
+        className="flex flex-col w-full md:flex-row items-center justify-center 
+      md:px-10 md:py-25 "
+      >
         <div
           className="relative md:mr-[-35px] flex flex-col items-center justify-center
            bg-dark-yellow text-white w-full md:w-100 
@@ -67,7 +66,7 @@ const ConsumerRegister = () => {
             />
 
             <Input
-              type="text"
+              type="tel"
               placeholder="Telefone celular"
               error={errors.telefone?.message}
               {...register("telefone")}
@@ -78,15 +77,17 @@ const ConsumerRegister = () => {
               error={errors.email?.message}
               {...register("email")}
             />
-            <div className="flex flex-col md:flex-row items-center justify-center 
-            w-full gap-4">
+            <div
+              className="flex flex-col md:flex-row items-center justify-center 
+            w-full gap-4"
+            >
               <Input
                 type="password"
                 placeholder="Senha"
                 error={errors.senha?.message}
                 {...register("senha")}
               />
-               <Input
+              <Input
                 type="password"
                 placeholder="Confirmar senha"
                 error={errors.confirmarSenha?.message}
@@ -113,8 +114,10 @@ const ConsumerRegister = () => {
             </span>
           </p>
         </div>
-        <div className="hidden md:flex flex-col items-center justify-center
-         bg-dark-blue md:w-100 lg:w-120 h-120 rounded-3xl">
+        <div
+          className="hidden md:flex flex-col items-center justify-center
+         bg-dark-blue md:w-100 lg:w-120 h-120 rounded-3xl"
+        >
           <img className="w-10" src={logo} alt="Logo DD" />
           <h1 className="font-kaisei flex flex-col text-center md:text-xl text-white">
             Desconto <span className="text-dark-yellow">Direto</span>

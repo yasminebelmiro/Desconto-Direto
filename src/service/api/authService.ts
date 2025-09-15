@@ -1,9 +1,24 @@
 import api from "./axios.ts";
 import { type ConsumerRegisterData } from "../../schemas/ConsumerRegisterSchema.ts";
+import type { MerchantData } from "../../schemas/MerchantRegisterSchema.ts";
 
 export async function resgiterConsumer(data: ConsumerRegisterData) {
   try {
     const response = await api.post("clientes/add", data);
+    return response.data;
+  } catch (error: any) {
+    if (error.code === "ERR_NETWORK") {
+      throw new Error(
+        "Não foi possível conectar ao servidor. Verifique se a API está rodando."
+      );
+    }
+    throw error;
+  }
+}
+
+export async function registerMerchant(data: MerchantData) {
+  try {
+    const response = await api.post("/comercios/add", data);
     return response.data;
   } catch (error: any) {
     if (error.code === "ERR_NETWORK") {
@@ -38,7 +53,6 @@ export async function login(email: string, senha: string, endpoint: string) {
   const role: "merchant" | "consumer" = user.categoria
     ? "merchant"
     : "consumer";
-
 
   localStorage.setItem("user", JSON.stringify(user));
   localStorage.setItem("role", role);
