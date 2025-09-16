@@ -12,11 +12,13 @@ const NotFoundPage = () => {
         <button className="bg-white font-bold text-dark-yellow py-5 px-10 rounded-2xl cursor-pointer" onClick={() => navigate("/consumidores/home")}>
           Voltar ao início
         </button>
-      ) : (
-        <button className="bg-white font-bold text-dark-yellow py-5 px-10 rounded-2xl cursor-pointer" onClick={() => navigate("/comercios/home")}>
+      ) : role === "merchant" ? (
+        <button className="bg-white font-bold text-dark-yellow py-5 px-10 rounded-2xl cursor-pointer" onClick={() => navigate("/comerciantes/home")}>
           Voltar ao início
         </button>
-      )}
+      ) : <button className="bg-white font-bold text-dark-yellow py-5 px-10 rounded-2xl cursor-pointer" onClick={() => navigate("/")}>
+          Voltar ao início
+        </button>}
     </div>
   );
 };

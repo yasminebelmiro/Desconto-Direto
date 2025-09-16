@@ -8,13 +8,12 @@ const MerchantHome = () => {
     <>
      <Header />
       <div>
-        <Separator section="Panfletos" />
+        <Separator section="Meus panfletos" route="/comerciantes/novo-panfleto"/>
          <FlyersCarousel />
-        <Separator section="Minhas ofertas" />
+        <Separator section="Minhas ofertas" route="/comerciantes/nova-oferta"/>
         <div className="flex items-center justify-center">
         <ListOffers/>
         </div>
-
       </div>
     </>
   )

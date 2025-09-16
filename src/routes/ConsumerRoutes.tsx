@@ -31,7 +31,7 @@ const ConsumerRoutes = [
         path: "/consumidores/buscar",
         element: <SearchConsumer />,
       },
-        {
+      {
         path: "/consumidores/favoritos",
         element: <FavoritesOffers />,
       },

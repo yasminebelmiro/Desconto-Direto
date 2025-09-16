@@ -1,8 +1,11 @@
+import path from "path";
 import LandingPage from "../pages/LadingPage/LandingPage.tsx";
 import Login from "../pages/Login/Login.tsx";
 import MerchantHome from "../pages/Merchant/MerchantHome.tsx";
 
 import MerchantRegister from "../pages/Merchant/MerchantRegister.tsx";
+import ProtectedRoutes from "./ProtectedRoute.tsx";
+import AddFlyer from "../pages/Merchant/AddFlyer.tsx";
 
 const MerchantRoutes = [
   {
@@ -18,10 +21,21 @@ const MerchantRoutes = [
     element: <MerchantRegister />,
   },
   {
-    path: "/comerciantes/home",
-    element: <MerchantHome />,
+    element: <ProtectedRoutes roleRequired="merchant" />,
+    children: [
+      {
+        path: "/comerciantes/home",
+        element: <MerchantHome />,
+      },
+      {
+        path: "/comerciantes/novo-panfleto",
+        element: <AddFlyer/>
+      },
+      {
+        path: "/comerciantes/nova-oferta"
+      },
+    ],
   },
 ];
-
 
 export default MerchantRoutes;
