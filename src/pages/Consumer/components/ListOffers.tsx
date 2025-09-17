@@ -6,23 +6,11 @@ import api from "../../../service/api/axios.ts";
 interface ListOffersProps {
   cardCount: number;
   order: string;
+  offers: OfferTypes[];
 }
 
-const ListOffers = ({ cardCount, order }: ListOffersProps) => {
-  const [offers, setOffers] = useState<OfferTypes[]>([]);
-
+const ListOffers = ({ offers, cardCount, order }: ListOffersProps) => {
   const offersToShow: OfferTypes[] = offers.slice(0, cardCount);
-  useEffect(() => {
-    try {
-      const fetchRecentOffers = async () => {
-        const response = await api.get("/ofertas/all");
-        setOffers(response.data);
-      };
-      fetchRecentOffers();
-    } catch (error) {
-      console.error(error);
-    }
-  }, []);
 
   const sortOffers = (offers: OfferTypes[], order: string) => {
     switch (order) {
