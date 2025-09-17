@@ -1,24 +1,21 @@
-export type FormState = {
-  basic: {
-    nome: string;
-    categoria: string;
-    fotoUrl: string;
-  };
-  details: {
-    telefone: string;
-    whatsapp: string;
-    instagram: string;
-    endereco: string;
-    bairro: string;
-    cep: string;
-    entrega: string;
-    horarioAbertura: string;
-    horarioFechamento: string;
-  };
-  account: {
-    email: string;
-    senha: string;
-    confirmarSenha: string;
-    termosUso: boolean;
-  };
-}
+import type { FlyerTypes } from "./FlyerTypes.ts";
+import type { OfferTypes } from "./OfferTypes.ts";
+
+export type MerchantTypes = {
+  id: string;
+  nome: string;
+  telefone: string;
+  telefoneCelular: string;
+  instagram: string;
+  bairro: string;
+  cep: string;
+  fazEntrega: boolean;
+  email: string;
+  senha: string;
+  horarioAbertura: Date;
+  horarioFechamento: Date;
+  aberto: boolean;
+  fotoUrl: string;
+  ofertas: OfferTypes;
+  panfletos: FlyerTypes;
+};

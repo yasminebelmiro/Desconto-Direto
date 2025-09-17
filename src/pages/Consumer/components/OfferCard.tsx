@@ -3,28 +3,55 @@ import { FaHeart, FaRegHeart } from "react-icons/fa";
 import api from "../../../service/api/axios.ts";
 import type { OfferTypes } from "../../../types/OfferTypes.ts";
 import { toast } from "react-toastify";
+import type { MerchantTypes } from "../../../types/MerchantTypes.ts";
 interface OfferCardProps {}
 const OfferCard = ({ ...props }: OfferTypes) => {
   const [isLiked, setIsLiked] = useState(false);
+  const [merchant, setMerchant] = useState<MerchantTypes[]>([]);
+
+  const [likes, setLikes] = useState(props.likes);
   const userId = localStorage.getItem("userId");
 
-  useEffect(() => {
-    const toggleHeart = async () => {
-      try {
-        if (isLiked) {
-          await api.post(`/clientes/${userId}/favoritos/${props.id}`, props);
-          toast.success("Oferta adicionada aos favoritos!");
-        }
-      } catch (error) {
-        toast.error("Não foi possível adicionar essa oferta aos favoritos");
-        console.error(error);
+  const toggleHeart = async () => {
+    try {
+      setIsLiked(!isLiked);
+      if (!isLiked) {
+        await api.post(`/clientes/${userId}/favoritos/${props.id}`, props);
+        const newLikes = likes + 1;
+        setLikes(newLikes);
+
+        toast.success("Oferta adicionada aos favoritos!");
+      } else {
+        await api.delete(`/clientes/${userId}/favoritos/${props.id}`);
+        const newLikes = likes - 1;
+        setLikes(newLikes);
       }
-    };
+    } catch (error) {
+      toast.error("Não foi possível adicionar essa oferta aos favoritos");
+      console.error(error);
+    }
+  };
 
-    toggleHeart();
-  }, [isLiked, userId, props.id]);
+  useEffect(() => {
+    try {
+      const fetchMerchant = async () => {
+        const response = await api.get(`/comercios/find/${props.comercioId}`);
+        setMerchant(response.data);
+      };
+      const CheckIfLiked = async () => {
+        const response = await api.get(`/clientes/find/${userId}`);
+        const { ofertasPreferidas } = response.data;
+        const liked = ofertasPreferidas.some((fav: any) => fav.id === props.id);
+        setIsLiked(liked);
+      };
+      fetchMerchant();
+      CheckIfLiked();
+    } catch (error) {
+      console.error("Erro ao buscar comércio", error);
+    }
+  }, []);
 
-    const formatedData = (date: string) => {
+  const formatedData = (date: string) => {
     const data = new Date(date);
     return data.toLocaleDateString("pt-BR", {
       day: "2-digit",
@@ -45,24 +72,24 @@ const OfferCard = ({ ...props }: OfferTypes) => {
       >
         <div className="flex gap-2 items-center justify-start pt-4 pl-4">
           {isLiked ? (
-            <FaRegHeart
-              onClick={() => setIsLiked(!isLiked)}
+            <FaHeart
+              onClick={toggleHeart}
               className="text-red-500 text-lg md:text-2xl cursor-pointer"
             />
           ) : (
-            <FaHeart
-              onClick={() => setIsLiked(!isLiked)}
+            <FaRegHeart
+              onClick={toggleHeart}
               className="text-red-500 text-lg md:text-2xl cursor-pointer"
             />
           )}
           {/*TODO: colocar os likes */}
-          <p className="text-xs text-red-500">{10}</p>
+          <p className="text-xs text-red-500">{likes}</p>
         </div>
         <img
           className="absolute top-[-5%] right-[-10%] w-15 h-15  md:w-17 md:h-17 object-cover rounded-full  outline-4
            outline-dark-orange"
-          src={""}
-          alt={""}
+          src={merchant.fotoUrl}
+          alt={`Perfil de ${merchant.nome}`}
         />
         <div className=" flex flex-col items-center justify-evenly   text-center w-full">
           <img

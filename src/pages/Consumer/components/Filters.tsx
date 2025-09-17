@@ -38,6 +38,8 @@ const Filters = ({
           <option value="relevance">Relevância</option>
           <option value="price-asc">Menor preço</option>
           <option value="price-desc">Maior preço</option>
+          <option value="last">Recentes</option>
+
         </select>
       </div>
     </div>

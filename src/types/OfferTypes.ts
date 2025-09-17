@@ -1,9 +1,11 @@
-import type { ProductType } from "./ProductTypes.ts"
+import type { ProductType } from "./ProductTypes.ts";
 
 export type OfferTypes = {
-    id:string,
-    nome:string,
-    preco:number,
-    validade:string,
-    produto: ProductType
-}
+  id: string;
+  preco: number;
+  dataPostagem: Date;
+  validade: string;
+  produto: ProductType;
+  likes: number;
+  comercioId: string;
+};
