@@ -1,11 +1,12 @@
 import z from "zod";
 
 export const FlyerSchema = z.object({
-  dataExpiracao: z.string(),
+  dataExpiracao: z.string().refine((date) => !isNaN(Date.parse(date)), {
+    message: "Data inválida",
+  }),
   fotoUrl: z
-    .any()
-    .refine((files) => files?.length === 1, "É necessário enviar um arquivo de imagem"),
+    .instanceof(File)
+    .refine((file) => file.size > 0, "Arquivo obrigatório"),
 });
 
-
-export type FlyerData = z.infer<typeof FlyerSchema> 
+export type FlyerData = z.infer<typeof FlyerSchema>;
