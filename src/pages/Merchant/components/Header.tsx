@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { FaRegBell, FaRegHeart, FaSearch } from "react-icons/fa";
+import { FaCartPlus, FaRegBell, FaRegHeart, FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import logo from "../../../assets/logo.png";
-
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoSearch } from "react-icons/io5";
 import api from "../../../service/api/axios.ts";
-import { DiVim } from "react-icons/di";
+import { MdLocalOffer } from "react-icons/md";
+import { TbBuildingPlus } from "react-icons/tb";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -15,7 +15,6 @@ const Header = () => {
 
   const userId = localStorage.getItem("userId");
   const firtsLetter = nameMerchant[0];
-  console.log(firtsLetter);
 
   useEffect(() => {
     try {
@@ -45,7 +44,7 @@ const Header = () => {
           className="text-dark-yellow text-2xl hidden md:flex items-center
          justify-center gap-5"
         >
-          <Link to={""}>
+          <Link to={"/comerciantes/nova-oferta"}>
             <IoSearch size={22} />
           </Link>
           {/* <Link to={""}>
@@ -53,7 +52,11 @@ const Header = () => {
           </Link> */}
           <Link to={""}>
             {imageMerchant ? (
-              <img className="w-10 h-10 rounded-full object-cover" src={imageMerchant ?? undefined} alt="Imagem de perfil" />
+              <img
+                className="w-10 h-10 rounded-full object-cover"
+                src={imageMerchant ?? undefined}
+                alt="Imagem de perfil"
+              />
             ) : (
               <div className="w-10 h-10 bg-dark-yellow text-white text-lg rounded-full flex items-center justify-center">
                 {firtsLetter}
@@ -67,13 +70,7 @@ const Header = () => {
           className="bg-dark-blue font-inter text-white w-full h-auto 
         flex flex-col justify-between items-start p-8 gap-5"
         >
-          <Link
-            className="font-inter flex gap-5 items-center w-full
-           hover:text-dark-yellow"
-            to={""}
-          >
-            <FaSearch /> Pesquisar
-          </Link>
+
           {/* <Link
             className="font-inter flex gap-5 items-center w-full
            hover:text-dark-yellow"
@@ -81,12 +78,52 @@ const Header = () => {
           >
             <FaRegBell /> Notificações
           </Link> */}
-          <Link
+   
+           <Link
+            className="font-inter flex gap-5 items-center w-full
+           hover:text-dark-yellow"
+            to={"v"}
+          >
+            <FaCartPlus />
+            <p className="">Adicionar produto</p>
+            
+          </Link>
+           <Link
+            className="font-inter flex gap-5 items-center w-full
+           hover:text-dark-yellow"
+            to={"/comerciantes/nova-oferta"}
+          >
+            <MdLocalOffer />
+            <p className="">Adicionar oferta</p>
+          </Link>
+           <Link
+            className="font-inter flex gap-5 items-center w-full
+           hover:text-dark-yellow"
+            to={"/comerciantes/novo-panfleto"}
+          >
+            <TbBuildingPlus />
+            <p className="">Adicionar panfleto</p>
+          </Link>
+                 <Link
             className="font-inter flex gap-5 items-center w-full
            hover:text-dark-yellow"
             to={""}
           >
-            <img src="" alt="Imagem de perfil" />
+            {imageMerchant ? (
+              <div className="flex  gap-5">
+                <img
+                  className="w-7 h-7 rounded-full object-cover"
+                  src={imageMerchant ?? undefined}
+                  alt="Imagem de perfil"
+                />
+                <p className="">Perfil</p>
+              </div>
+            ) : (
+              <div className="w-7 h-7 bg-dark-yellow text-white text-lg rounded-full flex items-center justify-center">
+                {firtsLetter}
+                <p className="">Perfil</p>
+              </div>
+            )}
           </Link>
         </menu>
       )}
