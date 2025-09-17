@@ -4,13 +4,14 @@ import api from "../../../service/api/axios.ts";
 import type { OfferTypes } from "../../../types/OfferTypes.ts";
 import { toast } from "react-toastify";
 import type { MerchantTypes } from "../../../types/MerchantTypes.ts";
+import { useNavigate } from "react-router-dom";
 interface OfferCardProps {}
 const OfferCard = ({ ...props }: OfferTypes) => {
   const [isLiked, setIsLiked] = useState(false);
   const [merchant, setMerchant] = useState<MerchantTypes[]>([]);
-
   const [likes, setLikes] = useState(props.likes);
   const userId = localStorage.getItem("userId");
+  const navigate = useNavigate();
 
   const toggleHeart = async () => {
     try {
@@ -37,6 +38,7 @@ const OfferCard = ({ ...props }: OfferTypes) => {
       const fetchMerchant = async () => {
         const response = await api.get(`/comercios/find/${props.comercioId}`);
         setMerchant(response.data);
+  
       };
       const CheckIfLiked = async () => {
         const response = await api.get(`/clientes/find/${userId}`);
@@ -46,6 +48,7 @@ const OfferCard = ({ ...props }: OfferTypes) => {
       };
       fetchMerchant();
       CheckIfLiked();
+      
     } catch (error) {
       console.error("Erro ao buscar comércio", error);
     }
@@ -82,14 +85,14 @@ const OfferCard = ({ ...props }: OfferTypes) => {
               className="text-red-500 text-lg md:text-2xl cursor-pointer"
             />
           )}
-          {/*TODO: colocar os likes */}
           <p className="text-xs text-red-500">{likes}</p>
         </div>
         <img
           className="absolute top-[-5%] right-[-10%] w-15 h-15  md:w-17 md:h-17 object-cover rounded-full  outline-4
-           outline-dark-orange"
+           outline-dark-orange cursor-pointer"
           src={merchant.fotoUrl}
           alt={`Perfil de ${merchant.nome}`}
+          onClick={() => navigate(`/consumidores/comercios/${merchant.nome}`)}
         />
         <div className=" flex flex-col items-center justify-evenly   text-center w-full">
           <img

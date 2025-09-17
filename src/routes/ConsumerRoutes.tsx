@@ -35,6 +35,9 @@ const ConsumerRoutes = [
         path: "/consumidores/favoritos",
         element: <FavoritesOffers />,
       },
+      {
+        path: `/consumidores/comercios/:name`
+      }
     ],
   },
 ];
