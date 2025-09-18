@@ -9,7 +9,7 @@ interface SeparatorProps {
 const Separator = ({ section, typeUser, route }: SeparatorProps) => {
   const navigate = useNavigate()
   return (
-    <div className="bg-dark-yellow h-15 md:text-xl flex items-center justify-between font-kaisei text-white font-bold px-10">
+    <div className="bg-dark-yellow h-15 md:text-xl flex items-center justify-between font-kaisei text-white font-bold px-10 md:px-20 lg:px-30">
       <p>{section} </p>
       {typeUser && <Link to={`/${typeUser}/buscar`}>Ver mais</Link>}
       { route && (

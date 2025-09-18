@@ -4,19 +4,18 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ReactModal from "react-modal";
 import type { FlyerTypes } from "../../../types/FlyerTypes.ts";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
+import { Autoplay, Navigation } from "swiper/modules";
+
 interface FlyersCarouselProps {
   flyers: FlyerTypes[];
 }
 const FlyersCarousel = ({ flyers }: FlyersCarouselProps) => {
-  const settings = {
-    infinite: true,
-    slidesToShow: 3,
-    slidesToScroll: 2,
-    autoplay: true,
-    speed: 2000,
-    autoplaySpeed: 3000,
-  };
-
   const [flyer, setFlyer] = useState<FlyerTypes[]>([]);
   const [flyerSelected, setFlyerSelected] = useState<null | FlyerTypes[][0]>(
     null
@@ -38,24 +37,50 @@ const FlyersCarousel = ({ flyers }: FlyersCarouselProps) => {
   return (
     <div>
       {flyer.length > 0 ? (
-        <div className="font-inter w-full max-w-3xl mx-auto">
-          <Slider {...settings}>
+        <>
+          <Swiper
+            modules={[Navigation, Autoplay]}
+            loop={true}
+            breakpoints={{
+              340: { slidesPerView: 3 },
+              768: { slidesPerView: 4 },
+              1024: { slidesPerView: 5 },
+            }}
+            slidesPerGroup={1}
+            spaceBetween={0}
+            autoplay={{ delay: 3000 }}
+            speed={2000}
+            className="w-full z-10"
+          >
             {flyer.map((item) => (
-              <img
-                key={item.id}
-                src={item.fotoUrl}
-                alt={`Panfleto`}
-                className="h-full w-auto mx-auto object-contain cursor-pointer"
-                onClick={() => setFlyerSelected(item)}
-              />
+              <SwiperSlide key={item.id} className="w-full">
+                <img
+                  src={item.fotoUrl}
+                  alt={`Panfleto`}
+                  className="h-[300px] md:h-[400px] w-full object-fill"
+                  onClick={() => setFlyerSelected(item)}
+                />
+              </SwiperSlide>
             ))}
-          </Slider>
+          </Swiper>
 
           <ReactModal
-            className="flex flex-col md:flex-row items-center  overflow-y-auto h-full bg-white p-8"
             isOpen={!!flyerSelected}
             onRequestClose={() => setFlyerSelected(null)}
             contentLabel="Panfleto Detalhes"
+            ariaHideApp={false}
+            style={{
+              overlay: {
+                zIndex: 1000,
+                backgroundColor: "rgba(0, 0, 0, 0.5)",
+              },
+              content: {
+                zIndex: 1001,
+                position: "relative",
+                inset: "auto",
+              },
+            }}
+            className="flex flex-col md:flex-row items-center overflow-y-auto h-full bg-white p-8"
           >
             <div className="w-full lg:w-1/2 h-screen flex items-center justify-center">
               <img
@@ -83,7 +108,7 @@ const FlyersCarousel = ({ flyers }: FlyersCarouselProps) => {
               </button>
             </div>
           </ReactModal>
-        </div>
+        </>
       ) : (
         <p className=" text-center m-10 font-inter">
           Nenhum resultado encontrado

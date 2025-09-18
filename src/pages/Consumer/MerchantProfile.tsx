@@ -49,7 +49,7 @@ const MerchantProfile = () => {
     <>
       <Header />
       <div className="flex flex-col justify-center items-center ">
-        <div className="font-inter w-full bg-dark-yellow flex items-center justify-start gap-5 p-5 text-black font-bold ">
+        <div className="bg-dark-yellow w-full h-15 md:text-xl flex items-center font-kaisei font-bold px-10 md:px-20 lg:px-30 gap-5 ">
           <button
             onClick={() => navigate("/consumidores/home")}
             className="text-white font-normal hover:underline"
