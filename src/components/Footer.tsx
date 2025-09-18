@@ -5,7 +5,7 @@ import logo from "../assets/logo.png";
 
 const Footer = () => {
   return (
-    <section className="bg-dark-blue text-white flex flex-col px-10 md:px-30 py-10 md:py-15 gap-5 md:gap-10">
+    <section className="w-full bg-dark-blue text-white flex flex-col px-10 md:px-30 py-10 md:py-15 gap-5 md:gap-10">
       <div className="flex  items-center justify-between">
         <div className="flex flex-col items-center justify-center gap-2">
           <img className="w-10" src={logo} alt="" />

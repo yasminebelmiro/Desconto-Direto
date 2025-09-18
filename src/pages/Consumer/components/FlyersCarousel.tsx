@@ -3,10 +3,11 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ReactModal from "react-modal";
-import api from "../../../service/api/axios.ts";
 import type { FlyerTypes } from "../../../types/FlyerTypes.ts";
-
-const FlyersCarousel = () => {
+interface FlyersCarouselProps {
+  flyers: FlyerTypes[];
+}
+const FlyersCarousel = ({ flyers }: FlyersCarouselProps) => {
   const settings = {
     infinite: true,
     slidesToShow: 3,
@@ -22,12 +23,8 @@ const FlyersCarousel = () => {
   );
 
   useEffect(() => {
-    const fetchFlyers = async () => {
-      const response = await api.get("/panfletos/all");
-      setFlyer(response.data);
-    };
-    fetchFlyers();
-  }, []);
+    setFlyer(flyers);
+  }, [flyers]);
 
   const formatedData = (date: string) => {
     const data = new Date(date);
@@ -39,20 +36,21 @@ const FlyersCarousel = () => {
   };
 
   return (
-    <>
+    <div>
       {flyer.length > 0 ? (
-        <div className="font-inter w-full h-full max-w-5xl mx-auto">
+        <div className="font-inter w-full max-w-3xl mx-auto">
           <Slider {...settings}>
             {flyer.map((item) => (
               <img
                 key={item.id}
                 src={item.fotoUrl}
-                alt={`Panfleto de `}
-                className="cursor-pointer h-full"
+                alt={`Panfleto`}
+                className="h-full w-auto mx-auto object-contain cursor-pointer"
                 onClick={() => setFlyerSelected(item)}
               />
             ))}
           </Slider>
+
           <ReactModal
             className="flex flex-col md:flex-row items-center  overflow-y-auto h-full bg-white p-8"
             isOpen={!!flyerSelected}
@@ -91,7 +89,7 @@ const FlyersCarousel = () => {
           Nenhum resultado encontrado
         </p>
       )}
-    </>
+    </div>
   );
 };
 

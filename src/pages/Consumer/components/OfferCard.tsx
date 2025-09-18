@@ -5,7 +5,7 @@ import type { OfferTypes } from "../../../types/OfferTypes.ts";
 import { toast } from "react-toastify";
 import type { MerchantTypes } from "../../../types/MerchantTypes.ts";
 import { useNavigate } from "react-router-dom";
-interface OfferCardProps {}
+
 const OfferCard = ({ ...props }: OfferTypes) => {
   const [isLiked, setIsLiked] = useState(false);
   const [merchant, setMerchant] = useState<MerchantTypes[]>([]);
@@ -92,7 +92,7 @@ const OfferCard = ({ ...props }: OfferTypes) => {
            outline-dark-orange cursor-pointer"
           src={merchant.fotoUrl}
           alt={`Perfil de ${merchant.nome}`}
-          onClick={() => navigate(`/consumidores/comercios/${merchant.nome}`)}
+          onClick={() => navigate(`/consumidores/comercios/${merchant.id}`)}
         />
         <div className=" flex flex-col items-center justify-evenly   text-center w-full">
           <img

@@ -5,16 +5,26 @@ import ListOffers from "./components/ListOffers.tsx";
 import { useEffect, useState } from "react";
 import api from "../../service/api/axios.ts";
 import type { OfferTypes } from "../../types/OfferTypes.ts";
+import type { FlyerTypes } from "../../types/FlyerTypes.ts";
 
 const ConsumerHome = () => {
   const [offers, setOffers] = useState<OfferTypes[]>([]);
+  const [flyers, setFlyers] = useState<FlyerTypes[]>([]);
   useEffect(() => {
     try {
-      const fetchRecentOffers = async () => {
+      const fetchOffers = async () => {
         const response = await api.get("/ofertas/all");
         setOffers(response.data);
+        console.log(response.data);
       };
-      fetchRecentOffers();
+      const fetchFlyers = async () => {
+        const response = await api.get("/panfletos/all");
+        setFlyers(response.data);
+        console.log(response.data);
+        
+      };
+      fetchOffers();
+      fetchFlyers();
     } catch (error) {
       console.error(error);
     }
@@ -24,7 +34,7 @@ const ConsumerHome = () => {
       <Header />
       <div>
         <Separator section="Panfletos" />
-        <FlyersCarousel />
+        <FlyersCarousel flyers={flyers} />
         <Separator section="Top ofertas" typeUser="consumidores" />
         <div className="flex items-center justify-center ">
           <ListOffers offers={offers} cardCount={8} order="relevance" />

@@ -6,6 +6,7 @@ import LandingPage from "../pages/LadingPage/LandingPage.tsx";
 import Login from "../pages/Login/Login.tsx";
 import ProtectedRoutes from "./ProtectedRoute.tsx";
 import FavoritesOffers from "../pages/Consumer/FavoritesOffers.tsx";
+import MerchantProfile from "../pages/Consumer/MerchantProfile.tsx";
 
 const ConsumerRoutes = [
   {
@@ -36,7 +37,8 @@ const ConsumerRoutes = [
         element: <FavoritesOffers />,
       },
       {
-        path: `/consumidores/comercios/:name`
+        path: `/consumidores/comercios/:id`,
+        element: <MerchantProfile/>
       }
     ],
   },
