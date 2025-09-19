@@ -11,6 +11,9 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 import { Autoplay, Navigation } from "swiper/modules";
+import api from "../../../service/api/axios.ts";
+import type { MerchantTypes } from "../../../types/MerchantTypes.ts";
+import { useNavigate } from "react-router-dom";
 
 interface FlyersCarouselProps {
   flyers: FlyerTypes[];
@@ -20,10 +23,21 @@ const FlyersCarousel = ({ flyers }: FlyersCarouselProps) => {
   const [flyerSelected, setFlyerSelected] = useState<null | FlyerTypes[][0]>(
     null
   );
+  const [merchant, setMerchant] = useState<MerchantTypes>();
+  const navigate = useNavigate();
 
   useEffect(() => {
+    const fetchMerchant = async () => {
+      if (flyerSelected) {
+        const response = await api.get(
+          `/comercios/find/${flyerSelected?.comercioId}`
+        );
+        setMerchant(response.data);
+      }
+    };
+    fetchMerchant();
     setFlyer(flyers);
-  }, [flyers]);
+  }, [flyers, flyerSelected?.comercioId]);
 
   const formatedData = (date: string) => {
     const data = new Date(date);
@@ -57,7 +71,7 @@ const FlyersCarousel = ({ flyers }: FlyersCarouselProps) => {
                 <img
                   src={item.fotoUrl}
                   alt={`Panfleto`}
-                  className="h-[300px] md:h-[400px] w-full object-fill"
+                  className="h-[200px] md:h-[300px] lg:h-[450px] w-full object-fill"
                   onClick={() => setFlyerSelected(item)}
                 />
               </SwiperSlide>
@@ -86,14 +100,21 @@ const FlyersCarousel = ({ flyers }: FlyersCarouselProps) => {
               <img
                 className="w-auto h-[80%] lg:w-[60%] lg:h-auto rounded-lg"
                 src={flyerSelected?.fotoUrl}
-                alt={`Panfleto de ?`}
+                alt={`Panfleto de ? `}
               />
             </div>
             <div className="pt-4 w-full lg:w-1/2  flex flex-col items-center gap-4">
-              <h1 className="text-2xl font-bold">Comercio</h1>
-              <p>
-                Publicado em <span className="font-bold">Data publicação</span>
-              </p>
+            
+              <button
+                onClick={() =>
+                  navigate(
+                    `/consumidores/comercios/${flyerSelected?.comercioId}`
+                  )
+                }
+                className="text-2xl font-bold hover:underline cursor-pointer"
+              >
+                {merchant?.nome}{" "}
+              </button>
               <p>
                 Válido até{" "}
                 <span className="font-bold text-red-500">

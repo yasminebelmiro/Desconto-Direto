@@ -70,7 +70,7 @@ const OfferCard = ({ ...props }: OfferTypes) => {
   return (
     <div className="font-inter flex justify-center items-center m-2">
       <div
-        className=" relative outline-4 outline-dark-orange w-35 h-52 md:w-50 md:h-70 rounded-2xl
+        className="relative outline-4 outline-dark-orange w-35 h-55 md:w-50 md:h-75 rounded-2xl
     "
       >
         <div className="flex gap-2 items-center justify-start pt-4 pl-4">
