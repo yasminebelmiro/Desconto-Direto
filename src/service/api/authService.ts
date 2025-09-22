@@ -60,3 +60,7 @@ export async function login(email: string, senha: string, endpoint: string) {
 
   return { ...user, role, userId };
 }
+
+export const LogOut = () => {
+  localStorage.clear();
+};
