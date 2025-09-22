@@ -2,6 +2,8 @@ import OfferCard from "./OfferCard.tsx";
 import type { OfferTypes } from "../../../types/OfferTypes.ts";
 import { useEffect, useState } from "react";
 import api from "../../../service/api/axios.ts";
+import Loading from "../../../components/Loading.tsx";
+import NotFoundItem from "../../../components/NotFoundItem.tsx";
 
 interface ListOffersProps {
   cardCount: number;
@@ -46,17 +48,19 @@ const ListOffers = ({ offers, cardCount, order }: ListOffersProps) => {
   const sortedOffers = sortOffers(offersToShow, order);
 
   return (
-    <div className="w-full flex items-center justify-center gap-10 py-10 md:px-10 flex-wrap lg:grid grid-cols-4 lg:w-250 ">
-      {sortedOffers.length > 0 ? (
-        sortedOffers.map((offer) => {
-          return <OfferCard key={offer.id} {...offer} />;
-        })
+    <>
+      {!sortedOffers ? (
+        <Loading />
+      ) : sortedOffers.length === 0 ? (
+        <NotFoundItem />
       ) : (
-        <p className="text-center m-10 font-inter">
-          Nenhum resultado encontrado
-        </p>
+        <div className="w-full flex items-center justify-center gap-10 py-10 md:px-10 flex-wrap lg:grid grid-cols-4 lg:w-250 ">
+          {sortedOffers.map((offer) => {
+            return <OfferCard key={offer.id} {...offer} />;
+          })}
+        </div>
       )}
-    </div>
+    </>
   );
 };
 

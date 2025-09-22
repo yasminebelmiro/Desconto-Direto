@@ -68,7 +68,7 @@ const Header = () => {
             <li className="hover:text-dark-yellow">
               <Link to="#comoFunciona">Como funciona?</Link>
             </li>
-            <li className="">
+            <li className="hover:text-dark-yellow">
               {isMerchantArea ? (
                 <Link to="/" onClick={()=> setMenuIsOpen(false)}>Área do consumidor</Link>
               ) : (
@@ -76,7 +76,7 @@ const Header = () => {
               )}
             </li>
             <li
-              className="bg-dark-yellow text-center p-3 w-40 text-dark-blue font-bold rounded-md hover:bg-light-yellow"
+              className="bg-dark-yellow text-center p-3 w-40 text-dark-blue font-bold rounded-md hover:bg-light-yellow cursor-pointer"
               onClick={() => {
                   isMerchantArea
                     ? navigate("/comerciantes/login")
@@ -86,7 +86,7 @@ const Header = () => {
               Login
             </li>
             <li
-              className="bg-dark-yellow text-center p-3 w-40 text-dark-blue font-bold rounded-md hover:bg-light-yellow"
+              className="bg-dark-yellow text-center p-3 w-40 text-dark-blue font-bold rounded-md hover:bg-light-yellow cursor-pointer"
                onClick={() => {
                   isMerchantArea
                     ? navigate("/comerciantes/cadastrar")
