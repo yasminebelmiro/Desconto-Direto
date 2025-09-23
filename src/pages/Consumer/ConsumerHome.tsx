@@ -15,12 +15,12 @@ const ConsumerHome = () => {
       const fetchOffers = async () => {
         const response = await api.get("/ofertas/all");
         setOffers(response.data);
-        console.log(response.data);
+ 
       };
       const fetchFlyers = async () => {
         const response = await api.get("/panfletos/all");
         setFlyers(response.data);
-        console.log(response.data);
+   
         
       };
       fetchOffers();

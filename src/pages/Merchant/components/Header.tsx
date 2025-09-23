@@ -7,6 +7,8 @@ import { IoSearch } from "react-icons/io5";
 import api from "../../../service/api/axios.ts";
 import { MdLocalOffer } from "react-icons/md";
 import { TbBuildingPlus } from "react-icons/tb";
+import { LuLogOut } from "react-icons/lu";
+import { LogOut } from "../../../service/api/authService.ts";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -63,6 +65,9 @@ const Header = () => {
               </div>
             )}
           </Link>
+          <Link to="/comerciantes" onClick={LogOut}>
+            <LuLogOut size={20} />
+          </Link>
         </menu>
       </section>
       {isMenuOpen && (
@@ -70,7 +75,6 @@ const Header = () => {
           className="bg-dark-blue font-inter text-white w-full h-auto 
         flex flex-col justify-between items-start p-8 gap-5"
         >
-
           {/* <Link
             className="font-inter flex gap-5 items-center w-full
            hover:text-dark-yellow"
@@ -78,17 +82,16 @@ const Header = () => {
           >
             <FaRegBell /> Notificações
           </Link> */}
-   
-           <Link
+
+          <Link
             className="font-inter flex gap-5 items-center w-full
            hover:text-dark-yellow"
             to={"v"}
           >
             <FaCartPlus />
             <p className="">Adicionar produto</p>
-            
           </Link>
-           <Link
+          <Link
             className="font-inter flex gap-5 items-center w-full
            hover:text-dark-yellow"
             to={"/comerciantes/nova-oferta"}
@@ -96,7 +99,7 @@ const Header = () => {
             <MdLocalOffer />
             <p className="">Adicionar oferta</p>
           </Link>
-           <Link
+          <Link
             className="font-inter flex gap-5 items-center w-full
            hover:text-dark-yellow"
             to={"/comerciantes/novo-panfleto"}
@@ -104,7 +107,7 @@ const Header = () => {
             <TbBuildingPlus />
             <p className="">Adicionar panfleto</p>
           </Link>
-                 <Link
+          <Link
             className="font-inter flex gap-5 items-center w-full
            hover:text-dark-yellow"
             to={""}
@@ -124,6 +127,13 @@ const Header = () => {
                 <p className="">Perfil</p>
               </div>
             )}
+          </Link>
+          <Link
+            to="/comerciantes"
+            className="font-inter flex gap-5 items-center w-full
+           hover:text-dark-yellow"
+          >
+            <LuLogOut size={20} /> Sair
           </Link>
         </menu>
       )}

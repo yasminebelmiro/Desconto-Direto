@@ -8,9 +8,11 @@ import { useNavigate } from "react-router-dom";
 
 const OfferCard = ({ ...props }: OfferTypes) => {
   const [isLiked, setIsLiked] = useState(false);
-  const [merchant, setMerchant] = useState<MerchantTypes[]>([]);
+  const [merchant, setMerchant] = useState<MerchantTypes | null>(null);
   const [likes, setLikes] = useState(props.likes);
+
   const userId = localStorage.getItem("userId");
+
   const navigate = useNavigate();
 
   const toggleHeart = async () => {
@@ -38,7 +40,6 @@ const OfferCard = ({ ...props }: OfferTypes) => {
       const fetchMerchant = async () => {
         const response = await api.get(`/comercios/find/${props.comercioId}`);
         setMerchant(response.data);
-  
       };
       const CheckIfLiked = async () => {
         const response = await api.get(`/clientes/find/${userId}`);
@@ -48,7 +49,6 @@ const OfferCard = ({ ...props }: OfferTypes) => {
       };
       fetchMerchant();
       CheckIfLiked();
-      
     } catch (error) {
       console.error("Erro ao buscar comércio", error);
     }
@@ -65,6 +65,10 @@ const OfferCard = ({ ...props }: OfferTypes) => {
 
   const formatedPrice = (price: number) => {
     return price.toFixed(2).replace(".", ",");
+  };
+
+  const getPrimeiraLetra = (nome: string | undefined): string => {
+    return nome?.charAt(0).toUpperCase() || "?";
   };
 
   return (
@@ -87,13 +91,26 @@ const OfferCard = ({ ...props }: OfferTypes) => {
           )}
           <p className="text-xs text-red-500">{likes}</p>
         </div>
-        <img
-          className="absolute top-[-5%] right-[-10%] w-15 h-15  md:w-17 md:h-17 object-cover rounded-full  outline-4
+        {merchant?.fotoUrl ? (
+          <img
+            className="absolute top-[-5%] right-[-10%] w-15 h-15  md:w-17 md:h-17 object-cover rounded-full  outline-4
            outline-dark-orange cursor-pointer"
-          src={merchant.fotoUrl}
-          alt={`Perfil de ${merchant.nome}`}
-          onClick={() => navigate(`/consumidores/comercios/${merchant.id}`)}
-        />
+            src={merchant.fotoUrl}
+            alt={`Perfil de ${merchant.nome}`}
+            onClick={() => navigate(`/consumidores/comercios/${merchant.id}`)}
+          />
+        ) : (
+          <div
+            className="absolute top-[-5%] right-[-10%] w-15 h-15  md:w-17 md:h-17 object-cover rounded-full  outline-4
+           outline-dark-orange cursor-pointer"
+            onClick={() => navigate(`/consumidores/comercios/${merchant?.id}`)}
+          >
+            <div className="w-full h-full bg-dark-yellow text-white text-lg rounded-full flex items-center justify-center">
+              <p className="text-3xl">{getPrimeiraLetra(merchant?.nome)}</p>
+            </div>
+          </div>
+        )}
+
         <div className=" flex flex-col items-center justify-evenly   text-center w-full">
           <img
             className="w-20 h-20 object-cover md:w-30 md:h-30 "

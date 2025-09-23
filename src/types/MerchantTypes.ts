@@ -1,4 +1,3 @@
-import type { ZodString } from "zod";
 import type { FlyerTypes } from "./FlyerTypes.ts";
 import type { OfferTypes } from "./OfferTypes.ts";
 

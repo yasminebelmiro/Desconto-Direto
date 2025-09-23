@@ -37,14 +37,10 @@ const MerchantProfile = () => {
 
     fetchMerchant();
   }, [id]);
+  const getPrimeiraLetra = (nome: string | undefined): string => {
+    return nome?.charAt(0).toUpperCase() || "?";
+  };
 
-  if (!merchant)
-    return (
-      <>
-        <Header />
-        <p>Comercio não encontrado</p>
-      </>
-    );
   return (
     <>
       <Header />
@@ -62,11 +58,20 @@ const MerchantProfile = () => {
 
         <div className="relative flex flex-col w-full md:w-[80%] lg:w-[70%] mt-20 md:m-20 rounded-2xl bg-dark-orange justify-center items-center p-10 text-white">
           <div className="flex flex-col justify-center items-center text-center gap-5 mb-10">
-            <img
-              className="absolute top-[-15%] rounded-full w-30 object-cover outline-3 outline-dark-orange"
-              src={merchant?.fotoUrl}
-              alt={`Logo de ${merchant?.nome}`}
-            />
+            {merchant?.fotoUrl ? (
+              <img
+                className="absolute top-[-15%] rounded-full w-30 object-cover outline-3 outline-dark-orange"
+                src={merchant?.fotoUrl}
+                alt={`Logo de ${merchant?.nome}`}
+              />
+            ) : (
+              <div className="absolute top-[-15%] rounded-full w-30 h-30 bg-dark-yellow outline-3 outline-dark-orange">
+                <div className="w-full h-full bg-dark-yellow text-white text-lg rounded-full flex items-center justify-center">
+                  <p className="text-3xl">{getPrimeiraLetra(merchant?.nome)}</p>
+                </div>
+              </div>
+            )}
+
             <div className="pt-10">
               <h1 className="font-kaisei text-xl font-bold">
                 {merchant?.nome}
@@ -122,7 +127,7 @@ const MerchantProfile = () => {
         </div>
       </div>
       <Separator section="Panfletos" />
-      <FlyersCarousel flyers={flyers}/>
+      <FlyersCarousel flyers={flyers} />
       <Separator section="Ofertas" />
       <div className="w-full flex justify-center items-center">
         <ListOffers cardCount={16} offers={offers} order="last" />
