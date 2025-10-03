@@ -88,8 +88,7 @@ const AddFlyer = () => {
       setUploadError(
         error.response?.data?.message || error.message || "Erro desconhecido"
       );
-      console.error(error); 
-      
+      console.error(error);
     }
   };
 
@@ -142,7 +141,7 @@ const AddFlyer = () => {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full h-10 bg-dark-orange text-xl text-white rounded-2xl cursor-pointer mt-30"
+            className="w-full h-10 bg-dark-orange text-xl text-white rounded-2xl cursor-pointer"
           >
             {isSubmitting ? "Enviando..." : "Postar"}
           </button>
