@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
@@ -25,7 +25,7 @@
     "react-slick": "^0.31.0",
     "react-toastify": "^11.0.5",
     "slick-carousel": "^1.8.1",
-    "swiper": "^12.0.1",
+    "swiper": "^12.0.2",
     "tailwindcss": "^4.1.12",
     "zod": "^3.25.76"
   },

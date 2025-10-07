@@ -1,130 +1,142 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ReactModal from "react-modal";
-import { set } from "zod/v4";
+import type { FlyerTypes } from "../../../types/FlyerTypes.ts";
+import { Swiper, SwiperSlide } from "swiper/react";
 
-const flyers = [
-  {
-    id: 1,
-    image:
-      "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/sale-promo-flyer-design-template-bdc981e993d4b9163f142c85a13e104c_screen.jpg?ts=1696311754",
-    datePublication: "2023-10-01",
-    dateExpiration: "2023-10-31",
-    store: "Store A",
-  },
-  {
-    id: 2,
-    image:
-      "https://marketplace.canva.com/EAGWLvLwUho/1/0/1131w/canva-black-november-amarelo-simples-promo%C3%A7%C3%A3o-o-m%C3%AAs-inteiro-panfleto-jVykQ1VGpEU.jpg",
-    datePublication: "2023-10-05",
-    dateExpiration: "2023-11-05",
-    store: "Store B",
-  },
-  {
-    id: 3,
-    image: "https://img.cdndsgni.com/preview/10442240.jpg",
-    datePublication: "2023-10-10",
-    dateExpiration: "2023-11-10",
-    store: "Store C",
-  },
-  {
-    id: 4,
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsb2seA1yo5LwH5E5hqmlPlakw7gxgDCrrvg&s",
-    datePublication: "2023-10-15",
-    dateExpiration: "2023-11-15",
-    store: "Store D",
-  },
-  {
-    id: 5,
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrFdfff5zniOvA0pN8StzO_bVV-M7dHd0b1Q&s",
-    datePublication: "2023-10-20",
-    dateExpiration: "2023-11-20",
-    store: "Store E",
-  },
-  {
-    id: 6,
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSK4VJ69Yh6QPmuiXe-Cgv3wGTE3aah6tAKtg&s",
-    datePublication: "2023-10-25",
-    dateExpiration: "2023-11-25",
-    store: "Store F",
-  },
-];
-const FlyersCarousel = () => {
-  const settings = {
-    infinite: true,
-    slidesToShow: 3,
-    slidesToScroll: 2,
-    autoplay: true,
-    speed: 2000,
-    autoplaySpeed: 3000,
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
-    
-  };
+import { Autoplay, Navigation } from "swiper/modules";
+import api from "../../../service/api/axios.ts";
+import type { MerchantTypes } from "../../../types/MerchantTypes.ts";
+import { useNavigate } from "react-router-dom";
+import Loading from "../../../components/Loading.tsx";
+import NotFoundItem from "../../../components/NotFoundItem.tsx";
 
-  const [flyerSelected, setFlyerSelected] = useState<null | (typeof flyers)[0]>(
+interface FlyersCarouselProps {
+  flyers: FlyerTypes[];
+}
+const FlyersCarousel = ({ flyers }: FlyersCarouselProps) => {
+  const [flyer, setFlyer] = useState<FlyerTypes[]>([]);
+  const [flyerSelected, setFlyerSelected] = useState<null | FlyerTypes[][0]>(
     null
   );
+  const [merchant, setMerchant] = useState<MerchantTypes>();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchMerchant = async () => {
+      if (flyerSelected) {
+        const response = await api.get(
+          `/comercios/find/${flyerSelected?.comercioId}`
+        );
+        setMerchant(response.data);
+      }
+    };
+    fetchMerchant();
+    setFlyer(flyers);
+  }, [flyers, flyerSelected?.comercioId]);
+
+  const formatedData = (date: string) => {
+    const data = new Date(date);
+    return data.toLocaleDateString("pt-BR", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    });
+  };
 
   return (
-    <div className=" font-inter w-full h-full max-w-5xl mx-auto">
-      <Slider {...settings} className="h-full">
-        {flyers.map((flyer) => (
-          <img
-            key={flyer.id}
-            src={flyer.image}
-            alt={`Panfleto de ${flyer.store}`}
-            className="cursor-pointer h-full object-cover"
-            onClick={() => setFlyerSelected(flyer)}
-          />
-        ))}
-      </Slider>
-      <ReactModal
-        className="fixed inset-0 z-10 flex flex-col lg:flex-row items-center justify-center h-full bg-white p-8"
-        isOpen={!!flyerSelected}
-        onRequestClose={() => setFlyerSelected(null)}
-        contentLabel="Panfleto Detalhes"
-      >
-        <div className="w-full lg:w-1/2 flex items-center justify-center">
-          <img
-            className="w-[80%] lg:w-[60%] rounded-lg"
-            src={flyerSelected?.image}
-            alt={`Panfleto de ${flyerSelected?.store}`}
-          />
+    <>
+      {!flyer ? (
+        <Loading />
+      ) : flyer.length === 0 ? (
+        <NotFoundItem />
+      ) : (
+        <div>
+          <Swiper
+            modules={[Navigation, Autoplay]}
+            loop={true}
+            breakpoints={{
+              340: { slidesPerView: 3 },
+              768: { slidesPerView: 4 },
+              1024: { slidesPerView: 5 },
+            }}
+            slidesPerGroup={1}
+            spaceBetween={0}
+            autoplay={{ delay: 3000 }}
+            speed={2000}
+            className="w-auto z-10"
+          >
+            {flyer.map((item) => (
+              <SwiperSlide key={item.id} className="w-full">
+                <img
+                  src={item.fotoUrl}
+                  alt={`Panfleto`}
+                  className="h-[200px] md:h-[300px] lg:h-[450px] w-full object-fill"
+                  onClick={() => setFlyerSelected(item)}
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+
+          <ReactModal
+            isOpen={!!flyerSelected}
+            onRequestClose={() => setFlyerSelected(null)}
+            contentLabel="Panfleto Detalhes"
+            ariaHideApp={false}
+            style={{
+              overlay: {
+                zIndex: 1000,
+                backgroundColor: "rgba(0, 0, 0, 0.5)",
+              },
+              content: {
+                zIndex: 1001,
+                position: "relative",
+                inset: "auto",
+              },
+            }}
+            className="flex flex-col md:flex-row items-center overflow-y-auto h-full bg-white p-8"
+          >
+            <div className="w-full lg:w-1/2 h-screen flex items-center justify-center">
+              <img
+                className="w-auto h-[80%] lg:w-[60%] lg:h-auto rounded-lg"
+                src={flyerSelected?.fotoUrl}
+                alt={`Panfleto de ? `}
+              />
+            </div>
+            <div className="pt-4 w-full lg:w-1/2  flex flex-col items-center gap-4">
+              <button
+                onClick={() =>
+                  navigate(
+                    `/consumidores/comercios/${flyerSelected?.comercioId}`
+                  )
+                }
+                className="text-2xl font-bold hover:underline cursor-pointer"
+              >
+                {merchant?.nome}{" "}
+              </button>
+              <p>
+                Válido até{" "}
+                <span className="font-bold text-red-500">
+                  {formatedData(flyerSelected?.dataExpiracao ?? "").toString()}
+                </span>
+              </p>
+              <button
+                className="p-4 w-1/2 bg-dark-blue rounded-2xl text-dark-yellow font-bold cursor-pointer"
+                onClick={() => setFlyerSelected(null)}
+              >
+                Fechar
+              </button>
+            </div>
+          </ReactModal>
         </div>
-        <div className="pt-4 w-full lg:w-1/2 flex flex-col items-center gap-4">
-          <h1 className="text-2xl font-bold">{flyerSelected?.store}</h1>
-          <p>
-            Publicado em{" "}
-            <span className="font-bold">{flyerSelected?.datePublication}</span>
-          </p>
-          <p>
-            Válido até{" "}
-            <span className="font-bold text-red-500">
-              {flyerSelected?.dateExpiration}
-            </span>
-          </p>
-          <div className="w-full flex items-center justify-center lg:flex-col gap-4 pt-5 md:p-8">
-            <button className="p-4 w-3/1 lg:w-1/2 h-15 bg-red-600 rounded-2xl text-white font-bold cursor-pointer text-center text-xl">
-              Excluir
-            </button>
-            <button className="p-4 w-3/1 lg:w-1/2 h-15 bg-dark-yellow rounded-2xl text-white font-bold cursor-pointer text-center text-xl">
-              Editar
-            </button>
-            <button
-              className="p-4 w-3/1 lg:w-1/2 h-15 bg-dark-blue rounded-2xl text-white font-bold cursor-pointer text-center text-xl"
-              onClick={() => setFlyerSelected(null)}
-            >
-              Fechar
-            </button>
-          </div>
-        </div>
-      </ReactModal>
-    </div>
+      )}
+    </>
   );
 };
 
