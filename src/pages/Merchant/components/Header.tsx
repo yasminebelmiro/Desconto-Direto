@@ -49,10 +49,8 @@ const Header = () => {
           <Link to={"/comerciantes/nova-oferta"}>
             <IoSearch size={22} />
           </Link>
-          {/* <Link to={""}>
-            <FaRegBell size={20} />
-          </Link> */}
-          <Link to={""}>
+
+          <Link to={"/comerciantes/perfil"}>
             {imageMerchant ? (
               <img
                 className="w-10 h-10 rounded-full object-cover"
@@ -75,14 +73,6 @@ const Header = () => {
           className="bg-dark-blue font-inter text-white w-full h-auto 
         flex flex-col justify-between items-start p-8 gap-5"
         >
-          {/* <Link
-            className="font-inter flex gap-5 items-center w-full
-           hover:text-dark-yellow"
-            to={""}
-          >
-            <FaRegBell /> Notificações
-          </Link> */}
-
           <Link
             className="font-inter flex gap-5 items-center w-full
            hover:text-dark-yellow"
@@ -110,7 +100,7 @@ const Header = () => {
           <Link
             className="font-inter flex gap-5 items-center w-full
            hover:text-dark-yellow"
-            to={""}
+            to={"/comerciantes/perfil"}
           >
             {imageMerchant ? (
               <div className="flex  gap-5">

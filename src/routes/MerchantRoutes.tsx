@@ -7,6 +7,7 @@ import MerchantRegister from "../pages/Merchant/MerchantRegister.tsx";
 import ProtectedRoutes from "./ProtectedRoute.tsx";
 import AddFlyer from "../pages/Merchant/AddFlyer.tsx";
 import NewOffer from "../pages/Merchant/NewOffer.tsx";
+import Profile from "../pages/Merchant/Profile.tsx";
 
 
 const MerchantRoutes = [
@@ -41,6 +42,10 @@ const MerchantRoutes = [
         path: "/comerciantes/novo-produto",
         
       },
+      {
+        path: "/comerciantes/perfil",
+        element: <Profile/>
+      }
 
     ],
   },
