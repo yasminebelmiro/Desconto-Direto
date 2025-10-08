@@ -1,14 +1,12 @@
-import path from "path";
 import LandingPage from "../pages/LadingPage/LandingPage.tsx";
 import Login from "../pages/Login/Login.tsx";
 import MerchantHome from "../pages/Merchant/MerchantHome.tsx";
-
 import MerchantRegister from "../pages/Merchant/MerchantRegister.tsx";
 import ProtectedRoutes from "./ProtectedRoute.tsx";
 import AddFlyer from "../pages/Merchant/AddFlyer.tsx";
 import NewOffer from "../pages/Merchant/NewOffer.tsx";
 import Profile from "../pages/Merchant/Profile.tsx";
-
+import AddProduct from "../pages/Merchant/AddProduct.tsx";
 
 const MerchantRoutes = [
   {
@@ -32,21 +30,20 @@ const MerchantRoutes = [
       },
       {
         path: "/comerciantes/novo-panfleto",
-        element: <AddFlyer/>
+        element: <AddFlyer />,
       },
       {
         path: "/comerciantes/nova-oferta",
-        element: <NewOffer />
+        element: <NewOffer />,
       },
       {
         path: "/comerciantes/novo-produto",
-        
+        element: <AddProduct />,
       },
       {
         path: "/comerciantes/perfil",
-        element: <Profile/>
-      }
-
+        element: <Profile />,
+      },
     ],
   },
 ];
