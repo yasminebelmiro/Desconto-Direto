@@ -11,6 +11,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import NotFoundItem from "../../components/NotFoundItem.tsx";
+import Header from "./components/Header.tsx";
 
 const NewOffer = () => {
   const [search, setSearch] = useState<string>("");
@@ -68,6 +69,7 @@ const NewOffer = () => {
 
   return (
     <div className="font-inter">
+      <Header/>
       <BreadcrumbBanner
         currentPage="Cadastrar oferta"
         typeUser="comerciantes"

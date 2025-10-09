@@ -7,6 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import api from "../../service/api/axios.ts";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import Header from "./components/Header.tsx";
 
 interface ErrorType {
   img_upload?: string | null;
@@ -89,6 +90,7 @@ const AddFlyer = () => {
 
   return (
     <div>
+      <Header/>
       <BreadcrumbBanner
         currentPage="Cadastro de Panfleto"
         typeUser="comerciantes"

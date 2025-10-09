@@ -12,6 +12,7 @@ import BreadcrumbBanner from "../../components/BreadcrumbBanner.tsx";
 import { useNavigate } from "react-router-dom";
 import api from "../../service/api/axios.ts";
 import { ProductCategory } from "../../enum/ProductsCategory.ts";
+import Header from "./components/Header.tsx";
 
 export const units: string[] = [
   "Unidade",
@@ -124,6 +125,7 @@ const AddProduct = () => {
 
   return (
     <div>
+      <Header/>
       <BreadcrumbBanner
         currentPage="Cadastro de Panfleto"
         typeUser="comerciantes"
