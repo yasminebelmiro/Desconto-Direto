@@ -125,7 +125,7 @@ const Profile = () => {
               </ul>
             </div>
           </div>
-           <button className="w-full md:w-30 md:absolute top-0 right-4 h-10 mt-4 bg-dark-yellow text-xl text-white rounded-2xl cursor-pointer">Editar</button>
+           <button onClick={() => navigate("/comerciantes/editar-perfil")} className="w-full md:w-30 md:absolute top-0 right-4 h-10 mt-4 bg-dark-yellow text-xl text-white rounded-2xl cursor-pointer">Editar</button>
         </div>
       </div>
       <Separator section="Meus panfletos" route="/comerciantes/novo-panfleto" />
