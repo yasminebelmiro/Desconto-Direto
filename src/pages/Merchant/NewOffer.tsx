@@ -53,6 +53,8 @@ const NewOffer = () => {
       });
       toast.success("Oferta cadastrada com sucesso!");
       reset();
+      setSelectProduct(null);
+      setSearch("")
     } catch (error) {
       console.error(error);
       toast.error("Não foi possível cadastrar a oferta!");
@@ -69,7 +71,7 @@ const NewOffer = () => {
 
   return (
     <div className="font-inter">
-      <Header/>
+      <Header />
       <BreadcrumbBanner
         currentPage="Cadastrar oferta"
         typeUser="comerciantes"

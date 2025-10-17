@@ -34,6 +34,7 @@ const MerchantHome = () => {
           section="Meus panfletos"
           route="/comerciantes/novo-panfleto"
         />
+        
         <FlyersCarousel flyers={flyers}/>
         <Separator section="Minhas ofertas" route="/comerciantes/nova-oferta" />
         <div className="flex items-center justify-center">
