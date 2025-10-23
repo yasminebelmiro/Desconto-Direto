@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 
 import BreadcrumbBanner from "../../components/BreadcrumbBanner.tsx";
 import { useNavigate } from "react-router-dom";
-import api from "../../service/api/axios.ts";
+import api from "../../lib/axios.ts";
 import { ProductCategory } from "../../enum/ProductsCategory.ts";
 import Header from "./components/Header.tsx";
 
@@ -41,7 +41,7 @@ export const units: string[] = [
   "Envelope",
   "Blister",
   "Tambor",
-  "Barril"
+  "Barril",
 ];
 
 interface ErrorType {
@@ -125,7 +125,7 @@ const AddProduct = () => {
 
   return (
     <div>
-      <Header/>
+      <Header />
       <BreadcrumbBanner
         currentPage="Cadastro de Panfleto"
         typeUser="comerciantes"
@@ -176,7 +176,10 @@ const AddProduct = () => {
               <label className="text-lg text-dark-orange">
                 Unidade de medida
               </label>
-              <select className=" w-full outline-dark-orange outline-1 text-gray-500 p-3" {...register("unit")}>
+              <select
+                className=" w-full outline-dark-orange outline-1 text-gray-500 p-3"
+                {...register("unit")}
+              >
                 {units.map((category: string) => (
                   <option key={category} value={category}>
                     {category}
@@ -184,20 +187,20 @@ const AddProduct = () => {
                 ))}
               </select>
             </div>
-            
           </div>
           <div className="flex flex-col w-full">
-              <label className="text-lg text-dark-orange">
-                Cateogria
-              </label>
-              <select className=" w-full outline-dark-orange outline-1 text-gray-500 p-3" {...register("category")}>
-                {Object.values(ProductCategory).map((category: string) => (
-                  <option key={category} value={category}>
-                    {category}
-                  </option>
-                ))}
-              </select>
-            </div>
+            <label className="text-lg text-dark-orange">Cateogria</label>
+            <select
+              className=" w-full outline-dark-orange outline-1 text-gray-500 p-3"
+              {...register("category")}
+            >
+              {Object.values(ProductCategory).map((category: string) => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
+              ))}
+            </select>
+          </div>
           <input
             type="file"
             accept="image/*"

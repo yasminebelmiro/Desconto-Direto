@@ -5,26 +5,33 @@ import Header from "./components/Header.tsx";
 import ListOffers from "./components/ListOffers.tsx";
 import type { OfferTypes } from "../../types/OfferTypes.ts";
 import type { FlyerTypes } from "../../types/FlyerTypes.ts";
-import api from "../../service/api/axios.ts";
+import { MerchantService } from "../../service/MerchantService.ts";
 
 const MerchantHome = () => {
   const [offers, setOffers] = useState<OfferTypes[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+
   const [flyers, setFlyers] = useState<FlyerTypes[]>([]);
-  const userId = localStorage.getItem("userId")
+  const userId = localStorage.getItem("userId");
+
   useEffect(() => {
-    try {
-      const fetch = async () => {
-      const response = await api.get(`/comercios/find/${userId}`);
-        const {ofertas,panfletos } = response.data
-        setOffers(ofertas);
-        setFlyers(panfletos);
-        
-      };
-     fetch()
- 
-    } catch (error) {
-      console.error(error);
+    if (!offers) {
+      setLoading(false);
+      return;
     }
+    if (!flyers) {
+      setLoading(false);
+      return;
+    }
+    MerchantService.getById(userId)
+      .then((data) => {
+        setFlyers(data.panfletos);
+        setOffers(data.ofertas);
+      })
+      .catch(console.error)
+      .finally(() => {
+        setLoading(false);
+      });
   }, []);
   return (
     <>
@@ -34,16 +41,15 @@ const MerchantHome = () => {
           section="Meus panfletos"
           route="/comerciantes/novo-panfleto"
         />
-        
-        <FlyersCarousel flyers={flyers}/>
+
+        <FlyersCarousel flyers={flyers} loading={loading} />
         <Separator section="Minhas ofertas" route="/comerciantes/nova-oferta" />
         <div className="flex items-center justify-center">
-          <ListOffers offers={offers}/>
+          <ListOffers offers={offers} loading={loading} />
         </div>
       </div>
-      
     </>
   );
 };
 
-export default MerchantHome;
+export default MerchantHome; 

@@ -15,7 +15,7 @@ export const MerchantService = {
       throw error;
     }
   },
-  getById: async (id: string | null) => {
+  getById: async (id: string| null | undefined) => {
     try {
       const response = await api.get(`/comercios/find/${id}`);
       return response.data;

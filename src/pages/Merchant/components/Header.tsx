@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 import logo from "../../../assets/logo.png";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoSearch } from "react-icons/io5";
-import api from "../../../service/api/axios.ts";
+import api from "../../../lib/axios.ts";
 import { MdLocalOffer } from "react-icons/md";
 import { TbBuildingPlus } from "react-icons/tb";
 import { LuLogOut } from "react-icons/lu";
-import { LogOut } from "../../../service/api/authService.ts";
+import { LogOut } from "../../../service/authService.ts";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

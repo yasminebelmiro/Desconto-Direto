@@ -1,24 +1,17 @@
 import { BiChevronRight } from "react-icons/bi";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Header from "./components/Header.tsx";
 import { useEffect, useState } from "react";
 import type { MerchantTypes } from "../../types/MerchantTypes.ts";
-import api from "../../service/api/axios.ts";
 import { TbTruckDelivery } from "react-icons/tb";
 import { FaLocationDot, FaSquareInstagram } from "react-icons/fa6";
 import { FaCity, FaPhone, FaWhatsapp } from "react-icons/fa";
-import Separator from "../../components/Separator.tsx";
-import type { OfferTypes } from "../../types/OfferTypes.ts";
-import type { FlyerTypes } from "../../types/FlyerTypes.ts";
-import ListOffers from "./components/ListOffers.tsx";
-import FlyersCarousel from "./components/FlyersCarousel.tsx";
+import { MerchantService } from "../../service/MerchantService.ts";
 
 const Profile = () => {
-  const id = localStorage.getItem("userId");
+  const userId = localStorage.getItem("userId");
   const navigate = useNavigate();
   const [merchant, setMerchant] = useState<MerchantTypes>();
-  const [offers, setOffers] = useState<OfferTypes[]>([]);
-  const [flyers, setFlyers] = useState<FlyerTypes[]>([]);
 
   const formatedHour = (time: string) => {
     if (!time) return "N/A";
@@ -27,19 +20,8 @@ const Profile = () => {
   };
 
   useEffect(() => {
-    const fetchMerchant = async () => {
-      const response = await api.get(`/comercios/find/${id}`);
-      const { ofertas, panfletos } = response.data;
-      setMerchant(response.data);
-      setOffers(ofertas);
-      setFlyers(panfletos);
-    };
-
-    fetchMerchant();
-  }, [id]);
-  const getPrimeiraLetra = (nome: string | undefined): string => {
-    return nome?.charAt(0).toUpperCase() || "?";
-  };
+    MerchantService.getById(userId).then(setMerchant).catch(console.error);
+  }, []);
 
   return (
     <>
@@ -58,7 +40,6 @@ const Profile = () => {
 
         <div className="relative flex flex-col w-full md:w-[80%] lg:w-[70%] mt-20 md:m-20 rounded-2xl bg-dark-orange justify-center items-center p-10 text-white">
           <div className="flex flex-col justify-center items-center text-center gap-5 mb-10">
-           
             {merchant?.fotoUrl ? (
               <img
                 className="absolute top-[-15%] rounded-full w-30 object-cover outline-3 outline-dark-orange"
@@ -68,7 +49,7 @@ const Profile = () => {
             ) : (
               <div className="absolute top-[-15%] rounded-full w-30 h-30 bg-dark-yellow outline-3 outline-dark-orange">
                 <div className="w-full h-full bg-dark-yellow text-white text-lg rounded-full flex items-center justify-center">
-                  <p className="text-3xl">{getPrimeiraLetra(merchant?.nome)}</p>
+                  <p className="text-3xl">{merchant?.nome[0]}</p>
                 </div>
               </div>
             )}
@@ -125,14 +106,13 @@ const Profile = () => {
               </ul>
             </div>
           </div>
-           <button onClick={() => navigate("/comerciantes/editar-perfil")} className="w-full md:w-30 md:absolute top-0 right-4 h-10 mt-4 bg-dark-yellow text-xl text-white rounded-2xl cursor-pointer">Editar</button>
+          <button
+            onClick={() => navigate("/comerciantes/editar-perfil")}
+            className="w-full md:w-30 md:absolute top-0 right-4 h-10 mt-4 bg-dark-yellow text-xl text-white rounded-2xl cursor-pointer"
+          >
+            Editar
+          </button>
         </div>
-      </div>
-      <Separator section="Meus panfletos" route="/comerciantes/novo-panfleto" />
-      <FlyersCarousel flyers={flyers} />
-      <Separator section="Minhas ofertas" route="/comerciantes/nova-oferta" />
-      <div className="flex items-center justify-center">
-        <ListOffers offers={offers} />
       </div>
     </>
   );

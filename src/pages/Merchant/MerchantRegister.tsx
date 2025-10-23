@@ -11,7 +11,7 @@ import {
 import Input from "../Login/components/Input.tsx";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "react-toastify";
-import { registerMerchant } from "../../service/api/authService.ts";
+import { registerMerchant } from "../../service/authService.ts";
 
 const MerchantRegister = () => {
   const navigate = useNavigate();
@@ -23,25 +23,23 @@ const MerchantRegister = () => {
     resolver: zodResolver(MerchantSchema),
   });
 
-   const onSubmit = async (data: MerchantData) => {
-      try {
-        await registerMerchant(data)
-        toast.success("Cadastro realizado com sucesso!")
-        navigate(`/comerciantes/login`)
-      } catch (error) {
-   
-       console.log(error);
+  const onSubmit = async (data: MerchantData) => {
+    try {
+      await registerMerchant(data);
+      toast.success("Cadastro realizado com sucesso!");
+      navigate(`/comerciantes/login`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const onError = (errors: any) => {
+    Object.values(errors).forEach((err: any) => {
+      if (err?.message) {
+        toast.error(err.message);
       }
-      
-    };
-  
-    const onError = (errors: any) => {
-      Object.values(errors).forEach((err: any) => {
-        if (err?.message) {
-          toast.error(err.message);
-        }
-      });
-    };
+    });
+  };
   return (
     <div>
       <Header />
@@ -55,7 +53,10 @@ const MerchantRegister = () => {
         lg:w-120 h-auto md:h-120 gap-5 px-4 py-10 md:rounded-3xl "
         >
           <h1 className="font-kaisei text-3xl">Cadastro</h1>
-          <form onSubmit={handleSubmit(onSubmit, onError)} className="flex flex-col items-center justify-center w-full gap-4">
+          <form
+            onSubmit={handleSubmit(onSubmit, onError)}
+            className="flex flex-col items-center justify-center w-full gap-4"
+          >
             <Input
               type="text"
               placeholder="Nome da empresa"
@@ -76,9 +77,9 @@ const MerchantRegister = () => {
               ))}
             </select>
             <Input
-            type="string"
-            placeholder="Telefone"
-            error={errors.telefone?.message}
+              type="string"
+              placeholder="Telefone"
+              error={errors.telefone?.message}
             />
             <Input
               type="email"
