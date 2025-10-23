@@ -3,45 +3,57 @@ import FlyersCarousel from "./components/FlyersCarousel.tsx";
 import Header from "./components/Header.tsx";
 import ListOffers from "./components/ListOffers.tsx";
 import { useEffect, useState } from "react";
-import api from "../../service/api/axios.ts";
 import type { OfferTypes } from "../../types/OfferTypes.ts";
 import type { FlyerTypes } from "../../types/FlyerTypes.ts";
+import { OfferService } from "../../service/OfferService.ts";
+import { FlyerService } from "../../service/FlyerService.ts";
 
 const ConsumerHome = () => {
   const [offers, setOffers] = useState<OfferTypes[]>([]);
   const [flyers, setFlyers] = useState<FlyerTypes[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const cardCount = 8;
   useEffect(() => {
-    try {
-      const fetchOffers = async () => {
-        const response = await api.get("/ofertas/all");
-        setOffers(response.data);
- 
-      };
-      const fetchFlyers = async () => {
-        const response = await api.get("/panfletos/all");
-        setFlyers(response.data);
-   
-        
-      };
-      fetchOffers();
-      fetchFlyers();
-    } catch (error) {
-      console.error(error);
+    if (!flyers) {
+      setLoading(false);
+      return;
     }
+    if (!offers) {
+      setLoading(false);
+      return;
+    }
+    FlyerService.getAll()
+      .then(setFlyers)
+      .catch(console.error)
+      .finally(() => setLoading(false));
+    OfferService.getAll()
+      .then(setOffers)
+      .catch(console.error)
+      .finally(() => setLoading(false));
   }, []);
   return (
     <>
       <Header />
       <div>
         <Separator section="Panfletos" />
-        <FlyersCarousel flyers={flyers} />
+        <FlyersCarousel flyers={flyers} loading={loading} />
         <Separator section="Top ofertas" typeUser="consumidores" />
         <div className="flex items-center justify-center ">
-          <ListOffers offers={offers} cardCount={8} order="relevance" />
+          <ListOffers
+            offers={offers}
+            cardCount={cardCount}
+            order="relevance"
+            loading={loading}
+          />
         </div>
         <Separator section="Últimas ofertas" typeUser="consumidores" />
         <div className="flex items-center justify-center">
-          <ListOffers offers={offers} cardCount={8} order="last" />
+          <ListOffers
+            offers={offers}
+            cardCount={cardCount}
+            order="last"
+            loading={loading}
+          />
         </div>
       </div>
     </>

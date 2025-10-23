@@ -6,7 +6,7 @@ import logo from "../../../assets/logo.png";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoSearch } from "react-icons/io5";
 import { LuLogOut } from "react-icons/lu";
-import { LogOut } from "../../../service/api/authService.ts";
+import { LogOut } from "../../../service/authService.ts";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

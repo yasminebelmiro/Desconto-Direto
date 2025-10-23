@@ -11,7 +11,7 @@ export const ConsumerService = {
       throw error;
     }
   },
-  getById: async (id: string) => {
+  getById: async (id: string | null) => {
     try {
       const response = await api.get(`/clientes/find/${id}`);
       return response.data;
@@ -47,7 +47,7 @@ export const ConsumerService = {
       throw error;
     }
   },
-  likeOffer: async (userId: string, offerId: string) => {
+  likeOffer: async (userId: string | null, offerId: string) => {
     try {
       const response = await api.post(
         `/clientes/${userId}/favoritos/${offerId}`
@@ -58,7 +58,7 @@ export const ConsumerService = {
       throw error;
     }
   },
-  dislikeOffer: async (userId: string, offerId: string) => {
+  dislikeOffer: async (userId: string | null, offerId: string) => {
     try {
       const response = await api.delete(
         `/clientes/${userId}/favoritos/${offerId}`

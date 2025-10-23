@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Header from "./components/Header.tsx";
 import { useEffect, useState } from "react";
 import type { MerchantTypes } from "../../types/MerchantTypes.ts";
-import api from "../../service/api/axios.ts";
+import api from "../../lib/axios.ts";
 import { TbTruckDelivery } from "react-icons/tb";
 import { FaLocationDot, FaSquareInstagram } from "react-icons/fa6";
 import { FaCity, FaPhone, FaWhatsapp } from "react-icons/fa";
@@ -12,6 +12,8 @@ import type { OfferTypes } from "../../types/OfferTypes.ts";
 import type { FlyerTypes } from "../../types/FlyerTypes.ts";
 import ListOffers from "./components/ListOffers.tsx";
 import FlyersCarousel from "./components/FlyersCarousel.tsx";
+import { formatedHour } from "../../utils/FormatedHours.ts";
+import { MerchantService } from "../../service/MerchantService.ts";
 
 const MerchantProfile = () => {
   const { id } = useParams();
@@ -19,23 +21,22 @@ const MerchantProfile = () => {
   const [merchant, setMerchant] = useState<MerchantTypes>();
   const [offers, setOffers] = useState<OfferTypes[]>([]);
   const [flyers, setFlyers] = useState<FlyerTypes[]>([]);
-
-  const formatedHour = (time: string) => {
-    if (!time) return "N/A";
-    const [hour, minute] = time.split(":");
-    return `${hour}:${minute}`;
-  };
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    const fetchMerchant = async () => {
-      const response = await api.get(`/comercios/find/${id}`);
-      const { ofertas, panfletos } = response.data;
-      setMerchant(response.data);
-      setOffers(ofertas);
-      setFlyers(panfletos);
-    };
-
-    fetchMerchant();
+    if (!offers) {
+      setLoading(false);
+      return;
+    }
+    if (!flyers) {
+      setLoading(false);
+      return;
+    }
+    MerchantService.getById(id).then((data) => {
+      setMerchant(data);
+      setFlyers(data.panfletos);
+      setOffers(data.ofertas);
+    }).catch(console.error).finally(() => setLoading(false));
   }, [id]);
   const getPrimeiraLetra = (nome: string | undefined): string => {
     return nome?.charAt(0).toUpperCase() || "?";
@@ -127,10 +128,15 @@ const MerchantProfile = () => {
         </div>
       </div>
       <Separator section="Panfletos" />
-      <FlyersCarousel flyers={flyers} />
+      <FlyersCarousel flyers={flyers} loading={loading} />
       <Separator section="Ofertas" />
       <div className="w-full flex justify-center items-center">
-        <ListOffers cardCount={16} offers={offers} order="last" />
+        <ListOffers
+          cardCount={16}
+          offers={offers}
+          order="last"
+          loading={loading}
+        />
       </div>
     </>
   );

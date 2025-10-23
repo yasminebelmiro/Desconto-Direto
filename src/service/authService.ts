@@ -1,7 +1,7 @@
 import api from "../lib/axios.ts";
 import { type ConsumerRegisterData } from "../schemas/ConsumerRegisterSchema.ts";
 import type { MerchantData } from "../schemas/MerchantRegisterSchema.ts";
-import { ConsumerService } from "./Consumer.ts";
+import { ConsumerService } from "./ConsumerService.ts";
 import { MerchantService } from "./MerchantService.ts";
 
 export async function resgiterConsumer(data: ConsumerRegisterData) {
