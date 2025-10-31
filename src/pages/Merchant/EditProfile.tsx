@@ -7,7 +7,7 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
-import api from "../../service/api/axios.ts";
+import api from "../../lib/axios.ts";
 import type { MerchantTypes } from "../../types/MerchantTypes.ts";
 import { MerchantCategorys } from "../../enum/MerchantCategorys.ts";
 
@@ -53,7 +53,7 @@ const EditProfile = () => {
         fazEntrega: data.fazEntrega ? "true" : "false",
         horarioAbertura: data.horarioAbertura,
         horarioFechamento: data.horarioFechamento,
-        fotoUrl: data.fotoUrl
+        fotoUrl: data.fotoUrl,
       });
     };
     fecthMerchant();
@@ -117,8 +117,7 @@ const EditProfile = () => {
         >
           {
             <div className="w-full flex justify-center items-center flex-col">
-              
-              {imgProfile === undefined? (
+              {imgProfile === undefined ? (
                 <div className="w-40 h-40 bg-dark-yellow text-white text-7xl rounded-full flex items-center justify-center">
                   {merchant?.nome[0]}
                 </div>

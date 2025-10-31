@@ -1,11 +1,12 @@
-import api from "./axios.ts";
-import { type ConsumerRegisterData } from "../../schemas/ConsumerRegisterSchema.ts";
-import type { MerchantData } from "../../schemas/MerchantRegisterSchema.ts";
+import api from "../lib/axios.ts";
+import { type ConsumerRegisterData } from "../schemas/ConsumerRegisterSchema.ts";
+import type { MerchantData } from "../schemas/MerchantRegisterSchema.ts";
+import { ConsumerService } from "./ConsumerService.ts";
+import { MerchantService } from "./MerchantService.ts";
 
 export async function resgiterConsumer(data: ConsumerRegisterData) {
   try {
-    const response = await api.post("clientes/add", data);
-    return response.data;
+    return ConsumerService.create(data).catch(console.error);
   } catch (error: any) {
     if (error.code === "ERR_NETWORK") {
       throw new Error(
@@ -18,8 +19,7 @@ export async function resgiterConsumer(data: ConsumerRegisterData) {
 
 export async function registerMerchant(data: MerchantData) {
   try {
-    const response = await api.post("/comercios/add", data);
-    return response.data;
+    return await MerchantService.create(data).catch(console.error);
   } catch (error: any) {
     if (error.code === "ERR_NETWORK") {
       throw new Error(

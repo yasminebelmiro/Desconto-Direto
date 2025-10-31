@@ -11,7 +11,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 import { Autoplay, Navigation } from "swiper/modules";
-import api from "../../../service/api/axios.ts";
+import api from "../../../lib/axios.ts";
 import type { MerchantTypes } from "../../../types/MerchantTypes.ts";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../../components/Loading.tsx";
@@ -19,8 +19,9 @@ import NotFoundItem from "../../../components/NotFoundItem.tsx";
 
 interface FlyersCarouselProps {
   flyers: FlyerTypes[];
+  loading: boolean
 }
-const FlyersCarousel = ({ flyers }: FlyersCarouselProps) => {
+const FlyersCarousel = ({ flyers, loading }: FlyersCarouselProps) => {
   const [flyer, setFlyer] = useState<FlyerTypes[]>([]);
   const [flyerSelected, setFlyerSelected] = useState<null | FlyerTypes[][0]>(
     null
@@ -52,7 +53,7 @@ const FlyersCarousel = ({ flyers }: FlyersCarouselProps) => {
 
   return (
     <>
-      {!flyer ? (
+      {loading ? (
         <Loading />
       ) : flyer.length === 0 ? (
         <NotFoundItem />

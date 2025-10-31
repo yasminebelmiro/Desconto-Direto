@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import BreadcrumbBanner from "../../components/BreadcrumbBanner.tsx";
 import { IoSearch } from "react-icons/io5";
 import type { ProductType } from "../../types/ProductTypes.ts";
-import api from "../../service/api/axios.ts";
+import api from "../../lib/axios.ts";
 import { IoMdClose } from "react-icons/io";
 import type { OfferTypes } from "../../types/OfferTypes.ts";
 import { useForm } from "react-hook-form";
@@ -54,7 +54,7 @@ const NewOffer = () => {
       toast.success("Oferta cadastrada com sucesso!");
       reset();
       setSelectProduct(null);
-      setSearch("")
+      setSearch("");
     } catch (error) {
       console.error(error);
       toast.error("Não foi possível cadastrar a oferta!");

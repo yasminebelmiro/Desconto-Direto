@@ -1,7 +1,7 @@
 import OfferCard from "./OfferCard.tsx";
 import type { OfferTypes } from "../../../types/OfferTypes.ts";
 import { useEffect, useState } from "react";
-import api from "../../../service/api/axios.ts";
+import api from "../../../lib/axios.ts";
 import Loading from "../../../components/Loading.tsx";
 import NotFoundItem from "../../../components/NotFoundItem.tsx";
 
@@ -9,9 +9,10 @@ interface ListOffersProps {
   cardCount: number;
   order: string;
   offers: OfferTypes[];
+  loading: boolean
 }
 
-const ListOffers = ({ offers, cardCount, order }: ListOffersProps) => {
+const ListOffers = ({ offers, cardCount, order, loading }: ListOffersProps) => {
   const offersToShow: OfferTypes[] = offers.slice(0, cardCount);
 
   const sortOffers = (offers: OfferTypes[], order: string) => {
@@ -49,9 +50,9 @@ const ListOffers = ({ offers, cardCount, order }: ListOffersProps) => {
 
   return (
     <>
-      {!sortedOffers ? (
+      {loading ? (
         <Loading />
-      ) : sortedOffers.length === 0 ? (
+      ) : sortedOffers.length <= 0 ? (
         <NotFoundItem />
       ) : (
         <div className="w-full flex items-center justify-center gap-10 py-10 md:px-10 flex-wrap lg:grid grid-cols-4 lg:w-250 ">

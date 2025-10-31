@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
-import api from "../../../service/api/axios.ts";
+import api from "../../../lib/axios.ts";
 import type { OfferTypes } from "../../../types/OfferTypes.ts";
 import { toast } from "react-toastify";
 import type { MerchantTypes } from "../../../types/MerchantTypes.ts";
 import { useNavigate } from "react-router-dom";
+import { ConsumerService } from "../../../service/ConsumerService.ts";
+import { formatedData } from "../../../utils/FormatedData.ts";
+import { formatedPrice } from "../../../utils/FormatedPrice.ts";
+import { MerchantService } from "../../../service/MerchantService.ts";
 
 const OfferCard = ({ ...props }: OfferTypes) => {
   const [isLiked, setIsLiked] = useState(false);
@@ -19,13 +23,13 @@ const OfferCard = ({ ...props }: OfferTypes) => {
     try {
       setIsLiked(!isLiked);
       if (!isLiked) {
-        await api.post(`/clientes/${userId}/favoritos/${props.id}`, props);
+        await ConsumerService.likeOffer(userId, props.id);
         const newLikes = likes + 1;
         setLikes(newLikes);
 
         toast.success("Oferta adicionada aos favoritos!");
       } else {
-        await api.delete(`/clientes/${userId}/favoritos/${props.id}`);
+        await ConsumerService.dislikeOffer(userId, props.id);
         const newLikes = likes - 1;
         setLikes(newLikes);
       }
@@ -37,39 +41,20 @@ const OfferCard = ({ ...props }: OfferTypes) => {
 
   useEffect(() => {
     try {
-      const fetchMerchant = async () => {
-        const response = await api.get(`/comercios/find/${props.comercioId}`);
-        setMerchant(response.data);
-      };
+      MerchantService.getById(props.comercioId).then(setMerchant);
+
       const CheckIfLiked = async () => {
-        const response = await api.get(`/clientes/find/${userId}`);
-        const { ofertasPreferidas } = response.data;
-        const liked = ofertasPreferidas.some((fav: any) => fav.id === props.id);
+        const response = await ConsumerService.getById(userId);
+        const favorites = response.ofertasPreferidas;
+        const liked = favorites.some((fav: any) => fav.id === props.id);
         setIsLiked(liked);
       };
-      fetchMerchant();
+
       CheckIfLiked();
     } catch (error) {
       console.error("Erro ao buscar comércio", error);
     }
   }, []);
-
-  const formatedData = (date: string) => {
-    const data = new Date(date);
-    return data.toLocaleDateString("pt-BR", {
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric",
-    });
-  };
-
-  const formatedPrice = (price: number) => {
-    return price.toFixed(2).replace(".", ",");
-  };
-
-  const getPrimeiraLetra = (nome: string | undefined): string => {
-    return nome?.charAt(0).toUpperCase() || "?";
-  };
 
   return (
     <div className="font-inter flex justify-center items-center m-2">
@@ -106,7 +91,7 @@ const OfferCard = ({ ...props }: OfferTypes) => {
             onClick={() => navigate(`/consumidores/comercios/${merchant?.id}`)}
           >
             <div className="w-full h-full bg-dark-yellow text-white text-lg rounded-full flex items-center justify-center">
-              <p className="text-3xl">{getPrimeiraLetra(merchant?.nome)}</p>
+              <p className="text-3xl">{merchant?.nome[0]}</p>
             </div>
           </div>
         )}

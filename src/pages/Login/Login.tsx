@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { UserLoginSchema, type LoginData } from "../../schemas/LoginSchema.ts";
 import Input from "./components/Input.tsx";
 import { toast, ToastContainer } from "react-toastify";
-import { login } from "../../service/api/authService.ts";
+import { login } from "../../service/authService.ts";
 
 const Login = () => {
   const location = useLocation();

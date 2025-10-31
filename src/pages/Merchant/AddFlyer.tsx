@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { type FlyerData, FlyerSchema } from "../../schemas/FlyerSchema.ts";
 import { zodResolver } from "@hookform/resolvers/zod";
-import api from "../../service/api/axios.ts";
+import api from "../../lib/axios.ts";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import Header from "./components/Header.tsx";
@@ -14,7 +14,7 @@ interface ErrorType {
 }
 const AddFlyer = () => {
   const navigate = useNavigate();
-  const [uploadError, setUploadError] = useState<ErrorType| null>(null);
+  const [uploadError, setUploadError] = useState<ErrorType | null>(null);
   const [previewFlyer, setPreviewFlyer] = useState<File | undefined>(undefined);
   const [imgUrl, setImgUrl] = useState("");
   const userId = localStorage.getItem("userId");
@@ -90,7 +90,7 @@ const AddFlyer = () => {
 
   return (
     <div>
-      <Header/>
+      <Header />
       <BreadcrumbBanner
         currentPage="Cadastro de Panfleto"
         typeUser="comerciantes"
@@ -112,7 +112,7 @@ const AddFlyer = () => {
               alt="Preview do panfleto"
             />
           )}
-        {uploadError && <p>{uploadError.toString()}</p> }
+          {uploadError && <p>{uploadError.toString()}</p>}
         </div>
         <form
           onSubmit={handleSubmit(onSubmit, onError)}

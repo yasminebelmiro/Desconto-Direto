@@ -11,16 +11,19 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 import { Autoplay, Navigation } from "swiper/modules";
-import api from "../../../service/api/axios.ts";
+import api from "../../../lib/axios.ts";
 import type { MerchantTypes } from "../../../types/MerchantTypes.ts";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../../components/Loading.tsx";
 import NotFoundItem from "../../../components/NotFoundItem.tsx";
+import { MerchantService } from "../../../service/MerchantService.ts";
+import { formatedData } from "../../../utils/FormatedData.ts";
 
 interface FlyersCarouselProps {
   flyers: FlyerTypes[];
+  loading: boolean;
 }
-const FlyersCarousel = ({ flyers }: FlyersCarouselProps) => {
+const FlyersCarousel = ({ flyers, loading }: FlyersCarouselProps) => {
   const [flyer, setFlyer] = useState<FlyerTypes[]>([]);
   const [flyerSelected, setFlyerSelected] = useState<null | FlyerTypes[][0]>(
     null
@@ -29,32 +32,22 @@ const FlyersCarousel = ({ flyers }: FlyersCarouselProps) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchMerchant = async () => {
-      if (flyerSelected) {
-        const response = await api.get(
-          `/comercios/find/${flyerSelected?.comercioId}`
-        );
-        setMerchant(response.data);
-      }
-    };
-    fetchMerchant();
+    if (flyerSelected) {
+      MerchantService.getById(flyerSelected.comercioId)
+        .then(setMerchant)
+        .catch(console.error);
+    }
+
     setFlyer(flyers);
   }, [flyers, flyerSelected?.comercioId]);
 
-  const formatedData = (date: string) => {
-    const data = new Date(date);
-    return data.toLocaleDateString("pt-BR", {
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric",
-    });
-  };
+
 
   return (
     <>
-      {!flyer ? (
+      {loading ? (
         <Loading />
-      ) : flyer.length === 0 ? (
+      ) : flyer.length <= 0 ? (
         <NotFoundItem />
       ) : (
         <div>

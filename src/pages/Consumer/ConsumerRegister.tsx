@@ -10,7 +10,7 @@ import {
 } from "../../schemas/ConsumerRegisterSchema.ts";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "react-toastify";
-import { resgiterConsumer } from "../../service/api/authService.ts";
+import { resgiterConsumer } from "../../service/authService.ts";
 
 const ConsumerRegister = () => {
   const navigate = useNavigate();
