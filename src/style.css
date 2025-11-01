@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+
+@theme{
+    --font-inter: 'Inter', sans-serif;
+    --font-kaisei: 'Kaisei Decol', serif;
+
+    --color-dark-blue: #023047;
+    --color-dark-yellow: #FFB703;
+    --color-dark-orange: #FB8500;
+    --color-light-blue: #A7DCF6;
+    --color-light-yellow: #FFEAB6;
+    --color-light-orange: #FFC88A;
+}

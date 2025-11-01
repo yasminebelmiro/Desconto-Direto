@@ -1,0 +1,22 @@
+export enum MerchantCategorys {
+  SUPERMERCADO = "Supermercado / Mercearia",
+  PADARIA = "Padaria / Confeitaria",
+  ACOUGUE = "Açougue",
+  PEIXARIA = "Peixaria",
+  LANCHONETE = "Lanchonete / Pastelaria",
+  RESTAURANTE = "Restaurante",
+  PIZZARIA = "Pizzaria",
+  OFICINA_MECANICA = "Oficina Mecânica",
+  AUTO_PEÇAS = "Autopeças",
+  BORRACHARIA = "Borracharia",
+  FARMACIA = "Farmácia / Drogaria",
+  ROUPAS = "Loja de Roupas / Boutique",
+  CALCADOS = "Loja de Calçados",
+  SALAO_BELEZA = "Salão de Beleza / Barbearia",
+  PETSHOP = "Pet Shop",
+  PAPELARIA = "Papelaria / Utilidades",
+  LOJA_ELETRONICOS = "Eletrônicos / Informática",
+  MOVEIS = "Móveis / Decoração",
+  LOJA_CONSTRUCAO = "Materiais de Construção",
+  OUTROS = "Outros"
+}

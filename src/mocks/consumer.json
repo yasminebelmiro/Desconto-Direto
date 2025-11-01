@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "name": "Yasmin Oliveira",
+    "email": "yasmin.oliveira@email.com",
+    "cellPhone": "(11) 91234-5678",
+    "password": "yasminoliveira"
+  },
+  {
+    "id": 2,
+    "name": "Lucas Pereira",
+    "email": "lucas.pereira@email.com",
+    "cellPhone": "(21) 99876-5432",
+    "password": "lucaspereira"
+  },
+  {
+    "id": 3,
+    "name": "Ana Souza",
+    "email": "ana.souza@email.com",
+    "cellPhone": "(31) 98765-4321",
+    "password": "anasouza"
+  }
+]
