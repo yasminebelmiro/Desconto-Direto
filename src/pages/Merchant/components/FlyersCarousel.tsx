@@ -77,7 +77,7 @@ const FlyersCarousel = ({ flyers, loading }: FlyersCarouselProps) => {
               <SwiperSlide key={item.id} className="w-full">
                 <img
                   src={item.fotoUrl}
-                  alt={`Panfleto`}
+                  alt={`Panfleto de ${merchant?.nome} ${item.fotoUrl} `}
                   className="h-[200px] md:h-[300px] lg:h-[450px] w-full object-fill"
                   onClick={() => setFlyerSelected(item)}
                 />
@@ -107,7 +107,7 @@ const FlyersCarousel = ({ flyers, loading }: FlyersCarouselProps) => {
               <img
                 className="w-auto h-[80%] lg:w-[60%] lg:h-auto rounded-lg"
                 src={flyerSelected?.fotoUrl}
-                alt={`Panfleto de ? `}
+                alt={`Panfleto de ${merchant?.nome} `}
               />
             </div>
             <div className="pt-4 w-full lg:w-1/2  flex flex-col items-center gap-4">
