@@ -6,15 +6,12 @@ import { type FlyerData, FlyerSchema } from "../../schemas/FlyerSchema.ts";
 import { zodResolver } from "@hookform/resolvers/zod";
 import api from "../../lib/axios.ts";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
 import Header from "./components/Header.tsx";
-
 
 interface ErrorType {
   img_upload?: string | null;
 }
 const AddFlyer = () => {
-  const navigate = useNavigate();
   const [uploadError, setUploadError] = useState<ErrorType | null>(null);
   const [previewFlyer, setPreviewFlyer] = useState<File | undefined>(undefined);
   const [imgUrl, setImgUrl] = useState("");

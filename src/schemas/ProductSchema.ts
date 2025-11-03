@@ -1,10 +1,10 @@
 import z from "zod";
 
 export const ProductSchema = z.object({
-  name: z.string().min(1, "O nome do produto é obrigatório."),
-  quantity: z.string().min(1, "A quantidade é obrigatória."),
-  unit: z.string().min(1, "A unidade de medida é obrigatória."),
-   category: z.string().min(1, "A categoria de medida é obrigatória."),
+  nome: z.string().min(1, "O nome do produto é obrigatório."),
+  medida: z.string().min(1, "A quantidade é obrigatória."),
+  unidadeMedida: z.string().min(1, "A unidade de medida é obrigatória."),
+   categoria: z.string().min(1, "A categoria de medida é obrigatória."),
   fotoUrl: z
     .any()
     .refine((files) => files?.length === 1, {
