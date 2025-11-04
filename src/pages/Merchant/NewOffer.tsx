@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import NotFoundItem from "../../components/NotFoundItem.tsx";
 import Header from "./components/Header.tsx";
+import { ProductService } from "../../service/ProductServices.ts";
 
 const NewOffer = () => {
   const [search, setSearch] = useState<string>("");
@@ -62,11 +63,7 @@ const NewOffer = () => {
   };
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      const response = await api.get("produtos/all");
-      setProducts(response.data);
-    };
-    fetchProducts();
+    ProductService.getAll().then(setProducts).catch(console.error);
   }, []);
 
   return (

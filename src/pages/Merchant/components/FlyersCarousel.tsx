@@ -16,6 +16,7 @@ import type { MerchantTypes } from "../../../types/MerchantTypes.ts";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../../components/Loading.tsx";
 import NotFoundItem from "../../../components/NotFoundItem.tsx";
+import { MerchantService } from "../../../service/MerchantService.ts";
 
 interface FlyersCarouselProps {
   flyers: FlyerTypes[];
@@ -32,10 +33,7 @@ const FlyersCarousel = ({ flyers, loading }: FlyersCarouselProps) => {
   useEffect(() => {
     const fetchMerchant = async () => {
       if (flyerSelected) {
-        const response = await api.get(
-          `/comercios/find/${flyerSelected?.comercioId}`
-        );
-        setMerchant(response.data);
+        MerchantService.getById(flyerSelected.comercioId).then(setMerchant).catch(console.error);
       }
     };
     fetchMerchant();

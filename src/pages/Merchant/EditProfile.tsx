@@ -18,12 +18,12 @@ const EditProfile = () => {
   const [uploadError, setUploadError] = useState<ErrorType | null>(null);
   const userId = localStorage.getItem("userId");
   const [merchant, setMerchant] = useState<MerchantTypes>();
-  const [imgProfile, setImgProfile] = useState<File | undefined>(undefined);
-  const [imgPreview, setImgPreview] = useState("");
+  const [imgPreview, setImgPreview] = useState<File | undefined>(undefined);
+  const [imgUrl, setImgUrl] = useState("");
   const {
     register,
     handleSubmit,
-    reset,
+    reset, 
     watch,
     formState: { errors },
   } = useForm<MerchantProfileData>({
@@ -34,12 +34,11 @@ const EditProfile = () => {
   useEffect(() => {
     const fecthMerchant = async () => {
       const response = await api.get(`/comercios/find/${userId}`);
-
-      const { fotoUrl } = response.data;
       const data = response.data;
-
+      console.log(data.senha, data.email);
+      
       setMerchant(response.data);
-      setImgPreview(fotoUrl);
+      setImgUrl(response.data.fotoUrl);
 
       reset({
         nome: data.nome,
@@ -60,12 +59,12 @@ const EditProfile = () => {
   }, [reset]);
 
   useEffect(() => {
-    if (imgProfile) {
-      const url = URL.createObjectURL(imgProfile);
-      setImgPreview(url);
+    if (imgPreview) {
+      const url = URL.createObjectURL(imgPreview);
+      setImgUrl(url);
       return () => URL.revokeObjectURL(url);
     }
-  }, [imgProfile]);
+  }, [imgPreview]);
 
   const onError = (errors: any) => {
     Object.values(errors).forEach((err: any) => {
@@ -76,13 +75,24 @@ const EditProfile = () => {
   };
 
   const onSubmit = async (data: MerchantProfileData) => {
+
     try {
       const formData = new FormData();
+      formData.append("photo", imgPreview);
+      console.log(merchant)
       const merchantData = {
         ...data,
         id: userId,
+        email: merchant?.email,
+        senha: merchant?.senha,
       };
-      await api.put("/comercios/edit", merchantData);
+      // if (imgPreview) {
+      //   await api.post(`/comercios/upload-foto-comercio/${userId}`, formData, {
+      //     headers: { "Content-Type": "multipart/form-data" },
+      //   });
+      // }
+
+      // await api.put("/comercios/edit", merchantData);
       toast.success("Perfil atualizado com sucesso!");
     } catch (error) {
       toast.error("Erro ao editar perfil.");
@@ -97,12 +107,12 @@ const EditProfile = () => {
       setUploadError({
         img_upload: "O arquivo precisa ser uma imagem (JPG ou PNG)",
       });
-      setImgProfile(undefined);
+      setImgPreview(undefined);
       return;
     }
 
     setUploadError(null);
-    setImgProfile(file);
+    setImgPreview(file);
   };
 
   const selectedRadio = watch("fazEntrega");
@@ -117,14 +127,14 @@ const EditProfile = () => {
         >
           {
             <div className="w-full flex justify-center items-center flex-col">
-              {imgProfile === undefined ? (
+              {imgPreview === null ? (
                 <div className="w-40 h-40 bg-dark-yellow text-white text-7xl rounded-full flex items-center justify-center">
                   {merchant?.nome[0]}
                 </div>
               ) : (
                 <img
                   className="w-40 h-40 object-cover rounded-full"
-                  src={imgPreview}
+                  src={imgUrl}
                   alt={`Perfil de ${merchant?.nome}`}
                 />
               )}

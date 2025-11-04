@@ -4,30 +4,21 @@ import { Link } from "react-router-dom";
 import logo from "../../../assets/logo.png";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoSearch } from "react-icons/io5";
-import api from "../../../lib/axios.ts";
 import { MdLocalOffer } from "react-icons/md";
 import { TbBuildingPlus } from "react-icons/tb";
 import { LuLogOut } from "react-icons/lu";
 import { LogOut } from "../../../service/authService.ts";
+import type { MerchantTypes } from "../../../types/MerchantTypes.ts";
+import { MerchantService } from "../../../service/MerchantService.ts";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [imageMerchant, setImageMerchant] = useState<string | null>(null);
-  const [nameMerchant, setNameMerchant] = useState<string>("");
-
+  const [merchant, setMerchant] = useState<MerchantTypes>();
   const userId = localStorage.getItem("userId");
-  const firtsLetter = nameMerchant[0];
+
 
   useEffect(() => {
-    try {
-      const fetchId = async () => {
-        const response = await api.get(`/comercios/find/${userId}`);
-        const { fotoUrl, nome } = response.data;
-        setImageMerchant(fotoUrl);
-        setNameMerchant(nome);
-      };
-      fetchId();
-    } catch (error) {}
+    MerchantService.getById(userId).then(setMerchant).catch(console.error);
   }, []);
   return (
     <>
@@ -51,15 +42,15 @@ const Header = () => {
           </Link>
 
           <Link to={"/comerciantes/perfil"}>
-            {imageMerchant ? (
+            {merchant?.fotoUrl ? (
               <img
                 className="w-10 h-10 rounded-full object-cover"
-                src={imageMerchant ?? undefined}
+                src={merchant?.fotoUrl ?? undefined}
                 alt="Imagem de perfil"
               />
             ) : (
               <div className="w-10 h-10 bg-dark-yellow text-white text-lg rounded-full flex items-center justify-center">
-                {firtsLetter}
+                {merchant?.nome[0]}
               </div>
             )}
           </Link>
@@ -102,18 +93,18 @@ const Header = () => {
            hover:text-dark-yellow"
             to={"/comerciantes/perfil"}
           >
-            {imageMerchant ? (
+            {merchant?.fotoUrl ? (
               <div className="flex  gap-5">
                 <img
                   className="w-7 h-7 rounded-full object-cover"
-                  src={imageMerchant ?? undefined}
+                  src={merchant?.fotoUrl ?? undefined}
                   alt="Imagem de perfil"
                 />
                 <p className="">Perfil</p>
               </div>
             ) : (
               <div className="w-7 h-7 bg-dark-yellow text-white text-lg rounded-full flex items-center justify-center">
-                {firtsLetter}
+                {merchant?.nome[0]}
                 <p className="">Perfil</p>
               </div>
             )}

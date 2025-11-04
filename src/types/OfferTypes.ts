@@ -4,7 +4,7 @@ export type OfferTypes = {
   id: string;
   preco: number;
   dataPostagem: Date;
-  validade: string;
+  validade:  Date;
   produto: ProductType;
   likes: number;
   comercioId: string;
