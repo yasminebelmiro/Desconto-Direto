@@ -4,7 +4,7 @@ export const ProductSchema = z.object({
   nome: z.string().min(1, "O nome do produto é obrigatório."),
   medida: z.string().min(1, "A quantidade é obrigatória."),
   unidadeMedida: z.string().min(1, "A unidade de medida é obrigatória."),
-   categoria: z.string().min(1, "A categoria de medida é obrigatória."),
+  categoria: z.string().min(1, "A categoria de medida é obrigatória."),
   fotoUrl: z
     .any()
     .refine((files) => files?.length === 1, {
