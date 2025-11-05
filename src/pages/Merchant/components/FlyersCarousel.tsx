@@ -59,9 +59,9 @@ const FlyersCarousel = ({ flyers, loading }: FlyersCarouselProps) => {
     FlyerService.delete(id)
       .then(() => {
         setFlyerSelected(null);
+        toast.success("Panfleto excluído com sucesso!");
       })
       .catch(console.error);
-      toast.success("Panfleto excluído com sucesso!");
   };
 
   const handleCloseModal = () => {
