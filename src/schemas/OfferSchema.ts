@@ -1,6 +1,7 @@
 import z from "zod";
 
 export const OfferSchema = z.object({
+ 
   preco:  z.coerce.number()
     .positive("O preço deve ser maior que 0")
     .refine((val) => Number.isFinite(val), { message: "Preço inválido." }),

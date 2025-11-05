@@ -31,20 +31,7 @@ export const MerchantProfileSchema = z.object({
     .transform((val) => val === "true"),
   horarioAbertura: z.string().optional(),
   horarioFechamento: z.string().optional(),
-  fotoUrl:z
-      .any()
-      .refine((files) => files?.length === 1, {
-        message: "Você deve selecionar uma imagem",
-      })
-      .transform((files) => files[0])
-      .refine(
-        (file) =>
-          file &&
-          ["image/png", "image/jpeg", "image/jpg"].includes(file.type),
-        {
-          message: "A imagem deve ser JPG ou PNG",
-        }
-      ),
+  
 });
 
 export type MerchantProfileData = z.infer<typeof MerchantProfileSchema>;

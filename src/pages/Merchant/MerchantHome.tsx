@@ -32,7 +32,7 @@ const MerchantHome = () => {
       .finally(() => {
         setLoading(false);
       });
-  }, []);
+  }, [offers, flyers, userId]);
   return (
     <>
       <Header />

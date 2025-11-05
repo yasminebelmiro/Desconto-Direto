@@ -6,22 +6,21 @@ import { type FlyerData, FlyerSchema } from "../../schemas/FlyerSchema.ts";
 import { zodResolver } from "@hookform/resolvers/zod";
 import api from "../../lib/axios.ts";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
 import Header from "./components/Header.tsx";
 
 interface ErrorType {
   img_upload?: string | null;
 }
 const AddFlyer = () => {
-  const navigate = useNavigate();
   const [uploadError, setUploadError] = useState<ErrorType | null>(null);
   const [previewFlyer, setPreviewFlyer] = useState<File | undefined>(undefined);
   const [imgUrl, setImgUrl] = useState("");
-  const userId = localStorage.getItem("userId");
+const userId = localStorage.getItem("userId");
 
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm<FlyerData>({ resolver: zodResolver(FlyerSchema) });
 
@@ -55,29 +54,36 @@ const AddFlyer = () => {
     }
 
     try {
+      const { fotoUrl, ...restOfData } = data;
+
+      const initialFlyerData = { ...restOfData, fotoUrl: "" , comercioId: Number(userId) };
+      console.log(initialFlyerData);
+
+      const createResponse = await api.post("/panfletos/add", initialFlyerData);
+      console.log(createResponse.data);
+
+      const newFlyerId = createResponse.data.id;
+      console.log(newFlyerId);
+
+      if (!newFlyerId) {
+        toast.error("Falha ao criar o panfleto. Não foi possível obter o ID.");
+        throw new Error("Não foi possível obter o ID do panfleto criado.");
+      }
+
       const formData = new FormData();
-      formData.append("file", previewFlyer);
-
-      const imgResponse = await api.post(
-        `/panfletos/upload-foto-comercio/${userId}`,
-        formData,
-        {
-          headers: { "Content-Type": "multipart/form-data" },
-        }
-      );
-
-      const flyerData = {
-        ...data,
-        fotoUrl: imgResponse.data.url,
-      };
-
-      await api.post("/panfletos/add", flyerData);
+      formData.append("photo", previewFlyer);
+      console.log(formData.get("photo"));
+      
+      await api.post(`/panfletos/upload-foto-comercio/${newFlyerId}`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
       toast.success("Panfleto cadastrado com sucesso!");
-      navigate("/comerciantes/panfletos");
-    } catch (err) {
-      console.error(err);
+      reset();
+      setPreviewFlyer(undefined);
+    } catch (error) {
+      console.error(error);
       toast.error("Erro ao cadastrar panfleto.");
-    }
+      }
   };
 
   const onError = (errors: any) => {
