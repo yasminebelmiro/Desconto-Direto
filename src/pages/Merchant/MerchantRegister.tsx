@@ -46,7 +46,7 @@ const MerchantRegister = () => {
            bg-dark-yellow text-white w-full md:w-100 
         lg:w-120 h-screen md:h-120 gap-5 px-4 py-10 md:rounded-3xl "
         >
-          <h1 className="font-kaisei text-3xl">Cadastro</h1>
+          <h1 className="font-kaisei text-3xl text-center">Cadastro de comércio</h1>
           <form
             onSubmit={handleSubmit(onSubmit, onError)}
             className="flex flex-col items-center justify-center w-full gap-4"
