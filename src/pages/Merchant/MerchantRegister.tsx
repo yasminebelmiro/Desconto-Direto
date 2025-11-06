@@ -12,6 +12,7 @@ import Input from "../Login/components/Input.tsx";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "react-toastify";
 import { registerMerchant } from "../../service/authService.ts";
+import { onError } from "../../utils/handleError.ts";
 
 const MerchantRegister = () => {
   const navigate = useNavigate();
@@ -24,33 +25,26 @@ const MerchantRegister = () => {
   });
 
   const onSubmit = async (data: MerchantData) => {
-    try {
-      await registerMerchant(data);
-      toast.success("Cadastro realizado com sucesso!");
-      navigate(`/comerciantes/login`);
-    } catch (error) {
-      console.log(error);
-    }
+    await registerMerchant(data)
+      .then(() => {
+        toast.success("Cadastro realizado com sucesso!");
+        navigate(`/comerciantes/login`);
+      })
+      .catch(console.error);
   };
 
-  const onError = (errors: any) => {
-    Object.values(errors).forEach((err: any) => {
-      if (err?.message) {
-        toast.error(err.message);
-      }
-    });
-  };
+
   return (
     <div>
       <Header />
       <div
         className="flex flex-col w-full md:flex-row items-center justify-center 
-      md:px-10 md:py-25 "
+      md:px-10 md:h-screen lg:h-auto md:py-8 xl:py-25 bg-light-blue "
       >
         <div
           className="relative md:mr-[-35px] flex flex-col items-center justify-center
            bg-dark-yellow text-white w-full md:w-100 
-        lg:w-120 h-auto md:h-120 gap-5 px-4 py-10 md:rounded-3xl "
+        lg:w-120 h-screen md:h-120 gap-5 px-4 py-10 md:rounded-3xl "
         >
           <h1 className="font-kaisei text-3xl">Cadastro</h1>
           <form
@@ -109,8 +103,17 @@ const MerchantRegister = () => {
               className="font-kaisei bg-dark-blue w-1/2 px-10 py-2 rounded-2xl
                hover:bg-dark-orange cursor-pointer"
             >
-              Entrar
+              Cadastrar
             </button>
+             <p className="md:hidden">
+            Já tenho uma conta.{" "}
+            <span
+              className="underline hover:font-bold"
+              onClick={() => navigate("/comerciantes/login")}
+            >
+              Login
+            </span>
+          </p>
           </form>
         </div>
         <div
@@ -125,8 +128,9 @@ const MerchantRegister = () => {
             onClick={() => navigate("/comerciantes/login")}
             className="font-kaisei bg-dark-yellow hover:bg-dark-orange cursor-pointer mt-10 w-1/2 px-10 py-2 rounded-2xl text-white"
           >
-            Entrar
+            Login
           </button>
+          
         </div>
       </div>
     </div>

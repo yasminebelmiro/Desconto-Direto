@@ -7,6 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import api from "../../lib/axios.ts";
 import { toast } from "react-toastify";
 import Header from "./components/Header.tsx";
+import { onError } from "../../utils/handleError.ts";
 
 interface ErrorType {
   img_upload?: string | null;
@@ -84,14 +85,6 @@ const userId = localStorage.getItem("userId");
       console.error(error);
       toast.error("Erro ao cadastrar panfleto.");
       }
-  };
-
-  const onError = (errors: any) => {
-    Object.values(errors).forEach((err: any) => {
-      if (err?.message) {
-        toast.error(err.message);
-      }
-    });
   };
 
   return (

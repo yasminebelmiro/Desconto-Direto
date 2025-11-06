@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ReactModal from "react-modal";
@@ -71,7 +70,7 @@ const FlyersCarousel = ({ flyers, loading }: FlyersCarouselProps) => {
                   <img
                     src={item.fotoUrl}
                     alt={`Panfleto`}
-                    className="h-[200px] md:h-[300px] lg:h-[450px] w-full object-fill"
+                    className="h-full object-fill"
                     onClick={() => setFlyerSelected(item)}
                   />
                 </SwiperSlide>

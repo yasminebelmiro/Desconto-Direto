@@ -98,7 +98,7 @@ const FlyersCarousel = ({ flyers, loading }: FlyersCarouselProps) => {
                 <img
                   src={item.fotoUrl}
                   alt={`Panfleto de ${merchant?.nome} ${item.fotoUrl} `}
-                  className="h-[200px] md:h-[300px] lg:h-[450px] w-full object-fill"
+                  className="h-full object-fill"
                   onClick={() => setFlyerSelected(item)}
                 />
               </SwiperSlide>
@@ -124,7 +124,7 @@ const FlyersCarousel = ({ flyers, loading }: FlyersCarouselProps) => {
             className="flex flex-col md:flex-row justify-center items-center overflow-y-hidden h-full p-8  max-w-4xl mx-auto"
           >
             {modalView === "details" && flyerSelected && (
-              <div className="flex flex-col md:flex-row items-center bg-white w-full p-10 h-auto rounded-2xl">
+              <div className="flex flex-col md:flex-row items-center bg-white w-full py-5 md:p-10 h-auto rounded-2xl">
                 <div className="w-full lg:w-1/2  h-auto flex items-center justify-center">
                   <img
                     className="w-auto h-[80%] lg:w-[60%] lg:h-auto rounded-lg"
@@ -151,24 +151,25 @@ const FlyersCarousel = ({ flyers, loading }: FlyersCarouselProps) => {
                       ).toString()}
                     </span>
                   </p>
-                  <button
-                    className="p-4 w-1/2 bg-dark-blue rounded-2xl text-dark-yellow font-bold cursor-pointer"
-                    onClick={handleCloseModal}
-                  >
-                    Fechar
-                  </button>
+                
                   <button
                     className="p-4 w-1/2 bg-red-500 rounded-2xl text-white font-bold cursor-pointer"
                     onClick={() => setModalView("confirm")}
                   >
                     Excluir
                   </button>
+                    <button
+                    className="p-4 w-1/2 bg-dark-blue rounded-2xl text-dark-yellow font-bold cursor-pointer"
+                    onClick={handleCloseModal}
+                  >
+                    Fechar
+                  </button>
                 </div>
               </div>
             )}
             {modalView === "confirm" && (
               <div className="flex flex-col items-center bg-white w-auto p-10 h-auto rounded-2xl">
-                <p className="text-lg font-bold">
+                <p className="text-lg font-bold text-center">
                   Tem certeza que deseja excluir este panfleto?
                 </p>
                 <div className="flex gap-4 mt-4">
@@ -178,7 +179,13 @@ const FlyersCarousel = ({ flyers, loading }: FlyersCarouselProps) => {
                   >
                     Cancelar
                   </button>
-                  <button className="p-4 w-1/2 bg-dark-blue rounded-2xl text-dark-yellow font-bold cursor-pointer" onClick={() => { handleDeleteFlyer(flyerSelected!.id); handleCloseModal(); }}>
+                  <button
+                    className="p-4 w-1/2 bg-dark-blue rounded-2xl text-dark-yellow font-bold cursor-pointer"
+                    onClick={() => {
+                      handleDeleteFlyer(flyerSelected!.id);
+                      handleCloseModal();
+                    }}
+                  >
                     Confirmar
                   </button>
                 </div>

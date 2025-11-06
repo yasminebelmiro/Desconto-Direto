@@ -7,11 +7,12 @@ import type { OfferTypes } from "../../../types/OfferTypes.ts";
 import ReactModal from "react-modal";
 import { toast } from "react-toastify";
 import { OfferService } from "../../../service/OfferService.ts";
+import { useNavigate } from "react-router-dom";
 
 const OfferCard = ({ ...props }: OfferTypes) => {
   const [isOpenModal, setIsOpenModal] = useState(false);
-
   const [isOpenOverlay, setIsOpenOverlay] = useState(false);
+  const navigate = useNavigate();
   const formatedPrice = (price: number) => {
     return price.toFixed(2).replace(".", ",");
   };
@@ -26,19 +27,19 @@ const OfferCard = ({ ...props }: OfferTypes) => {
 
   const handleDeleteOffer = (id: string) => {
     if (!id) return;
-    OfferService.delete(id)
+    OfferService.delete(id);
   };
 
   return (
     <div className="font-inter flex justify-center items-center">
-      <div className=" relative outline-4 outline-dark-orange w-35 h-50 md:w-50 md:h-70 rounded-2xl">
+      <div className=" relative outline-4 outline-dark-orange w-50 h-55 md:w-50 md:h-70 rounded-2xl">
         <div className="flex gap-2 items-center justify-start pt-2 pl-2">
           <FaHeart className="text-red-500 text-lg md:text-2xl" />
           <p className="text-xs text-red-500">{props.likes}</p>
         </div>
         <button
           onClick={() => setIsOpenOverlay(!isOpenOverlay)}
-          className="absolute top-[-1%] right-[-1%] w-10 h-10 md:w-15 md:h-15 flex items-center justify-center rounded-2xl
+          className="absolute top-[-1%] right-[-1%] w-15 h-15  flex items-center justify-center rounded-2xl
      bg-dark-orange cursor-pointer outline-none "
         >
           <IoSettingsSharp className="text-2xl text-white" />
@@ -56,22 +57,27 @@ const OfferCard = ({ ...props }: OfferTypes) => {
             {formatedData(props.validade.toString())}
           </h2>
           <h3
-            className="font-kaisei absolute w-35 h-8 md:w-52 md:h-12 bottom-[-3%] bg-dark-orange
+            className="font-kaisei absolute w-50 h-10 md:w-52 md:h-12 bottom-[-3%] bg-dark-orange
            text-white font-bold text-md md:text-lg flex items-center justify-center rounded-3xl"
           >
             R$ {formatedPrice(props.preco)}
           </h3>
         </div>
         {isOpenOverlay && (
-          <div className="absolute top-0 left-0 w-35 h-50 md:w-50 md:h-70 bg-dark-orange/50 rounded-2xl flex flex-col items-center justify-center gap-3">
+          <div className="absolute top-0 left-0 w-full h-full bg-dark-orange/50 rounded-2xl flex flex-col items-center justify-center gap-3">
             <button
               onClick={() => setIsOpenOverlay(!isOpenOverlay)}
-              className="absolute top-[-1%] right-[-1%] w-10 h-10 md:w-15 md:h-15 flex items-center justify-center rounded-2xl
+              className="absolute top-[-1%] right-[-1%] w-15 h-15 md:w-15 md:h-15 flex items-center justify-center rounded-2xl
      bg-dark-orange cursor-pointer outline-none "
             >
               <RiCloseLargeFill className="text-2xl text-white" />
             </button>
-            <button className="w-[80%] text-white font-bold font-inter bg-dark-yellow hover:bg-light-yellow hover:text-black h-8 md:h-10 rounded-2xl cursor-pointer">
+            <button
+              className="w-[80%] text-white font-bold font-inter bg-dark-yellow hover:bg-light-yellow hover:text-black h-8 md:h-10 rounded-2xl cursor-pointer"
+              onClick={() =>
+                navigate(`/comerciantes/editar-oferta/${props.id}`)
+              }
+            >
               Editar
             </button>
             <button

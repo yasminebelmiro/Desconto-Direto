@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FaRegBell, FaRegHeart, FaSearch } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../../assets/logo.png";
 
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -10,13 +10,14 @@ import { LogOut } from "../../../service/authService.ts";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
   return (
     <>
       <section
         className="bg-dark-blue flex items-center justify-between
        px-10 py-5 lg:px-30"
       >
-        <img className="w-8" src={logo} alt="Logo DD" />
+        <img className="w-8 cursor-pointer" src={logo} alt="Logo DD" onClick={() => navigate("/consumidores/home")} />
         <button
           className="text-white text-2xl"
           onClick={() => setIsMenuOpen(!isMenuOpen)}

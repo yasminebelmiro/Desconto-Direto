@@ -11,6 +11,7 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "react-toastify";
 import { resgiterConsumer } from "../../service/authService.ts";
+import { onError } from "../../utils/handleError.ts";
 
 const ConsumerRegister = () => {
   const navigate = useNavigate();
@@ -25,20 +26,15 @@ const ConsumerRegister = () => {
 
   const onSubmit = async (data: ConsumerRegisterData) => {
     try {
-      await resgiterConsumer(data);
-      toast.success("Cadastro realizado com sucesso!");
-      navigate(`/consumidores/login`);
+      await resgiterConsumer(data)
+        .then(() => {
+          toast.success("Cadastro realizado com sucesso!");
+          navigate(`/consumidores/login`);
+        })
+        .catch(console.error);
     } catch (error) {
       console.log(error);
     }
-  };
-
-  const onError = (errors: any) => {
-    Object.values(errors).forEach((err: any) => {
-      if (err?.message) {
-        toast.error(err.message);
-      }
-    });
   };
 
   return (
@@ -46,7 +42,7 @@ const ConsumerRegister = () => {
       <Header />
       <div
         className="flex flex-col w-full md:flex-row items-center justify-center 
-      md:px-10 md:py-25 "
+      md:px-10 md:h-screen lg:h-auto md:py-8 xl:py-25 bg-light-blue"
       >
         <div
           className="relative md:mr-[-35px] flex flex-col items-center justify-center
@@ -104,13 +100,13 @@ const ConsumerRegister = () => {
               Entrar
             </button>
           </form>
-          <p>
-            Não tenho uma conta.{" "}
+          <p className="md:hidden">
+            Já tenho uma conta.{" "}
             <span
               className="underline hover:font-bold"
               onClick={() => navigate("/consumidores/login")}
             >
-              Cadastrar
+              Login
             </span>
           </p>
         </div>
@@ -126,7 +122,7 @@ const ConsumerRegister = () => {
             onClick={() => navigate("/consumidores/login")}
             className="font-kaisei bg-dark-yellow hover:bg-dark-orange cursor-pointer mt-10 w-1/2 px-10 py-2 rounded-2xl text-white"
           >
-            Cadastrar
+            Login
           </button>
         </div>
       </div>

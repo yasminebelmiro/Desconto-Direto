@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import api from "../../lib/axios.ts";
 import { ProductCategory } from "../../enum/ProductsCategory.ts";
 import Header from "./components/Header.tsx";
+import { onError } from "../../utils/handleError.ts";
 
 export const units: string[] = [
   "Unidade",
@@ -134,19 +135,11 @@ const AddProduct = () => {
     }
   };
 
-  const onError = useCallback((errors: any) => {
-    Object.values(errors).forEach((err: any) => {
-      if (err?.message) {
-        toast.error(err.message);
-      }
-    });
-  }, [errors]);
-
   return (
     <div>
       <Header />
       <BreadcrumbBanner
-        currentPage="Cadastro de Panfleto"
+        currentPage="Cadastro de Produto"
         typeUser="comerciantes"
       />
       <div className="font-inter flex flex-col-reverse md:flex-row items-center justify-center md:justify-evenly p-10 ">

@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import NotFoundItem from "../../components/NotFoundItem.tsx";
 import Header from "./components/Header.tsx";
 import { ProductService } from "../../service/ProductServices.ts";
+import { onError } from "../../utils/handleError.ts";
 
 const NewOffer = () => {
   const [search, setSearch] = useState<string>("");
@@ -36,13 +37,7 @@ const NewOffer = () => {
     resolver: zodResolver(OfferSchema),
   });
 
-  const onError = (errors: any) => {
-    Object.values(errors).forEach((err: any) => {
-      if (err?.message) {
-        toast.error(err.message);
-      }
-    });
-  };
+ 
 
   const onSubmit = async (data: OfferData) => {
     try {

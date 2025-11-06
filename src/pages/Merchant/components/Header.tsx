@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { FaCartPlus, FaRegBell, FaRegHeart, FaSearch } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../../assets/logo.png";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoSearch } from "react-icons/io5";
@@ -15,7 +15,7 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [merchant, setMerchant] = useState<MerchantTypes>();
   const userId = localStorage.getItem("userId");
-
+  const navigate = useNavigate();
 
   useEffect(() => {
     MerchantService.getById(userId).then(setMerchant).catch(console.error);
@@ -26,7 +26,7 @@ const Header = () => {
         className="bg-dark-blue flex items-center justify-between
        px-10 py-5 lg:px-30"
       >
-        <img className="w-8" src={logo} alt="Logo DD" />
+        <img className="w-8 cursor-pointer" src={logo} alt="Logo DD" onClick={() => navigate( "/comerciantes/home")} />
         <button
           className="text-white text-2xl"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -67,7 +67,7 @@ const Header = () => {
           <Link
             className="font-inter flex gap-5 items-center w-full
            hover:text-dark-yellow"
-            to={"v"}
+            to={"/comerciantes/novo-produto"}
           >
             <FaCartPlus />
             <p className="">Adicionar produto</p>
@@ -100,14 +100,13 @@ const Header = () => {
                   src={merchant?.fotoUrl ?? undefined}
                   alt="Imagem de perfil"
                 />
-                <p className="">Perfil</p>
               </div>
             ) : (
               <div className="w-7 h-7 bg-dark-yellow text-white text-lg rounded-full flex items-center justify-center">
                 {merchant?.nome[0]}
-                <p className="">Perfil</p>
               </div>
             )}
+            <p className="">Perfil</p>
           </Link>
           <Link
             to="/comerciantes"

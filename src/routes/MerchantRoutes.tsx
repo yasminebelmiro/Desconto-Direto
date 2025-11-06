@@ -8,6 +8,7 @@ import NewOffer from "../pages/Merchant/NewOffer.tsx";
 import Profile from "../pages/Merchant/Profile.tsx";
 import AddProduct from "../pages/Merchant/AddProduct.tsx";
 import EditProfile from "../pages/Merchant/EditProfile.tsx";
+import EditOffer from "../pages/Merchant/EditOffer.tsx";
 
 const MerchantRoutes = [
   {
@@ -48,6 +49,10 @@ const MerchantRoutes = [
       {
         path: "/comerciantes/editar-perfil",
         element: <EditProfile />,
+      },
+      {
+        path: "/comerciantes/editar-oferta/:offerId",
+        element: <EditOffer />,
       },
     ],
   },

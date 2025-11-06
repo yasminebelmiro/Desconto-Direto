@@ -11,6 +11,7 @@ import api from "../../lib/axios.ts";
 import type { MerchantTypes } from "../../types/MerchantTypes.ts";
 import { MerchantCategorys } from "../../enum/MerchantCategorys.ts";
 import { useNavigate } from "react-router-dom";
+import { onError } from "../../utils/handleError.ts";
 
 
 interface ErrorType {
@@ -60,17 +61,10 @@ const EditProfile = () => {
     }
   }, [imgPreview]);
 
-  const onError = (errors: any) => {
-    Object.values(errors).forEach((err: any) => {
-      if (err?.message) {
-        toast.error(err.message);
-      }
-    });
-  };
   const onSubmit = async (data: MerchantProfileData) => {
     try {
-      let fotoUrlToSend = merchant?.fotoUrl || ""; // URL existente por padrão
-      // Se houver nova imagem, faça upload primeiro e obtenha a nova URL
+      let fotoUrlToSend = merchant?.fotoUrl || ""; 
+    
       if (imgPreview) {
         const formData = new FormData();
         formData.append("photo", imgPreview);
@@ -79,24 +73,20 @@ const EditProfile = () => {
           formData,
           { headers: { "Content-Type": "multipart/form-data" } }
         );
-        // Assuma que a resposta retorna a nova fotoUrl (ajuste se for diferente, ex.: uploadResponse.data.url)
+      
         fotoUrlToSend = uploadResponse.data.fotoUrl || uploadResponse.data;
         toast.success("Foto atualizada com sucesso!");
       }
-      // Mesclar dados existentes com os atualizados do formulário
+  
       const payload = {
-        ...merchant, // Inclui id, email, senha, aberto, ofertas, panfletos, etc.
-        ...data, // Sobrescreve apenas os campos editados
-        fotoUrl: fotoUrlToSend, // Atualiza fotoUrl
-        id: merchant?.id || parseInt(userId || "0"), // Garantir id como number
+        ...merchant,
+        ...data, 
+        fotoUrl: fotoUrlToSend, 
+        id: merchant?.id || parseInt(userId || "0"), 
       };
-      // Enviar payload completo para o backend
+ 
       await api.put("/comercios/edit", payload);
       toast.success("Perfil atualizado com sucesso!");
-      // Opcional: Recarregar dados após update para refletir mudanças
-      // const response = await api.get(`/comercios/find/${userId}`);
-      // setMerchant(response.data);
-      // setImgUrl(response.data.fotoUrl);
     } catch (error) {
       console.error("Erro ao editar perfil:", error);
       toast.error("Erro ao editar perfil.");
@@ -145,7 +135,7 @@ const EditProfile = () => {
               accept="image/*"
               className="w-full lg:w-1/2 outline-1 outline-dark-orange text-dark-orange file:mr-2 file:py-2 file:px-3 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-light-yellow file:text-dark-orange my-4 cursor-pointer"
               placeholder="Editar imagem"
-              // Removido {...register("fotoUrl")} para evitar conflitos de validação
+            
               onChange={handleImgChange}
             />
             {uploadError && (
@@ -153,7 +143,7 @@ const EditProfile = () => {
             )}
           </div>
 
-          {/* Restante do formulário permanece igual */}
+      
           <div className="flex flex-col w-full">
             <label className="text-lg text-dark-orange">Nome do comércio</label>
             <input
@@ -164,7 +154,7 @@ const EditProfile = () => {
           </div>
           <div className="flex flex-col w-full">
             <label className="text-lg text-dark-orange">Categoria</label>{" "}
-            {/* Corrigido: "Cateogria" para "Categoria" */}
+          
             <select
               className="w-full outline-dark-orange outline-1 text-gray-500 p-3"
               {...register("categoria")}
