@@ -21,7 +21,7 @@ const NewOffer = () => {
 
   const [selectProduct, setSelectProduct] = useState<ProductType | null>(null);
 
-  const userId = localStorage.getItem("userId");
+  const userId = localStorage.getItem("token");
   const navigate = useNavigate();
 
   const searchResult = products.filter((product) =>
@@ -36,8 +36,6 @@ const NewOffer = () => {
   } = useForm<OfferData>({
     resolver: zodResolver(OfferSchema),
   });
-
- 
 
   const onSubmit = async (data: OfferData) => {
     try {

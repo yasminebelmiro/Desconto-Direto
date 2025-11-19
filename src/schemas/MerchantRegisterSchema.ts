@@ -21,11 +21,11 @@ export const MerchantProfileSchema = z.object({
   nome: z.string().min(1, "Nome da empresa obrigatório."),
   categoria: z.string().min(1, "Categoria da empresa obrigatório."),
   telefone: z.string().optional(),
-  endereco: z.string().optional(),
+  endereco: z.string().min(1, "Endereço é obrigatório."),
   telefoneCelular: z.string().optional(),
   instagram: z.string().optional(),
-  bairro: z.string().min(1, "Categoria da empresa obrigatório."),
-  cep: z.string().min(1, "Categoria da empresa obrigatório."),
+  bairro: z.string().min(1, "Bairro é obrigatório."),
+  cep: z.string().min(1, "CEP obrigatório."),
   fazEntrega: z
     .enum(["true", "false"])
     .transform((val) => val === "true"),

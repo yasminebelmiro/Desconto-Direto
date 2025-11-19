@@ -11,7 +11,7 @@ import { ConsumerService } from "../../service/ConsumerService.ts";
 const FavoritesOffers = () => {
   const [offers, setOffers] = useState<OfferTypes[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const userId = localStorage.getItem("userId");
+  const userId = localStorage.getItem("token");
 
   useEffect(() => {
     if (!offers) {

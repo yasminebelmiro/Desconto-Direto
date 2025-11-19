@@ -74,6 +74,7 @@ const MerchantRegister = () => {
               type="string"
               placeholder="Telefone"
               error={errors.telefone?.message}
+            {...register("telefone")}
             />
             <Input
               type="email"

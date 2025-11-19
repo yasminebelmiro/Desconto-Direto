@@ -7,11 +7,14 @@ import { TbTruckDelivery } from "react-icons/tb";
 import { FaLocationDot, FaSquareInstagram } from "react-icons/fa6";
 import { FaCity, FaPhone, FaWhatsapp } from "react-icons/fa";
 import { MerchantService } from "../../service/MerchantService.ts";
+import ReactModal from "react-modal";
+import { toast } from "react-toastify";
 
 const Profile = () => {
-  const userId = localStorage.getItem("userId");
+  const userId = localStorage.getItem("token");
   const navigate = useNavigate();
   const [merchant, setMerchant] = useState<MerchantTypes>();
+  const [isOpenModal, setIsOpenModal] = useState(false);
 
   const formatedHour = (time: string) => {
     if (!time) return "N/A";
@@ -22,6 +25,13 @@ const Profile = () => {
   useEffect(() => {
     MerchantService.getById(userId).then(setMerchant).catch(console.error);
   }, []);
+
+  const handleDeleteOffer = (id: string | undefined) => {
+    if (id === undefined) return;
+    MerchantService.delete(id).then(() => toast("Conta excluida com sucesso!"));
+    
+    navigate("/")
+  };
 
   return (
     <>
@@ -38,11 +48,11 @@ const Profile = () => {
           <p>{merchant?.nome ?? "Comércio não encontrado"} </p>
         </div>
 
-        <div className="relative flex flex-col w-full md:w-[80%] lg:w-[70%] mt-20 md:m-20 rounded-2xl bg-dark-orange justify-center items-center p-10 text-white">
+        <div className="relative flex flex-col w-full md:w-[80%] lg:w-[70%] mt-20 md:mt-20 rounded-2xl bg-dark-orange justify-center items-center p-10 text-white">
           <div className="flex flex-col justify-center items-center text-center gap-5 mb-10">
             {merchant?.fotoUrl ? (
               <img
-                className="absolute top-[-15%] rounded-full w-30 object-cover outline-3 outline-dark-orange"
+                className="absolute top-[-10%] md:top-[-20%] rounded-full w-30 object-cover outline-3 outline-dark-orange"
                 src={merchant?.fotoUrl}
                 alt={`Logo de ${merchant?.nome}`}
               />
@@ -112,7 +122,59 @@ const Profile = () => {
           >
             Editar
           </button>
+          <button
+            onClick={() => setIsOpenModal(true)}
+            className="md:hidden w-full  top-0 right-4 h-10 mt-4 bg-red-700 text-xl text-white rounded-2xl cursor-pointer"
+          >
+            Deletar minha conta
+          </button>
+          <ReactModal
+            isOpen={isOpenModal}
+            onRequestClose={() => setIsOpenModal(false)}
+            ariaHideApp={false}
+            style={{
+              overlay: {
+                zIndex: 1000,
+                backgroundColor: "rgba(0, 0, 0, 0.5)",
+              },
+              content: {
+                zIndex: 1001,
+                position: "relative",
+                inset: "auto",
+              },
+            }}
+            className="flex justify-center items-center w-full h-full p-8 max-w-md mx-auto"
+          >
+            <div className="flex flex-col items-center bg-white w-auto p-10 h-auto rounded-2xl">
+              <p className="text-lg font-bold">
+                Tem certeza que deseja excluir esta oferta?
+              </p>
+              <div className="flex gap-4 mt-4">
+                <button
+                  className="p-4 w-1/2 bg-red-500 rounded-2xl text-white font-bold cursor-pointer"
+                  onClick={() => setIsOpenModal(false)}
+                >
+                  Cancelar
+                </button>
+                <button
+                  className=" p-4 w-1/2 bg-dark-blue rounded-2xl text-dark-yellow font-bold cursor-pointer"
+                  onClick={() => {
+                    handleDeleteOffer(merchant?.id);
+                    setIsOpenModal(false);
+                  }}
+                >
+                  Confirmar
+                </button>
+              </div>
+            </div>
+          </ReactModal>
         </div>
+        <button
+          onClick={() => setIsOpenModal(true)}
+          className="hidden md:flex text-center w-1/3 h-10 items-center justify-center m-5 bg-red-700 text-xl text-white rounded-2xl cursor-pointer"
+        >
+          Deletar minha conta
+        </button>
       </div>
     </>
   );

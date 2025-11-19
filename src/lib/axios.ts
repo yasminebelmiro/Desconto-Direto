@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://descontodiretoapi-deploy-production-0c84.up.railway.app/",
+  baseURL: "http://localhost:8080/",
   timeout: 10000,
   headers: {
     "Content-Type": "application/json",

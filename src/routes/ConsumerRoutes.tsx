@@ -3,10 +3,11 @@ import ConsumerHome from "../pages/Consumer/ConsumerHome.tsx";
 import ConsumerRegister from "../pages/Consumer/ConsumerRegister.tsx";
 import SearchConsumer from "../pages/Consumer/SearchConsumer.tsx";
 import LandingPage from "../pages/LadingPage/LandingPage.tsx";
-import Login from "../pages/Login/Login.tsx";
+
 import ProtectedRoutes from "./ProtectedRoute.tsx";
 import FavoritesOffers from "../pages/Consumer/FavoritesOffers.tsx";
 import MerchantProfile from "../pages/Consumer/MerchantProfile.tsx";
+import LoginConsumer from "../pages/Login/LoginConsumer.tsx";
 
 const ConsumerRoutes = [
   {
@@ -15,7 +16,7 @@ const ConsumerRoutes = [
   },
   {
     path: "/consumidores/login",
-    element: <Login />,
+    element: <LoginConsumer />,
   },
   {
     path: "/consumidores/cadastrar",
@@ -38,8 +39,8 @@ const ConsumerRoutes = [
       },
       {
         path: `/consumidores/comercios/:id`,
-        element: <MerchantProfile/>
-      }
+        element: <MerchantProfile />,
+      },
     ],
   },
 ];

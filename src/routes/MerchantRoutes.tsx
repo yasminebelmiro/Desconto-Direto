@@ -1,5 +1,4 @@
 import LandingPage from "../pages/LadingPage/LandingPage.tsx";
-import Login from "../pages/Login/Login.tsx";
 import MerchantHome from "../pages/Merchant/MerchantHome.tsx";
 import MerchantRegister from "../pages/Merchant/MerchantRegister.tsx";
 import ProtectedRoutes from "./ProtectedRoute.tsx";
@@ -9,6 +8,7 @@ import Profile from "../pages/Merchant/Profile.tsx";
 import AddProduct from "../pages/Merchant/AddProduct.tsx";
 import EditProfile from "../pages/Merchant/EditProfile.tsx";
 import EditOffer from "../pages/Merchant/EditOffer.tsx";
+import LoginMerchant from "../pages/Login/LoginMerchant.tsx";
 
 const MerchantRoutes = [
   {
@@ -17,7 +17,7 @@ const MerchantRoutes = [
   },
   {
     path: "/comerciantes/login",
-    element: <Login />,
+    element: <LoginMerchant />,
   },
   {
     path: "/comerciantes/cadastrar",

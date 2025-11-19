@@ -9,7 +9,7 @@ interface ProtectedRoutesProps {
 export default function ProtectedRoutes({
   roleRequired,
 }: ProtectedRoutesProps) {
-  const user = localStorage.getItem("userId");
+  const user = localStorage.getItem("token");
   const role = localStorage.getItem("role") as "consumer" | "merchant" | null;
 
   if (!user) return <Navigate to={"/"} replace />;

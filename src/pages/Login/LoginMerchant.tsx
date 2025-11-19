@@ -5,30 +5,24 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UserLoginSchema, type LoginData } from "../../schemas/LoginSchema.ts";
 import Input from "./components/Input.tsx";
-import { toast, ToastContainer } from "react-toastify";
-import { login } from "../../service/authService.ts";
-import { onError } from "../../utils/handleError.ts";
+import { toast } from "react-toastify";
 
-const Login = () => {
-  const location = useLocation();
+import { onError } from "../../utils/handleError.ts";
+import { loginMerchant } from "../../service/authService.ts";
+
+const LoginMerchant = () => {
   const navigate = useNavigate();
-  const isMerchantArea = location.pathname.includes("comerciantes");
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<LoginData>({ resolver: zodResolver(UserLoginSchema) });
-
-  const endpoint = isMerchantArea ? "/comercios/all" : "/clientes/all";
-
   const onSubmit = async (data: LoginData) => {
     try {
-      const response = await login(data.email, data.senha, endpoint);
-      if (response.role === "merchant") {
-        navigate("/comerciantes/home");
-      } else {
-        navigate("/consumidores/home");
-      }
+      await loginMerchant(data.email, data.senha);
+
+      navigate("/comerciantes/home");
     } catch (error) {
       console.error(error);
       toast.error(
@@ -37,12 +31,13 @@ const Login = () => {
     }
   };
 
-
   return (
     <div>
       <Header />
-      <div className="flex flex-col w-full md:flex-row items-center justify-center 
-      md:px-10 md:h-screen lg:h-auto md:py-8 xl:py-25 bg-light-blue">
+      <div
+        className="flex flex-col w-full md:flex-row items-center justify-center 
+      md:px-10 md:h-screen lg:h-auto md:py-8 xl:py-25 bg-light-blue"
+      >
         <div className="hidden md:flex flex-col items-center justify-center bg-dark-blue md:w-100 lg:w-120 h-100 lg:h-120 rounded-3xl">
           <img className="w-10" src={logo} alt="Logo DD" />
           <h1 className="font-kaisei flex flex-col text-center md:text-xl text-white">
@@ -50,9 +45,7 @@ const Login = () => {
           </h1>
           <button
             onClick={() => {
-              isMerchantArea
-                ? navigate("/comerciantes/cadastrar")
-                : navigate("/consumidores/cadastrar");
+              navigate("/comerciantes/cadastrar");
             }}
             className="font-kaisei bg-dark-yellow hover:bg-dark-orange cursor-pointer mt-10 w-1/2 px-10 py-2 rounded-2xl text-white"
           >
@@ -95,9 +88,7 @@ const Login = () => {
             <span
               className="underline hover:font-bold"
               onClick={() => {
-                isMerchantArea
-                  ? navigate("/comerciantes/cadastrar")
-                  : navigate("/consumidores/cadastrar");
+                navigate("/comerciantes/cadastrar");
               }}
             >
               Cadastrar
@@ -108,4 +99,4 @@ const Login = () => {
     </div>
   );
 };
-export default Login;
+export default LoginMerchant;

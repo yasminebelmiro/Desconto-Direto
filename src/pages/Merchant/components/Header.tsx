@@ -14,7 +14,7 @@ import { MerchantService } from "../../../service/MerchantService.ts";
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [merchant, setMerchant] = useState<MerchantTypes>();
-  const userId = localStorage.getItem("userId");
+  const userId = localStorage.getItem("token");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -26,7 +26,12 @@ const Header = () => {
         className="bg-dark-blue flex items-center justify-between
        px-10 py-5 lg:px-30"
       >
-        <img className="w-8 cursor-pointer" src={logo} alt="Logo DD" onClick={() => navigate( "/comerciantes/home")} />
+        <img
+          className="w-8 cursor-pointer"
+          src={logo}
+          alt="Logo DD"
+          onClick={() => navigate("/comerciantes/home")}
+        />
         <button
           className="text-white text-2xl"
           onClick={() => setIsMenuOpen(!isMenuOpen)}

@@ -12,7 +12,7 @@ const MerchantHome = () => {
   const [loading, setLoading] = useState<boolean>(true);
 
   const [flyers, setFlyers] = useState<FlyerTypes[]>([]);
-  const userId = localStorage.getItem("userId");
+  const userId = localStorage.getItem("token");
 
   useEffect(() => {
     if (!offers) {
@@ -52,4 +52,4 @@ const MerchantHome = () => {
   );
 };
 
-export default MerchantHome; 
+export default MerchantHome;

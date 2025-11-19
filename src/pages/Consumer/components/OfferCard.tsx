@@ -15,7 +15,7 @@ const OfferCard = ({ ...props }: OfferTypes) => {
   const [merchant, setMerchant] = useState<MerchantTypes | null>(null);
   const [likes, setLikes] = useState(props.likes);
 
-  const userId = localStorage.getItem("userId");
+  const userId = localStorage.getItem("token");
 
   const navigate = useNavigate();
 

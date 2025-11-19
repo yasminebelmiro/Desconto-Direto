@@ -13,14 +13,13 @@ import { MerchantCategorys } from "../../enum/MerchantCategorys.ts";
 import { useNavigate } from "react-router-dom";
 import { onError } from "../../utils/handleError.ts";
 
-
 interface ErrorType {
   img_upload?: string | null;
 }
 
 const EditProfile = () => {
   const [uploadError, setUploadError] = useState<ErrorType | null>(null);
-  const userId = localStorage.getItem("userId");
+  const userId = localStorage.getItem("token");
   const [merchant, setMerchant] = useState<MerchantTypes>();
   const [imgPreview, setImgPreview] = useState<File | undefined>(undefined);
   const [imgUrl, setImgUrl] = useState("");
@@ -63,8 +62,8 @@ const EditProfile = () => {
 
   const onSubmit = async (data: MerchantProfileData) => {
     try {
-      let fotoUrlToSend = merchant?.fotoUrl || ""; 
-    
+      let fotoUrlToSend = merchant?.fotoUrl || "";
+
       if (imgPreview) {
         const formData = new FormData();
         formData.append("photo", imgPreview);
@@ -73,20 +72,22 @@ const EditProfile = () => {
           formData,
           { headers: { "Content-Type": "multipart/form-data" } }
         );
-      
+
         fotoUrlToSend = uploadResponse.data.fotoUrl || uploadResponse.data;
         toast.success("Foto atualizada com sucesso!");
       }
-  
+
       const payload = {
         ...merchant,
-        ...data, 
-        fotoUrl: fotoUrlToSend, 
-        id: merchant?.id || parseInt(userId || "0"), 
+        ...data,
+        fotoUrl: fotoUrlToSend,
+        id: merchant?.id || parseInt(userId || "0"),
       };
- 
+
       await api.put("/comercios/edit", payload);
       toast.success("Perfil atualizado com sucesso!");
+      navigate("/comerciantes/perfil")
+
     } catch (error) {
       console.error("Erro ao editar perfil:", error);
       toast.error("Erro ao editar perfil.");
@@ -135,7 +136,6 @@ const EditProfile = () => {
               accept="image/*"
               className="w-full lg:w-1/2 outline-1 outline-dark-orange text-dark-orange file:mr-2 file:py-2 file:px-3 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-light-yellow file:text-dark-orange my-4 cursor-pointer"
               placeholder="Editar imagem"
-            
               onChange={handleImgChange}
             />
             {uploadError && (
@@ -143,7 +143,6 @@ const EditProfile = () => {
             )}
           </div>
 
-      
           <div className="flex flex-col w-full">
             <label className="text-lg text-dark-orange">Nome do comércio</label>
             <input
@@ -154,7 +153,6 @@ const EditProfile = () => {
           </div>
           <div className="flex flex-col w-full">
             <label className="text-lg text-dark-orange">Categoria</label>{" "}
-          
             <select
               className="w-full outline-dark-orange outline-1 text-gray-500 p-3"
               {...register("categoria")}
@@ -265,7 +263,7 @@ const EditProfile = () => {
           </div>
           <button
             type="submit"
-            onClick={() => navigate("/comerciantes/perfil")}
+            
             className="w-full h-10 mt-10 bg-dark-orange text-xl text-white rounded-2xl cursor-pointer"
           >
             Salvar Perfil

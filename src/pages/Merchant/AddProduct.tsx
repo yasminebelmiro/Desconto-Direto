@@ -54,8 +54,8 @@ const AddProduct = () => {
     undefined
   );
   const [imgUrl, setImgUrl] = useState("");
-  const userId = localStorage.getItem("userId");
-
+  const userId = localStorage.getItem("token");
+const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -71,21 +71,24 @@ const AddProduct = () => {
     }
   }, [previewProduct]);
 
-  const handleImgChange = useCallback( (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
+  const handleImgChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const file = e.target.files?.[0];
+      if (!file) return;
 
-    if (!file.type.includes("image/")) {
-      setUploadError({
-        img_upload: "O arquivo precisa ser uma imagem (JPG ou PNG)",
-      });
-      setPreviewProduct(undefined);
-      return;
-    }
+      if (!file.type.includes("image/")) {
+        setUploadError({
+          img_upload: "O arquivo precisa ser uma imagem (JPG ou PNG)",
+        });
+        setPreviewProduct(undefined);
+        return;
+      }
 
-    setUploadError(null);
-    setPreviewProduct(file);
-  }, [setUploadError, setPreviewProduct]);
+      setUploadError(null);
+      setPreviewProduct(file);
+    },
+    [setUploadError, setPreviewProduct]
+  );
 
   const onSubmit = async (data: ProductData) => {
     if (!previewProduct) {
@@ -108,7 +111,6 @@ const AddProduct = () => {
       );
 
       const newProductId = createResponse.data.id;
-   
 
       if (!newProductId) {
         toast.error("Falha ao criar o produto. Não foi possível obter o ID.");
@@ -117,7 +119,6 @@ const AddProduct = () => {
 
       const formData = new FormData();
       formData.append("photo", previewProduct);
-    
 
       await api.post(
         `/produtos/upload-foto-produto/${newProductId}`,
@@ -129,6 +130,7 @@ const AddProduct = () => {
       toast.success("Produto cadastrado com sucesso!");
       reset();
       setPreviewProduct(undefined);
+      navigate("/comerciantes/nova-oferta")
     } catch (error) {
       console.error(error);
       toast.error("Erro ao cadastrar produto.");

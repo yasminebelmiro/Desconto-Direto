@@ -16,7 +16,7 @@ const AddFlyer = () => {
   const [uploadError, setUploadError] = useState<ErrorType | null>(null);
   const [previewFlyer, setPreviewFlyer] = useState<File | undefined>(undefined);
   const [imgUrl, setImgUrl] = useState("");
-const userId = localStorage.getItem("userId");
+const userId = localStorage.getItem("token");
 
   const {
     register,
