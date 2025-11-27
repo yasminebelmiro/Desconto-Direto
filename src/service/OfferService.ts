@@ -1,5 +1,6 @@
 import api from "../lib/axios.ts";
 import type { OfferData } from "../schemas/OfferSchema.ts";
+import type { OfferTypes } from "../types/OfferTypes.ts";
 
 export const OfferService = {
     getAll: async () => {
@@ -29,9 +30,12 @@ export const OfferService = {
       throw error;
     }
   },
-  update: async (data: OfferData) => {
+  update: async (data: any) => {
+  
     try {
-      const response = await api.put("/ofertas/edit", data);
+      const response = await api.put("/ofertas/edit", {
+        data
+      });
       return response.data;
     } catch (error) {
       console.error("Erro ao editar oferta:", error);

@@ -26,7 +26,7 @@ const Profile = () => {
     MerchantService.getById(userId).then(setMerchant).catch(console.error);
   }, []);
 
-  const handleDeleteOffer = (id: string | undefined) => {
+  const handleDeleteAccount = (id: string | undefined) => {
     if (id === undefined) return;
     MerchantService.delete(id).then(() => toast("Conta excluida com sucesso!"));
     
@@ -52,7 +52,7 @@ const Profile = () => {
           <div className="flex flex-col justify-center items-center text-center gap-5 mb-10">
             {merchant?.fotoUrl ? (
               <img
-                className="absolute top-[-10%] md:top-[-20%] rounded-full w-30 object-cover outline-3 outline-dark-orange"
+                className="absolute top-[-10%] md:top-[-20%] rounded-full w-30 h-30 object-cover outline-3 outline-dark-orange"
                 src={merchant?.fotoUrl}
                 alt={`Logo de ${merchant?.nome}`}
               />
@@ -147,7 +147,7 @@ const Profile = () => {
           >
             <div className="flex flex-col items-center bg-white w-auto p-10 h-auto rounded-2xl">
               <p className="text-lg font-bold">
-                Tem certeza que deseja excluir esta oferta?
+                Tem certeza que deseja excluir sua conta?
               </p>
               <div className="flex gap-4 mt-4">
                 <button
@@ -159,7 +159,7 @@ const Profile = () => {
                 <button
                   className=" p-4 w-1/2 bg-dark-blue rounded-2xl text-dark-yellow font-bold cursor-pointer"
                   onClick={() => {
-                    handleDeleteOffer(merchant?.id);
+                    handleDeleteAccount(merchant?.id);
                     setIsOpenModal(false);
                   }}
                 >

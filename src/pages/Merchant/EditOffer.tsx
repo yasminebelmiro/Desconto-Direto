@@ -10,9 +10,10 @@ import Header from "./components/Header.tsx";
 import { onError } from "../../utils/handleError.ts";
 import { OfferService } from "../../service/OfferService.ts";
 import { toast } from "react-toastify";
+import api from "../../lib/axios.ts";
 
 const EditOffer = () => {
-  const [offer, setOffer] = useState<OfferTypes | undefined>();
+  const [offer, setOffer] = useState<OfferTypes>();
 
   const { offerId } = useParams();
   const navigate = useNavigate();
@@ -27,26 +28,43 @@ const EditOffer = () => {
   });
 
   useEffect(() => {
-  
-    OfferService.getById(offerId as string)
-      .then((data) => {
+    const fetchOffer = async () => {
+      try {
+        const response = await api.get(`/ofertas/find/${offerId}`);
+        const data = response.data;
+
         setOffer(data);
-      })
-      .catch(console.error);
+        const dataFormatada = data.validade
+          ? new Date(data.validade).toISOString().split("T")[0]
+          : "";
+
+        reset({
+          validade: dataFormatada as any,
+          preco: data.preco,
+        });
+      } catch (error) {
+        console.error("Erro ao buscar oferta:", error);
+        toast.error("Erro ao carregar oferta.");
+      }
+    };
+    fetchOffer();
   }, []);
 
   const onSubmit = async (data: OfferData) => {
-    // const updatedData = { ...offer, ...data };
-    // console.log(offer);
-    // await OfferService.update(updatedData).then(() => {
-    //   // navigate("/comerciantes/home");
-    //   toast.success("Oferta atualizada com sucesso!");
-    // }).catch((error) => {
-    //   onError(error);
-    //   toast.error("Erro ao atualizar a oferta.");
-    // });
-    navigate("/comerciantes/home");
-    toast.error("Essa funcionalidade esta com erro na api.");
+    const updatedData = { ...offer, ...data, validade : data.validade.toISOString() };
+    console.log("ofertas: ", offer);
+    console.log("data: ", data);
+    console.log("updatedData: ", updatedData);
+    
+    await OfferService.update(updatedData)
+      .then(() => {
+        navigate("/comerciantes/home");
+        toast.success("Oferta atualizada com sucesso!");
+      })
+      .catch((error) => {
+        onError(error);
+        toast.error("Erro ao atualizar a oferta.");
+      });
   };
 
   return (
@@ -129,8 +147,12 @@ const EditOffer = () => {
                 min="0"
                 placeholder="R$0.00"
                 {...register("preco", {
-                  setValueAs: (val) =>
-                    val ? parseFloat(val.replace(",", ".")) : undefined,
+                  setValueAs: (val) => {
+                    if (val === "" || val === undefined || val === null)
+                      return undefined;
+                    if (typeof val === "number") return val;
+                    return parseFloat(String(val).replace(",", "."));
+                  },
                 })}
               />
             </div>{" "}
@@ -139,7 +161,6 @@ const EditOffer = () => {
               className="w-full h-10 mt-4 bg-dark-orange text-xl text-white rounded-2xl cursor-pointer"
             >
               {isSubmitting ? "Enviando..." : "Enviar"}
-              
             </button>
           </form>
         </div>

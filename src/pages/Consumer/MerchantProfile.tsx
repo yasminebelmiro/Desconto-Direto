@@ -61,7 +61,7 @@ const MerchantProfile = () => {
           <div className="flex flex-col justify-center items-center text-center gap-5 mb-10">
             {merchant?.fotoUrl ? (
               <img
-                className="absolute top-[-15%] rounded-full w-30 object-cover outline-3 outline-dark-orange"
+                className="absolute top-[-15%] rounded-full w-30 h-30 object-cover outline-3 outline-dark-orange"
                 src={merchant?.fotoUrl}
                 alt={`Logo de ${merchant?.nome}`}
               />

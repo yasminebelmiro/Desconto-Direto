@@ -10,8 +10,12 @@ const LandingPage = () => {
     <div>
       <Header />
       <HeroSection />
+    
       <Steps />
-      <About />
+   
+        <About />
+      
+     
       <DownloadApp />
     </div>
   );

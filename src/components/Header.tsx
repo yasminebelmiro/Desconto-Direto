@@ -7,6 +7,13 @@ const Header = () => {
   const navigate = useNavigate();
   const isMerchantArea = location.pathname.includes("comerciantes");
   const [menuisOpen, setMenuIsOpen] = useState(false);
+
+  const scrollToSection = (id: string) => {
+    navigate("/");
+    const section = document.getElementById(id);
+    section?.scrollIntoView({ behavior: "smooth" });
+    
+  };
   return (
     <>
       <div className="bg-dark-blue flex items-center text-white justify-between px-10 py-5">
@@ -22,16 +29,24 @@ const Header = () => {
         <nav className="hidden lg:flex ">
           <ul className="flex justify-between items-center lg:gap-10">
             <li className="">
-              <Link to="#sobre">Sobre nós</Link>
+              <Link to="#" onClick={() => scrollToSection("sobre")}>
+                Sobre nós
+              </Link>
             </li>
             <li className="">
-              <Link to="#comoFunciona">Como funciona?</Link>
+              <Link to="#" onClick={() => scrollToSection("comoFunciona")}>
+                Como funciona?
+              </Link>
             </li>
             <li className="">
               {isMerchantArea ? (
-                <Link to="/" onClick={()=> setMenuIsOpen(false)}>Área do consumidor</Link>
+                <Link to="/" onClick={() => setMenuIsOpen(false)}>
+                  Área do consumidor
+                </Link>
               ) : (
-                <Link to="/comerciantes" onClick={()=> setMenuIsOpen(false)}>Área do comerciante</Link>
+                <Link to="/comerciantes" onClick={() => setMenuIsOpen(false)}>
+                  Área do comerciante
+                </Link>
               )}
             </li>
             <div className="flex gap-5">
@@ -63,35 +78,43 @@ const Header = () => {
         <nav className="bg-dark-blue font-inter text-white w-full h-auto flex justify-between items-center p-8">
           <ul className=" w-full flex flex-col justify-between items-start gap-5">
             <li className="hover:text-dark-yellow">
-              <Link to="#sobre">Sobre nós</Link>
+              <Link to="#" onClick={() => scrollToSection("sobre")}>
+                Sobre nós
+              </Link>
             </li>
             <li className="hover:text-dark-yellow">
-              <Link to="#comoFunciona">Como funciona?</Link>
+              <Link to="#" onClick={() => scrollToSection("comoFunciona")}>
+                Como funciona?
+              </Link>
             </li>
             <li className="hover:text-dark-yellow">
               {isMerchantArea ? (
-                <Link to="/" onClick={()=> setMenuIsOpen(false)}>Área do consumidor</Link>
+                <Link to="/" onClick={() => setMenuIsOpen(false)}>
+                  Área do consumidor
+                </Link>
               ) : (
-                <Link to="/comerciantes" onClick={()=> setMenuIsOpen(false)}>Área do comerciante</Link>
+                <Link to="/comerciantes" onClick={() => setMenuIsOpen(false)}>
+                  Área do comerciante
+                </Link>
               )}
             </li>
             <li
               className="bg-dark-yellow text-center p-3 w-40 text-dark-blue font-bold rounded-md hover:bg-light-yellow cursor-pointer"
               onClick={() => {
-                  isMerchantArea
-                    ? navigate("/comerciantes/login")
-                    : navigate("/consumidores/login");
-                }}
+                isMerchantArea
+                  ? navigate("/comerciantes/login")
+                  : navigate("/consumidores/login");
+              }}
             >
               Login
             </li>
             <li
               className="bg-dark-yellow text-center p-3 w-40 text-dark-blue font-bold rounded-md hover:bg-light-yellow cursor-pointer"
-               onClick={() => {
-                  isMerchantArea
-                    ? navigate("/comerciantes/cadastrar")
-                    : navigate("/consumidores/cadastrar");
-                }}
+              onClick={() => {
+                isMerchantArea
+                  ? navigate("/comerciantes/cadastrar")
+                  : navigate("/consumidores/cadastrar");
+              }}
             >
               Cadastro
             </li>

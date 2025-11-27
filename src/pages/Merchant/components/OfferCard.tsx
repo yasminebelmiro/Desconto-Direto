@@ -72,14 +72,14 @@ const OfferCard = ({ ...props }: OfferTypes) => {
             >
               <RiCloseLargeFill className="text-2xl text-white" />
             </button>
-            <button
+            {/* <button
               className="w-[80%] text-white font-bold font-inter bg-dark-yellow hover:bg-light-yellow hover:text-black h-8 md:h-10 rounded-2xl cursor-pointer"
               onClick={() =>
                 navigate(`/comerciantes/editar-oferta/${props.id}`)
               }
             >
               Editar
-            </button>
+            </button> */}
             <button
               className="w-[80%] text-white font-bold font-inter bg-red-500 hover:bg-red-400 hover:text-black h-8 md:h-10 rounded-2xl cursor-pointer"
               onClick={() => setIsOpenModal(true)}
